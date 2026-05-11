@@ -18,4 +18,138 @@
     margin: 0 auto;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background-color: #fffcf0;
+    border-bottom: 1.5px solid #7d0f0f;
+}
 
+.logoGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+
+.brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #7d0f0f;
+    margin-bottom: 0.58rem;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.menu li {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #555;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.menu li:hover{
+    color: #7d0f0f;
+    text-decoration: underline;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #7d0f0f;
+    font-weight: bold;
+}
+
+.searchIcon {
+    width: 1.3rem;
+    color:  #7d0f0f;
+}
+
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    line-height: 1.05;
+    color: #1a1a1a;
+    margin-bottom: 2.5rem;
+    font-weight: bolder;
+}
+
+.italicTitle {
+    color:  #7d0f0f;
+    font-style: italic;
+    font-weight: 550;
+}
+
+.description {
+    font-family: 'Playfair Display', serif;
+    max-width: 48rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 3rem;
+}
+
+.highlight {
+    color:  #7d0f0f;
+    font-weight: 600;
+}
+
+.btnGroup {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    background-color:  #7d0f0f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 2.5;
+}
+
+
+.bookIcon {
+  width: 2rem;
+  height: 2rem;
+  color: #7d0f0f;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-bottom: 0.30rem;
+}
+
+.logoGroup:hover .bookIcon {
+  transform: scale(1.2) rotate(-5deg);
+  filter: drop-shadow(0 0 8px rgba(125, 15, 15, 0.3));
+}
+
+.brand {
+  transition: color 0.3s ease;
+}
