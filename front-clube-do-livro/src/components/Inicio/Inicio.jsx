@@ -23,7 +23,7 @@ const Inicio = () => {
 
                 <nav className={styles.nav}>
                     <ul className={styles.menu}>
-                        <li>Inicio</li>
+                        <li>Início</li>
                         <li>Sobre</li>
                         <li>A obra</li>
                         <li>Vestibular</li>
