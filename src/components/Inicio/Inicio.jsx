@@ -52,6 +52,7 @@ const Inicio = () => {
                 <h1 className={styles.italicTitle}>Intertexto!</h1>
                 </h1>
 
+                
                 <p className={styles.description}>
                     Neste site você terá acesso à análise das obras clássicas brasileiras,
                     principalmente à obra Quarto de Despejo de Carolina Maria de Jesus.
