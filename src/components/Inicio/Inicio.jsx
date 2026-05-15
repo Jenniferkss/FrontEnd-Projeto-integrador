@@ -57,7 +57,6 @@ const Inicio = () => {
                     principalmente à obra Quarto de Despejo de Carolina Maria de Jesus.
                 </p>
 
-                
                 <div className={styles.btnGroup}>
                     <button className={styles.btn}>Conheça Quarto de Despejo</button>
                     <button className={styles.btn}>Conheça outras obras </button>
