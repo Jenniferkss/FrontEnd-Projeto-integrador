@@ -1,4 +1,5 @@
 import styles from './Inicio.module.css';
+import { Link } from 'react-router-dom';
 
 const Inicio = () => {
     return (
@@ -27,7 +28,9 @@ const Inicio = () => {
                         <li>Sobre</li>
                         <li>A obra</li>
                         <li>Vestibular</li>
-                        <li>Simulados</li>
+                        <li>
+                            <Link to="/simulados">Simulado</Link>
+                        </li>
                         <li>Curiosidades</li>
                     </ul>
                 </nav>
