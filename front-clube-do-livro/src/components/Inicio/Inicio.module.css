@@ -124,7 +124,7 @@
 
 .btn {
     font-family: 'Montserrat', sans-serif;
-    background-color:  #7d0f0f;
+    background-color: #7d0f0f;
     color: white;
     border: none;
     padding: 0.5rem 1.2rem;
@@ -132,10 +132,14 @@
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease;
     margin-top: 2.5;
 }
 
+/* aumenta ao passar o mouse */
+.btn:hover {
+    transform: scale(1.08);
+}
 
 .bookIcon {
   width: 2rem;
