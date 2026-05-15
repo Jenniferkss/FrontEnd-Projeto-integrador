@@ -61,7 +61,7 @@ const Inicio = () => {
                         {''} Quarto de Despejo: Diário de Uma Favelada
                     </span>
                     , de
-                    <span className={styles.highlight}>Carolina Maria de Jesus</span>
+                    <span className={styles.highlight}> Carolina Maria de Jesus</span>
                 </p>
 
                 <div className={styles.btnGroup}>
