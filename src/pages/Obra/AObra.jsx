@@ -1,59 +1,20 @@
+import Header from '../../components/Header/Header';
 import styles from './AObra.module.css';
 
 const Obra = () => {
     return (
-        <div className={styles.page}>
-            <header className={styles.header}>
-                <div className={styles.logoGroup}>
-                    <svg
-                        className={styles.bookIcon}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round">
-                        {/* Lado esquerdo do livro */}
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                        {/* Lado direito do livro */}
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                    </svg>
-                    <span className={styles.brand}>Intertexto</span>
-                </div>
+        <div className={styles.pageContainer}>
+            <div className={styles.boxedLayout}>
+                <Header />
 
-                <nav className={styles.nav}>
-                    <ul className={styles.menu}>
-                        <li>Inicio</li>
-                        <li>Sobre</li>
-                        <li>A obra</li>
-                        <li>Vestibular</li>
-                        <li>Simulados</li>
-                        <li>Curiosidades</li>
-                    </ul>
-                </nav>
-
-                <div className={styles.actions}>
-                    <span className={styles.lang}>PT / EN</span>
-
-                    <svg
-                        className={styles.searchIcon}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </div>
-            </header>
-
-            <main className={styles.hero}>
-                <h1 className={styles.title}>
-                    {' '}
-                    Bem-Vindos ao <br />
-                    <span className={styles.italicTitle}>Intertexto!</span>
-                </h1>
-            </main>
+                <main className={styles.hero}>
+                    <h1 className={styles.title}>
+                        {' '}
+                        Bem-Vindos ao <br />
+                        <span className={styles.italicTitle}>Intertexto!</span>
+                    </h1>
+                </main>
+            </div>
         </div>
     );
 };
