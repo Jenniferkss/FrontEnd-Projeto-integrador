@@ -2,12 +2,12 @@ import './App.css';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Inicio from './components/Inicio/Inicio';
-import Simulados from './components/Simulados/Simulados.jsx';
-import Obra from './components/Obra/AObra.jsx';
-import Curiosidades from './components/Curiosidades/Curiosidades.jsx';
-import Sobre from './components/Sobre/Sobre.jsx';
-import Vestibular from './components/Vestibular/Vestibular.jsx';
+import Inicio from './pages/Inicio/Inicio';
+import Simulados from './pages/Simulados/Simulados.jsx';
+import Obra from './pages/Obra/AObra.jsx';
+import Curiosidades from './pages/Curiosidades/Curiosidades.jsx';
+import Sobre from './pages/Sobre/Sobre.jsx';
+import Vestibular from './pages/Vestibular/Vestibular.jsx';
 
 function App() {
     return (
