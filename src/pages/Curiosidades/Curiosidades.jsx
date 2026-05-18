@@ -14,17 +14,18 @@ const Curiosidades = () => {
                         <span className={styles.italicTitle}>clique e conheça:</span>
                     </h1>
                     <div className={styles.cardsContainer}>
-
                         <div className={styles.cardsContainer}>
-
                             {}
                             <div className={styles.card}>
                                 <div className={styles.imageWrapper}>
                                     <img src="/images/curiosidade1.png" alt="Vida da autora" />
                                 </div>
-                                <button>
-                                    Vida da autora
-                                </button>
+                                    <Link
+                                        to="/curiosidades/VidaDaAutora"
+                                        className={styles.cardButton}>
+                                        Vida da autora
+                                    </Link>
+
                             </div>
 
                             {}
@@ -32,13 +33,13 @@ const Curiosidades = () => {
                                 <div className={styles.imageWrapper}>
                                     <img src="/images/curiosidade2.png" alt="Contexto histórico" />
                                 </div>
-                                <button>
-                                <Link to="/curiosidades/contexto-historico" className={styles.linkButton}>
+
+                                <Link
+                                    to="/curiosidades/contexto-historico"
+                                    className={styles.cardButton}>
                                     Contexto histórico
                                 </Link>
-                                </button>
                             </div>
-
                         </div>
                     </div>
                 </main>
