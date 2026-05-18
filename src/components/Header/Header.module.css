@@ -26,24 +26,16 @@
 }
 
 .bookIcon {
-    width: 2.15rem;
-    height: 2.15rem;
+    width: 2.5rem;
+    height: 2.5rem;
     color: #7d0f0f;
-    padding: 0.45rem;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #fff9ef, #f8dfd9);
-    border: 1px solid rgba(125, 15, 15, 0.12);
-    box-shadow:
-        0 8px 18px rgba(125, 15, 15, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    padding: 0.30rem;
+    margin-top: 0.50rem;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .logoGroup:hover .bookIcon {
     transform: translateY(-2px) rotate(-4deg) scale(1.05);
-    box-shadow:
-        0 14px 28px rgba(125, 15, 15, 0.16),
-        inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .brand {
