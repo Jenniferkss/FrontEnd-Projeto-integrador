@@ -1,0 +1,10 @@
+.footerBottom {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #ead6d9;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: auto;
+    background-color: #FFF5EB;
+}
