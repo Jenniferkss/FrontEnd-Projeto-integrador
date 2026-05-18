@@ -1,7 +1,7 @@
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import styles from './Curiosidades.module.css';
-
+import Footer from '../../components/Footer/Footer';
+import { Link } from 'react-router-dom';
 const Curiosidades = () => {
     return (
         <div className={styles.pageContainer}>
@@ -22,7 +22,7 @@ const Curiosidades = () => {
                                 <div className={styles.imageWrapper}>
                                     <img src="/images/curiosidade1.png" alt="Vida da autora" />
                                 </div>
-                                <button link="/vida-da-autora">
+                                <button>
                                     Vida da autora
                                 </button>
                             </div>
@@ -32,8 +32,10 @@ const Curiosidades = () => {
                                 <div className={styles.imageWrapper}>
                                     <img src="/images/curiosidade2.png" alt="Contexto histórico" />
                                 </div>
-                                <button link="/contexto-historico">
+                                <button>
+                                <Link to="/curiosidades/contexto-historico" className={styles.linkButton}>
                                     Contexto histórico
+                                </Link>
                                 </button>
                             </div>
 
