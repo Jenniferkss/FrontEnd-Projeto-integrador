@@ -57,7 +57,7 @@ const Inicio = () => {
 
                 <p className={styles.description}>
                     Neste site você terá acesso à análise das obras clássicas brasileiras,
-                    principalmente à obra
+                    principalmente à obraa
                     <span className={styles.highlight}>
                         {''} Quarto de Despejo: Diário de Uma Favelada
                     </span>
