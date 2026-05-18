@@ -1,5 +1,5 @@
-import styles from './Inicio.module.css';
 import { Link } from 'react-router-dom';
+import styles from './Inicio.module.css';
 
 const Inicio = () => {
     return (
@@ -14,9 +14,7 @@ const Inicio = () => {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round">
-                        {/* Lado esquerdo do livro */}
                         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                        {/* Lado direito do livro */}
                         <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                     </svg>
                     <span className={styles.brand}>Intertexto</span>
@@ -24,14 +22,24 @@ const Inicio = () => {
 
                 <nav className={styles.nav}>
                     <ul className={styles.menu}>
-                        <li>Inicio</li>
-                        <li>Sobre</li>
-                        <li>A obra</li>
-                        <li>Vestibular</li>
+                        <li>
+                            <Link to="/">Inicio</Link>
+                        </li>
+                        <li>
+                            <Link to="/obra">Obra</Link>
+                        </li>
                         <li>
                             <Link to="/simulados">Simulado</Link>
                         </li>
-                        <li>Curiosidades</li>
+                        <li>
+                            <Link to="/sobre">Sobre</Link>
+                        </li>
+                        <li>
+                            <Link to="/vestibular">Vestibular</Link>
+                        </li>
+                        <li>
+                            <Link to="/curiosidades">Curiosidades</Link>
+                        </li>
                     </ul>
                 </nav>
 
@@ -77,4 +85,4 @@ const Inicio = () => {
     );
 };
 
-export default Inicio
+export default Inicio;
