@@ -8,7 +8,7 @@
 
 .boxedLayout {
     width: 100%;
-    min-height: 100vh;
+    margin-bottom: 7rem;
     background-color: #fdf0f2;
     display: flex;
     flex-direction: column;
@@ -75,13 +75,12 @@
 }
 
 .hero {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     text-align: center;
-    padding-top: 12rem; 
+    padding-top: 6rem; 
 }
 
 .title {
@@ -154,3 +153,112 @@
   transition: color 0.3s ease;
 }
 
+.contentSection {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 3rem;
+    padding: 4rem 6rem; 
+    align-items: start;
+}
+
+.badgeGroup {
+    display: flex; 
+    gap: 1rem; 
+    margin-bottom: 2rem; 
+}
+
+.badge {
+    background-color: #d9d9d9;
+    padding: 0.4rem 1.5rem; 
+    border-radius: 20px;
+    font-family: 'Playfair Display', serif;
+    color: #7d0f0f; 
+    font-weight: bold;
+    font-size: 0.9rem; 
+}
+
+.bookTitle {
+    font-family: 'Playfair Display', serif; 
+    color: #7d0f0f; 
+    font-size: 2.2rem; 
+    margin-bottom: 1.5rem; 
+}
+
+.textBody {
+    font-family:'Montserrat', sans-serif; 
+    font-size: 1.2rem; 
+    line-height: 1.4;
+    color: #1a1a1a;
+    margin-bottom: 4rem; 
+}
+
+.quote {
+    font-family: 'Playfair Display', serif; 
+    font-size: 1.8rem; 
+    color: #1a1a1a; 
+    margin: 0; 
+}
+
+.quoteAuthor {
+    font-family:'Montserrat', sans-serif; 
+    font-size: 1rem; 
+    margin-top: 1rem; 
+    color: #333; 
+}
+
+.imageCard {
+    border: 1px solid #7d0f0f; 
+    border-radius: 15px;
+    padding: 1rem; 
+    margin-bottom: 2rem; 
+    background-color: #fdf0f2;
+}
+
+.AuthorImg, .pageImg {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+}
+
+.infoBox {
+    background-color: #fffcf0;
+    border: 1px solid #7d0f0f;
+    padding: 2.2rem; 
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 1rem; 
+    line-height: 1.9rem;
+    color: #1a1a1a; 
+}
+
+.bookPageCard {
+    background-color: #7d0f0f;
+    padding: 1rem; 
+    border-radius: 15px;
+    margin-bottom: 2rem; 
+
+}
+
+.themeBox {
+    background-color: #7d0f0f;
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.themeTitle {
+    font-family: 'Playfair Display', serif; 
+    font-size: 1.5rem; 
+    margin-bottom: 1rem; 
+}
+
+.themeList {
+    list-style: disc;
+    padding-left: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.themeList li {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem; 
+}
