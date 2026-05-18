@@ -1,7 +1,7 @@
 import Header from '../../components/Header/Header';
 import styles from './Inicio.module.css';
-import AuthorImg from '../../assets/foto-carolina.png';
-import PaginaLivro from '../../assets/pagina-livro.png';
+import AuthorImg from '/images/foto-carolina.png';
+import PaginaLivro from '/images/pagina-livro.png';
 import Footer from '../../components/Footer/Footer.jsx';
 
 const Inicio = () => {
