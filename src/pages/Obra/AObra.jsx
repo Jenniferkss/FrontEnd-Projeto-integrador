@@ -1,4 +1,5 @@
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import carolina from '../../../public/images/carolina.png'
 import livro from '../../../public/images/livro.png'
 
@@ -12,7 +13,7 @@ export default function AObra() {
                 <div className={styles.leftHero}>
                     <div className={styles.titleBox}>
                         <h2 className={styles.titleMain}> Quarto de </h2>
-                        <h2 className={styles.titleItalic}> Desejo</h2>
+                        <h2 className={styles.titleItalic}> Despejo</h2>
                     </div>
 
                     <div className={styles.quoteBox}>
@@ -43,7 +44,6 @@ export default function AObra() {
                         <h2> Um relato que </h2>
                         <h2 className={styles.redTitle}> mudou o Brasil </h2>
                     </div>
-
                     <div className={styles.cards}>
                         <div className={styles.card}>
                             <p> Publicação </p>
@@ -78,6 +78,7 @@ export default function AObra() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </div>
     );
 }
