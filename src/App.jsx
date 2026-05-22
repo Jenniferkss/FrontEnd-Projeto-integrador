@@ -11,6 +11,7 @@ import Vestibular from './pages/Vestibular/Vestibular.jsx';
 import VidaDaAutora from './pages/Vida-da-autora/VidaDaAutora.jsx';
 import Contexto from './pages/Contexto-Historico/Contexto.jsx'
 import Personagens from './pages/personagens/Personagens.jsx'
+import Biblioteca from './pages/Biblioteca/Biblioteca.jsx';
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/curiosidades/VidaDaAutora" element={<VidaDaAutora />} />
                     <Route path="/curiosidades/Contexto-Historico" element={< Contexto/>} />
                     <Route path="/personagens" element={< Personagens/>} />
+                    <Route path="/biblioteca" element={< Biblioteca/>} />
                 </Routes>
             </div>
         </BrowserRouter>
