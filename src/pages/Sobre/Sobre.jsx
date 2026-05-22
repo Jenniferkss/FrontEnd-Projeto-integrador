@@ -112,8 +112,8 @@ export default function Inicio() {
                                 src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
                                 alt="integrante 1"
                             />
-                            <h4>{equipe?.find((e) => e.id === 2)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 2)?.curso || 'Curso integrante'}</p>
+                            <h4>{equipe?.find((e) => e.id === 7)?.nome || 'Nome integrante'}</h4>
+                            <p>{equipe?.find((e) => e.id === 7)?.curso || 'Curso integrante'}</p>
                         </div>
                         <div className={styles.integrante}>
                             <img
@@ -121,8 +121,8 @@ export default function Inicio() {
                                 src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
                                 alt="integrante 1"
                             />
-                            <h4>{equipe?.find((e) => e.id === 3)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 3)?.curso || 'Curso integrante'}</p>
+                            <h4>{equipe?.find((e) => e.id === 8)?.nome || 'Nome integrante'}</h4>
+                            <p>{equipe?.find((e) => e.id === 8)?.curso || 'Curso integrante'}</p>
                         </div>
                         <div className={styles.integrante}>
                             <img
@@ -130,8 +130,8 @@ export default function Inicio() {
                                 src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
                                 alt="integrante 1"
                             />
-                            <h4>{equipe?.find((e) => e.id === 4)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 4)?.curso || 'Curso integrante'}</p>
+                            <h4>{equipe?.find((e) => e.id === 9)?.nome || 'Nome integrante'}</h4>
+                            <p>{equipe?.find((e) => e.id === 9)?.curso || 'Curso integrante'}</p>
                         </div>
                         <div className={styles.integrante}>
                             <img
@@ -139,8 +139,8 @@ export default function Inicio() {
                                 src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
                                 alt="integrante 1"
                             />
-                            <h4>{equipe?.find((e) => e.id === 5)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 5)?.curso || 'Curso integrante'}</p>
+                            <h4>{equipe?.find((e) => e.id === 10)?.nome || 'Nome integrante'}</h4>
+                            <p>{equipe?.find((e) => e.id === 10)?.curso || 'Curso integrante'}</p>
                         </div>
                         <div className={styles.integrante}>
                             <img
@@ -148,8 +148,8 @@ export default function Inicio() {
                                 src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
                                 alt="integrante 1"
                             />
-                            <h4>{equipe?.find((e) => e.id === 6)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 6)?.curso || 'Curso integrante'}</p>
+                            <h4>{equipe?.find((e) => e.id === 11)?.nome || 'Nome integrante'}</h4>
+                            <p>{equipe?.find((e) => e.id === 11)?.curso || 'Curso integrante'}</p>
                         </div>
 
                     </div>
