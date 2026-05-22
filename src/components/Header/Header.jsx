@@ -8,6 +8,7 @@ const links = [
     { to: '/sobre', label: 'Sobre' },
     { to: '/vestibular', label: 'Vestibular' },
     { to: '/curiosidades', label: 'Curiosidades' },
+    { to: '/personagens', label: 'Personagens' },
 ];
 
 const Header = () => {

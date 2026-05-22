@@ -1,7 +1,8 @@
 import Header from '../../components/Header/Header';
+import carolina from '../../../public/images/carolina.png'
+import livro from '../../../public/images/livro.png'
+
 import styles from './AObra.module.css';
-import carolina from '/carolina.png'
-import livro from '/livro.png'
 
 export default function AObra() {
     return (

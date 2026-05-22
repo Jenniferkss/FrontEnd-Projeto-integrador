@@ -1,0 +1,177 @@
+.pageContainer {
+    background-color: #fdf0f2;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.boxedLayout {
+    width: 90%;
+    max-width: 1200px;
+    min-height: 100vh;
+    background-color: #fdf0f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza */
+    padding: 2rem 0;
+    gap: 30px;
+}
+
+.tituloDiv {
+    width: 80%;
+    max-width: 1100px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #1a1a1a;
+    font-weight: bold;
+}
+
+.falaJesus {
+    font-family: 'Montserrat', sans-serif;;
+    width: 80%;
+    max-width: 1100px;
+    border-radius: 15px;
+    border: 2px solid #1a1a1a;
+    padding: 20px;
+    background-color: #FFEBEF;
+}
+
+.divTextoJesus {
+    color: #1a1a1a;
+    text-align: left;
+}
+
+.divGrandeQuestoes {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* alternativas centralizadas */
+    gap: 20px;
+}
+
+.questoes {
+    width: 80%;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    color: #2d2c2c;
+    min-height: 160px;
+
+    border-radius: 12px;
+    background-color: #faedc8a2;
+
+    border-width: 2px;
+    border-color: #490000;
+    border-style: solid;
+
+    padding: 18px 20px;
+    text-align: left;
+}
+
+.divNomeDesc {
+    width: 100%;
+    height: 100%;
+}
+
+.questoes:hover {
+    background-color: #7d0f0f;
+    color: white;
+    transition: all ease 0.5s;
+}
+
+.enunciado {
+    font-family: 'Montserrat', sans-serif;
+    width: 63rem;
+    height: 4rem;
+    font-size: 19px;
+}
+
+.letraQuestao {
+    min-width: 40px;
+    height: 40px;
+    border: 2px solid #7d0f0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.textoQuestao {
+    flex: 1;
+}
+
+.btnGroup {
+    width: 80%;
+    max-width: 1100px;
+
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.divBotao {
+    height: 5rem;
+    width: 63rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttonVa {
+    height: 3rem;
+    width: 7rem;
+    border-radius: 17px;
+    background-color: #7d0f0f;
+    color: #fdf0f2;
+}
+
+.buttonVa:hover {
+    background-color: #c53434;
+    color: rgb(0, 0, 0);
+    transition: all ease 0.5s;
+}
+
+
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #7d0f0f;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.footer {
+    width: 100%;
+    background-color: #efe5dd;
+    color: #1a1a1a;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: auto;
+}
