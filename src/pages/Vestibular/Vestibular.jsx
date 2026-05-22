@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Vestibular.module.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer.jsx';
@@ -99,7 +100,7 @@ export default function ObraVestibular() {
                         </p>
                     </div>
 
-                    <div className={`${styles.cardTop} ${styles.cardBlueBorder}`}>
+                    <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
                         <h2 className={styles.cardTopTitle}>
                             {language === 'en' ? (
                                 'Interpretations'
@@ -208,14 +209,14 @@ export default function ObraVestibular() {
                     {/* Barra Lateral Otimizada (Direita) */}
                     <aside className={styles.sidebar}>
                         <div className={styles.videoBtnWrapper}>
-                            <button
-                                className={styles.videoBtn}
-                                onClick={() =>
-                                    dados.videoUrl && window.open(dados.videoUrl, '_blank')
-                                }
-                                disabled={!dados.videoUrl}>
-                                {language === 'en' ? 'Watch video-classes' : 'Veja as vídeo-aulas'}
-                            </button>
+                           
+                    <Link to="/VideoAulas">
+                        <button className={styles.videoBtn}>
+                            {language === 'en'
+                            ? 'Watch video-classes'
+                            : 'Veja as vídeo-aulas'}
+                        </button>
+                    </Link>
                         </div>
 
                         <div className={styles.statsCard}>
