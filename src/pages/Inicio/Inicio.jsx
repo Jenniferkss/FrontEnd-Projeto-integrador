@@ -3,7 +3,7 @@ import styles from './Inicio.module.css';
 import AuthorImg from '/images/foto-carolina.png';
 import PaginaLivro from '/images/pagina-livro.png';
 import Footer from '../../components/Footer/Footer.jsx';
-
+import { Link } from 'react-router-dom';
 const Inicio = () => {
     return (
         <div className={styles.pageContainer}>
@@ -23,9 +23,18 @@ const Inicio = () => {
                     </p>
 
                     <div className={styles.btnGroup}>
+
+                        <Link to="/Obra" className={styles.logoGroup}>
                         <button className={styles.btn}>Conheça Quarto de Despejo</button>
-                        <button className={styles.btn}>Conheça outras obras</button>
+                        </Link>
+
+                        <Link to="/Biblioteca" className={styles.logoGroup}>
+                            <button className={styles.btn}>Conheça outras obras</button>
+                        </Link>
+
+                        <Link to="/Sobre" className={styles.logoGroup}>
                         <button className={styles.btn}>Conheça nossa equipe</button>
+                        </Link>
                     </div>
                 </main>
             </div>
