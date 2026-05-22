@@ -55,11 +55,13 @@
 .divTextoJesus {
     color: #1a1a1a;
     text-align: left;
+    display: flex;
 }
 
 .divGrandeQuestoes {
     font-family: 'Montserrat', sans-serif;
     width: 100%;
+    height: 24rem;
     display: flex;
     flex-direction: column;
     align-items: center;
