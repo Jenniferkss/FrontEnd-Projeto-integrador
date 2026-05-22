@@ -1,4 +1,4 @@
-.pageContainer {
+setEquipe.pageContainer {
     background-color: #fdf0f2;
     min-height: 100vh;
     width: 100%;
@@ -170,14 +170,17 @@
 
 .divGrandeIntegrantes {
     width: 80%;
-    height: 20rem;
+    height: 40rem;
 }
 
 .linhaIntegrantes {
     width: 100%;
     height: 10rem;
     display: flex;
+    gap: 40px;
     align-items: center;
+    margin-left: 20rem;
+    margin-top: 5rem;
 }
 
 .integrante {
