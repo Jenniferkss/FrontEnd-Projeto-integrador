@@ -50,9 +50,6 @@ export default function Inicio() {
         carregarLivros();
     }, []);
 
-    if (loading) {
-        return <p>Carregando...</p>;
-    }
 
     if (error) {
         return <p>{error}</p>;
@@ -84,7 +81,7 @@ export default function Inicio() {
                         <div className={styles.divNomeDesc}>
                             <h1 className="title-main" style={{marginBottom: '20px'}}>
                                 {loading
-                                ? 'Carregando obra...'
+                                ? 'Carregando personagem...'
                                 : livro?.personagens[0] || 'Nome personagem'}
                             </h1>
                         <p>
@@ -105,7 +102,7 @@ export default function Inicio() {
                         <div className={styles.divNomeDesc}>
                             <h1 className="title-main" style={{marginBottom: '20px'}}>
                                 {loading
-                                ? 'Carregando obra...'
+                                ? 'Carregando personagem...'
                                 : livro?.personagens[1] || 'Nome personagem'}
                             </h1>
                         <p>
@@ -125,7 +122,7 @@ export default function Inicio() {
                         <div className={styles.divNomeDesc}>
                             <h1 className="title-main" style={{marginBottom: '20px'}}>
                                 {loading
-                                ? 'Carregando obra...'
+                                ? 'Carregando personagem...'
                                 : livro?.personagens[2] || 'Nome personagem'}
                             </h1>
                         <p>
@@ -145,7 +142,7 @@ export default function Inicio() {
                        <div className={styles.divNomeDesc}>
                             <h1 className="title-main" style={{marginBottom: '20px'}}>
                                 {loading
-                                ? 'Carregando obra...'
+                                ? 'Carregando personagem...'
                                 : livro?.personagens[3] || 'Nome personagem'}
                             </h1>
                         <p>
@@ -190,7 +187,7 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                         <div className={styles.divNomeDesc}>
                             <h1 className="title-main" style={{marginBottom: '20px'}}>
                                 {loading
-                                ? 'Carregando obra...'
+                                ? 'Carregando personagem...'
                                 : livro?.personagens[5] || 'Nome personagem'}
                             </h1>
                         <p>
