@@ -149,7 +149,6 @@
     margin: 5rem auto;
     padding: 0 4rem;
     box-sizing: border-box;
-    color: #FFF5EB;
 }
 
 .textContainer {
@@ -170,10 +169,10 @@
     margin: 0;
 }
 
-.titleContainer p {
+.textContainer p {
     font-size: 1.15rem;
     line-height: 1.9;
-    color: #111;
+    color: #000000;
     text-align: justify;
     margin: 0;
 }
