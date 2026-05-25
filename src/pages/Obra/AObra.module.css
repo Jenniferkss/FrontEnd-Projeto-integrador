@@ -5,9 +5,6 @@
     width: 100%;
 }
 
-/* HERO */
-
-/* HERO */
 
 .hero {
     width: 100%;
@@ -19,6 +16,8 @@
     gap: 3rem;
     padding: 2rem 2rem 0;
     box-sizing: border-box;
+    margin-top: 1.1rem;
+    margin-left: 6.75rem;
 }
 
 .leftHero {
@@ -30,12 +29,12 @@
 
 .titleBox {
     max-width: 32rem;
-    margin-top: -1rem;
+    margin-top: 2.5rem;
 }
 
 .titleMain {
     font-family: 'Playfair Display', serif;
-    font-size: 5.5rem;
+    font-size: 5rem;
     line-height: 0.88;
     color: #000000;
     margin: 0;
@@ -45,19 +44,20 @@
 .redTitleMain {
     color: #8d1f1f;
     font-size: 5.5rem;
-    margin-left: 6rem;
+    margin-left: 9rem;
+    font-style: italic;
 }
 
 .subtitle {
-    margin-top: 1.2rem;
-    font-size: 1.5rem;
+    margin-top: 2rem;
+    font-size: 1.3rem;
     color: #111;
     font-family: 'Playfair Display', serif;
     font-style: bolder;
 }
 
 .subtitleAuthor {
-    margin-top: 1.2rem;
+    margin-top:1.5rem;
     font-size: 1rem;
     color: #111;
     font-family: 'Playfair Display', serif;
@@ -90,7 +90,7 @@
 
 .authorImage {
     width: 100%;
-    max-width: 20rem;
+    max-width: 19.3rem;
     height: auto;
     object-fit: cover;
     border-radius: 0.4rem;
@@ -148,6 +148,7 @@
 
 .redTitle {
     color: #8d1f1f;
+    font-style: italic;
 }
 
 /* CARDS */
@@ -164,6 +165,7 @@
     padding: 1rem;
     background-color: #fff7f7;
     min-width: 0;
+    background-color: #fff8f0;
 }
 
 .card p {
@@ -196,14 +198,13 @@
     margin: 0;
 }
 
-/* CONTAINERS */
 
 .container {
     width: 100%;
     max-width: 75rem;
     margin: 2rem auto;
     padding: 0 2rem;
-    box-sizing: border-box;
+    box-sizing: content-box;
 }
 
 .textContainer {
@@ -273,7 +274,7 @@
     opacity: 0.9;
 }
 
-/* LOADING */
+
 
 .loading {
     min-height: 100vh;
@@ -282,7 +283,7 @@
     align-items: center;
 }
 
-/* RESPONSIVO */
+
 
 @media (max-width: 900px) {
     .hero,
