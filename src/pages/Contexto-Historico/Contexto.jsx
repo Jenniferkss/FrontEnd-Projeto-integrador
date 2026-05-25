@@ -1,5 +1,5 @@
 import Header from '../../components/Header/Header';
-import styles from './contexto.module.css';
+import styles from './Contexto.module.css';
 import Footer from '../../components/Footer/Footer';
 import Card from '../../components/Card/Card';
 
@@ -37,4 +37,3 @@ const Contexto = () => {
 
 
 export default Contexto;
-
