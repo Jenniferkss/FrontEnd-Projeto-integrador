@@ -1,10 +1,122 @@
-.footerBottom {
-    text-align: center;
-    padding: 2rem;
-    border-top: 1px solid #ead6d9;
+.footer {
+    width: 100%;
+    background-color: #fff8f4;
+    border-top: 1px solid #7d0f0f;
+    padding: 38px 24px 18px;
     font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr;
+    gap: 32px;
+}
+
+.brandTitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #7d0f0f;
+}
+
+.brandText {
+    max-width: 260px;
+    color: #5d4f4f;
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.nav h3,
+.contact h3 {
+    font-family: 'Playfair Display', serif;
+    color: #7d0f0f;
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color:#3b2f2f;
     font-size: 0.9rem;
-    color: #333;
-    margin-top: auto;
-    background-color: #FFF5EB;
+    transition: 0.2s ease;
+}
+
+.nav ul li a:hover {
+    color: #7d0f0f;
+}
+
+.contact p {
+    color: #7d0f0f;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.contactLink {
+    color: #3b2f2f;
+    text-decoration: none;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.contactLink:hover {
+    color: #7d0f0f;
+}
+
+.divider {
+    width: 100%;
+    max-width: 1250px;
+    margin: 28px auto 16px;
+    border: none;
+    border-top: 1px solid rgba(125, 15, 15, 0.12);
+}
+
+.bottomBar {
+    text-align: center;
+}
+
+.bottomBar p {
+    color: #756666;
+    font-size: 0.78rem;
+}
+
+@media (max-width: 900px) {
+
+    .container {
+        grid-template-columns: 1fr;
+
+        gap: 28px;
+    }
+
+    .supportBtn {
+        width: 100%;
+
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .footer {
+        padding: 34px 18px 16px;
+    }
+
+    .brandTitle {
+        font-size: 1.4rem;
+    }
+
+    .logo {
+        width: 95px;
+    }
 }
