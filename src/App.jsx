@@ -14,6 +14,7 @@ import VidaDaAutora from './pages/Vida-da-autora/VidaDaAutora.jsx';
 import Contexto from './pages/Contexto-Historico/Contexto.jsx';
 import Personagens from './pages/personagens/Personagens.jsx';
 import Biblioteca from './pages/Biblioteca/Biblioteca.jsx'; // Adicionado
+import VideoAulas from './pages/VideoAulas/VideoAulas.jsx';
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                         <Route path="/curiosidades/Contexto-Historico" element={<Contexto />} />
                         <Route path="/personagens" element={<Personagens />} />
                         <Route path="/biblioteca" element={<Biblioteca />} /> {/* Adicionado */}
+                        <Route path='/videoAulas' element={<VideoAulas/>} />
                     </Routes>
                 </div>
             </BrowserRouter>
