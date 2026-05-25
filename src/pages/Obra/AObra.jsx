@@ -136,15 +136,15 @@ export default function ObraVestibular() {
                         {(
                             dados.estatisticas || [
                                 {
-                                    nome: 'Fuvest',
+                                    nome: 'Publicação',
                                     porcentagem: 30,
                                 },
                                 {
-                                    nome: 'Unicamp',
+                                    nome: 'Idiomas',
                                     porcentagem: 72,
                                 },
                                 {
-                                    nome: 'ENEM',
+                                    nome: 'Vendas',
                                     porcentagem: 42,
                                 },
                             ]
@@ -190,11 +190,10 @@ export default function ObraVestibular() {
                 </div>
             </section>
 
-            {/* TEMAS */}
             <section className={styles.container}>
                 <div className={styles.textContainer}>
                     <h2 className={styles.titleContainer}>
-                        {language === 'en' ? 'Essay Topics' : 'Possíveis temas de redação'}
+                        {language === 'en' ? 'Essay Topics' : 'Temas Principais'}
                     </h2>
 
                     <div className={styles.redacaoList}>
