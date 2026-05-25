@@ -16,6 +16,18 @@ const normalizeText = (...values) => {
     return '';
 };
 
+const normalizeImageList = (value) => {
+    if (Array.isArray(value)) {
+        return value.map((item) => (typeof item === 'string' ? item.trim() : '')).filter(Boolean);
+    }
+
+    if (typeof value === 'string' && value.trim()) {
+        return [value.trim()];
+    }
+
+    return [];
+};
+
 const normalizeLivro = (livro) => {
     if (!livro || typeof livro !== 'object') {
         return null;
@@ -29,7 +41,7 @@ const normalizeLivro = (livro) => {
         livro.nomePt,
         livro.nomePT,
         livro.obraPt,
-        livro.obraPT
+        livro.obraPT,
     );
     const tituloEn = normalizeText(
         livro.titulo_en,
@@ -39,7 +51,7 @@ const normalizeLivro = (livro) => {
         livro.nomeEn,
         livro.nomeEN,
         livro.obraEn,
-        livro.obraEN
+        livro.obraEN,
     );
     const titulo = normalizeText(
         livro.titulo,
@@ -51,11 +63,24 @@ const normalizeLivro = (livro) => {
         livro.nomePt,
         livro.nomePT,
         livro.obra,
-        livro.obraPt
+        livro.obraPt,
     );
 
     const autor = normalizeText(livro.autor, livro.autora, livro.nomeAutor, livro.nomeAutora);
     const capaUrl = normalizeText(livro.capa_url, livro.capaUrl, livro.capaURl, livro.capaURL);
+    const fotoAutor = normalizeText(
+        livro.fotoAutor,
+        livro.foto_autor,
+        livro.fotoAutorUrl,
+        livro.fotoAutorURL,
+        livro.authorPhoto,
+    );
+    const fotoPersonagens = normalizeImageList(
+        livro.fotoPersonagens ?? livro.foto_personagens ?? livro.fotosPersonagens,
+    );
+    const fotosCuriosidades = normalizeImageList(
+        livro.fotosCuriosidades ?? livro.fotos_curiosidades ?? livro.fotosCuriosidade,
+    );
     const generoPt = normalizeText(livro.genero_pt, livro.generoPT, livro.generoPt, livro.genero);
     const generoEn = normalizeText(livro.genero_en, livro.generoEN, livro.generoEn, livro.genero);
     const enredoPt = normalizeText(
@@ -63,14 +88,14 @@ const normalizeLivro = (livro) => {
         livro.descricaoPT,
         livro.descricaoPt,
         livro.descricao,
-        livro.conteudoPt
+        livro.conteudoPt,
     );
     const enredoEn = normalizeText(
         livro.enredo_en,
         livro.descricaoEN,
         livro.descricaoEn,
         livro.descricao,
-        livro.conteudoEn
+        livro.conteudoEn,
     );
 
     const ano = livro.ano ?? livro.anoPublicacao ?? livro.ano_publicacao ?? '';
@@ -82,6 +107,9 @@ const normalizeLivro = (livro) => {
         titulo_en: tituloEn || titulo,
         autor,
         capa_url: capaUrl,
+        fotoAutor,
+        fotoPersonagens,
+        fotosCuriosidades,
         genero_pt: generoPt,
         genero_en: generoEn,
         enredo_pt: enredoPt,

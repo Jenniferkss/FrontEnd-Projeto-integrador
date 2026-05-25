@@ -1,5 +1,5 @@
 .page {
-    min-height: 100vh;
+    min-height: 10vh;
     width: 100%;
     background:
         radial-gradient(circle at top left, rgba(125, 15, 15, 0.12), transparent 28%),
@@ -338,8 +338,8 @@
 
 .booksGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
 }
 
 .bookCard {
@@ -355,7 +355,7 @@
 
 .coverFrame {
     position: relative;
-    min-height: 240px;
+    min-height: 180px;
     background: linear-gradient(135deg, rgba(125, 15, 15, 0.92), rgba(174, 75, 55, 0.9));
 }
 
@@ -406,8 +406,8 @@
 
 .bookBody {
     display: grid;
-    gap: 0.85rem;
-    padding: 1.15rem;
+    gap: 0.7rem;
+    padding: 1rem;
 }
 
 .bookMetaRow {
@@ -427,7 +427,7 @@
 
 .bookTitle {
     margin: 0;
-    font-size: clamp(1.35rem, 2.3vw, 1.75rem);
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
     line-height: 1.08;
     color: #5a1111;
 }
@@ -468,7 +468,7 @@
 .synopsisText {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.92rem;
+    font-size: 0.88rem;
     line-height: 1.7;
     color: #4b3c38;
 }
@@ -495,6 +495,10 @@
 
     .heroPanel {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .booksGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 

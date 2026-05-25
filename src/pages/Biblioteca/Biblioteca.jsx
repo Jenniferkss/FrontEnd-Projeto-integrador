@@ -76,6 +76,11 @@ const copy = {
         authorFallback: 'Autor não informado',
         yearFallback: 'Ano não informado',
         coverFallback: 'Sem capa',
+        photosLabel: 'Fotos do banco',
+        photosFallback: 'Nenhuma foto adicional disponível.',
+        authorPhotoLabel: 'Foto do autor',
+        charactersPhotoLabel: 'Personagem',
+        curiositiesPhotoLabel: 'Curiosidade',
         synopsisLabel: 'Resumo',
         synopsisFallback: 'Resumo não informado.',
         genreFallback: 'Gênero não informado.',
@@ -117,6 +122,11 @@ const copy = {
         authorFallback: 'Author not provided',
         yearFallback: 'Year not provided',
         coverFallback: 'No cover',
+        photosLabel: 'Database photos',
+        photosFallback: 'No additional photos available.',
+        authorPhotoLabel: 'Author photo',
+        charactersPhotoLabel: 'Character',
+        curiositiesPhotoLabel: 'Curiosity',
         synopsisLabel: 'Summary',
         synopsisFallback: 'Summary unavailable.',
         genreFallback: 'Genre unavailable.',
@@ -198,6 +208,30 @@ function BookCard({ livro, fallbackIndex, language, texts }) {
         pickText(livro.autor, livro.autora, livro.nomeAutor, livro.nomeAutora) ||
         texts.authorFallback;
     const coverUrl = livro.capa_url || livro.capaUrl || livro.capaURl;
+    const authorPhoto = pickText(
+        livro.fotoAutor,
+        livro.foto_autor,
+        livro.fotoAutorUrl,
+        livro.fotoAutorURL,
+        livro.authorPhoto
+    );
+    const characterPhotos = Array.isArray(livro.fotoPersonagens)
+        ? livro.fotoPersonagens.filter((item) => typeof item === 'string' && item.trim())
+        : [];
+    const curiosityPhotos = Array.isArray(livro.fotosCuriosidades)
+        ? livro.fotosCuriosidades.filter((item) => typeof item === 'string' && item.trim())
+        : [];
+    const gallery = [
+        ...(authorPhoto ? [{ src: authorPhoto, label: texts.authorPhotoLabel }] : []),
+        ...characterPhotos.map((src, photoIndex) => ({
+            src,
+            label: `${texts.charactersPhotoLabel} ${photoIndex + 1}`,
+        })),
+        ...curiosityPhotos.map((src, photoIndex) => ({
+            src,
+            label: `${texts.curiositiesPhotoLabel} ${photoIndex + 1}`,
+        })),
+    ];
     const year = livro.ano || livro.anoPublicacao || texts.yearFallback;
     const genres = splitValues(
         getLocalizedText(
@@ -266,6 +300,29 @@ function BookCard({ livro, fallbackIndex, language, texts }) {
                         <p className={styles.synopsisLabel}>{texts.synopsisLabel}</p>
                         <p className={styles.synopsisText}>{synopsis || texts.synopsisFallback}</p>
                     </div>
+                </div>
+
+                <div className={styles.photoSection}>
+                    <p className={styles.photoSectionLabel}>{texts.photosLabel}</p>
+
+                    {gallery.length > 0 ? (
+                        <div className={styles.photoGrid}>
+                            {gallery.slice(0, 4).map((photo, photoIndex) => (
+                                <figure
+                                    key={`${title}-${photoIndex}-${photo.label}`}
+                                    className={styles.photoCard}>
+                                    <img
+                                        src={photo.src}
+                                        alt={`${photo.label} - ${title}`}
+                                        loading='lazy'
+                                    />
+                                    <figcaption>{photo.label}</figcaption>
+                                </figure>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className={styles.photoEmpty}>{texts.photosFallback}</p>
+                    )}
                 </div>
             </div>
         </article>
