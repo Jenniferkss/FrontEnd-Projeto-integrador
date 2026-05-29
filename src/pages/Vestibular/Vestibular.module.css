@@ -20,6 +20,28 @@
     gap: 32px;
 }
 
+.lead {
+    max-width: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 1rem 0 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+    line-height: 1.75;
+    color: #4d403c;
+}
+
+.kicker {
+    margin: 0 0 0.8rem;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #7d0f0f;
+}
+
 /* Título superior estilizado */
 .mainHeader {
     width: 100%;

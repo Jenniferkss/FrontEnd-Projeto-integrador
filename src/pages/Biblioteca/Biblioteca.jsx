@@ -4,8 +4,7 @@ import Footer from '../../components/Footer/Footer.jsx';
 import Header from '../../components/Header/Header.jsx';
 import styles from './Biblioteca.module.css';
 
-const BIBLIOTECA_URL =
-    'https://backend-projeto-integrador-rana.onrender.com/api/integracao/biblioteca';
+const BIBLIOTECA_URL = 'https://backend-projeto-integrador-rana.onrender.com/api/integracao/biblioteca';
 
 const truncateText = (value, maxLength = 180) => {
     const text = String(value || '').trim();
@@ -28,13 +27,13 @@ const getBookTitle = (livro, index) => {
 };
 
 const getBookAuthor = (livro) => {
-    const author = livro.autor || livro.autora || '';
+    const primaryAuthor = String(livro.autor || livro.autora || '').trim();
 
-    if (author && author !== 'Autor não informado') {
-        return author;
+    if (primaryAuthor && primaryAuthor !== 'Autor não informado') {
+        return primaryAuthor;
     }
 
-    const nestedAuthor = livro.autores?.[0]?.nome;
+    const nestedAuthor = String(livro.autores?.[0]?.nome || '').trim();
 
     if (nestedAuthor) {
         return nestedAuthor;
@@ -136,21 +135,18 @@ function BookCard({ livro, index }) {
 function FonteSection({ fonte, index }) {
     const livros = Array.isArray(fonte.conteudo) ? fonte.conteudo : [];
     const tituloFonte = fonte.livro || `Fonte ${index + 1}`;
-    const statusOnline =
-        String(fonte.statusApi || '')
-            .trim()
-            .toLowerCase() === 'online';
+    const statusOnline = String(fonte.statusApi || '').trim().toLowerCase() === 'online';
     const statusApi = statusOnline ? 'Online' : 'Indisponível';
     const statusStyles = statusOnline
         ? {
-              background: 'linear-gradient(135deg, #156b38, #2f8f4e)',
-              boxShadow: '0 14px 26px rgba(21, 107, 56, 0.3)',
-              border: '1px solid rgba(92, 206, 124, 0.45)',
+              background: 'linear-gradient(135deg, #0f7a3d, #1fb35e)',
+              boxShadow: '0 16px 28px rgba(15, 122, 61, 0.34)',
+              border: '1px solid rgba(151, 230, 178, 0.55)',
           }
         : {
-              background: 'linear-gradient(135deg, #8d3c3c, #c03d2f)',
-              boxShadow: '0 14px 26px rgba(160, 45, 45, 0.28)',
-              border: '1px solid rgba(224, 116, 116, 0.42)',
+              background: 'linear-gradient(135deg, #9f1d1d, #e53d34)',
+              boxShadow: '0 16px 28px rgba(159, 29, 29, 0.32)',
+              border: '1px solid rgba(239, 137, 137, 0.5)',
           };
 
     return (
@@ -170,9 +166,7 @@ function FonteSection({ fonte, index }) {
             </div>
 
             {!statusOnline ? (
-                <p className={styles.sourceError}>
-                    {fonte.erro || 'Fonte indisponível no momento.'}
-                </p>
+                <p className={styles.sourceError}>{fonte.erro || 'Fonte indisponível no momento.'}</p>
             ) : null}
 
             {statusOnline && livros.length > 0 ? (

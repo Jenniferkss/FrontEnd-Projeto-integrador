@@ -1,76 +1,100 @@
 .page {
     min-height: 100vh;
-    background-color: #f7e8ea ;
+    background-color: #f7e8ea;
     overflow-x: hidden;
-    max-width: 100vw;
+    width: 100%;
 }
+
 
 .hero {
     width: 100%;
-    max-width: 87.5rem;
+    max-width: 68rem;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr 0.8fr;
     align-items: center;
-    gap: 2rem;
-    padding: 2rem 4rem;
+    gap: 3rem;
+    padding: 2rem 2rem 0;
+    box-sizing: border-box;
+    margin-top: 1.1rem;
+    margin-left: 6.75rem;
 }
 
-.titleMain,
-.titleItalic {
-    font-family: 'Playfair Display', serif;
-    font-size: 5rem;
-    line-height: 0.9;
-    padding: 0;
+.leftHero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: -2rem;
 }
 
-.titleItalic {
-    color:  #8d1f1f;
-    font-style: italic;
-    margin-left: 10rem;
+.titleBox {
+    max-width: 32rem;
+    margin-top: 2.5rem;
 }
 
 .titleMain {
-    color: #111;
-    margin-top: -3rem;
-    margin-left: 7.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    line-height: 0.88;
+    color: #000000;
+    margin: 0;
+    letter-spacing: -0.15rem;
 }
 
-.titleItalic {
+.redTitleMain {
     color: #8d1f1f;
+    font-size: 5.5rem;
+    margin-left: 9rem;
     font-style: italic;
-    margin-left: 16rem;
 }
 
-.quote {
+.subtitle {
     margin-top: 2rem;
-    font-size: 1.5rem;
-    line-height: 1.5;
+    font-size: 1.3rem;
+    color: #111;
+    font-family: 'Playfair Display', serif;
+    font-style: bolder;
+}
+
+.subtitleAuthor {
+    margin-top:1.5rem;
+    font-size: 1rem;
+    color: #111;
+    font-family: 'Playfair Display', serif;
+    font-style: bolder;
 }
 
 .quoteBox {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    margin-top: 3rem;
     max-width: 28rem;
-    margin-top: 4rem;
-    margin-left: 6rem;
-    font-family: 'Playfair Display', serif;
+}
 
+.quote {
+    font-size: 2rem;
+    line-height: 1.4;
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+}
+
+.author {
+    margin-top: 1rem;
+    font-size: 1rem;
 }
 
 .rightHero {
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin-top: 0rem;
 }
 
 .authorImage {
     width: 100%;
-    max-width: 20rem;
-    display: block;
+    max-width: 19.3rem;
+    height: auto;
     object-fit: cover;
-    border-radius: 0.75rem;
-    margin-top: 0.6rem;
+    border-radius: 0.4rem;
+    display: block;
 }
 
 .sectionName {
@@ -78,87 +102,117 @@
     font-weight: 600;
     letter-spacing: 0.15rem;
     text-transform: uppercase;
-    margin-top: 3rem;
+    margin-top: 1rem;
+    font-size: 0.75rem;
 }
 
 .aboutBook {
     width: 100%;
-    max-width: 87.5rem;
-    margin: 4rem auto 0;
+    max-width: 75rem;
+    margin: 2rem auto 0;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 4rem;
-    padding-bottom: 5rem;
+    grid-template-columns: 0.9fr 1fr;
+    gap: 2.5rem;
+    padding: 0 2rem 4rem;
+    align-items: start;
+    box-sizing: border-box;
+    margin-top: 5.1rem;
 }
 
 .bookImage {
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
+    align-items: flex-start;
+
 }
 
 .bookCover {
-    width: auto;
-    height: auto;
-    max-width: 30.5rem;
+    width: 100%;
+    max-width: 22rem;
+    border-radius: 1rem;
     display: block;
-    object-fit: cover;
-    border-radius: 3rem;
 }
 
 .bookInfo {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    margin-right: 4rem;
+    gap: 1.2rem;
 }
+
+.bookTitle h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    line-height: 1;
+    margin: 0;
+}
+
+.redTitle {
+    color: #8d1f1f;
+    font-style: italic;
+}
+
+/* CARDS */
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
 }
 
 .card {
     border: 1px solid #8d1f1f;
-    border-radius: 0.75rem;
-    padding: 1.5rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
     background-color: #fff7f7;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    min-width: 0;
+    background-color: #fff8f0;
 }
+
+.card p {
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+.card h3 {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    word-break: break-word;
+}
+
+/* TEXTOS */
 
 .textBox {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-    margin-top: 0.4rem;
+    gap: 1rem;
+    margin-top: 0.3rem;
 }
 
 .textBox p {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.8;
     color: #222;
+    text-align: justify;
+    word-break: break-word;
+    margin: 0;
 }
+
 
 .container {
     width: 100%;
-    max-width: 87.5rem;
-    margin: 5rem auto;
-    padding: 0 4rem;
-    box-sizing: border-box;
+    max-width: 75rem;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    box-sizing: content-box;
 }
 
 .textContainer {
     background-color: #f8eeee;
-    border: 1.5px solid #b35a5a;
-    border-radius: 1rem;
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    border: 1px solid #b35a5a;
+    border-radius: 0.8rem;
+    padding: 2rem;
+    overflow: hidden;
 }
 
 .titleContainer {
@@ -166,13 +220,129 @@
     font-size: 3rem;
     font-style: italic;
     color: #111;
+    margin: 0 0 1.5rem 0;
+}
+
+.analysisText,
+.textContainer p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #000;
+    text-align: justify;
+    margin: 0;
+    word-break: break-word;
+}
+
+.redacaoList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.redacaoItem {
+    background: #fff7f7;
+    border: 1px solid #b35a5a;
+    border-radius: 0.5rem;
+    padding: 1rem 1.2rem;
+}
+
+.redacaoItem p {
     margin: 0;
 }
 
-.textContainer p {
-    font-size: 1.15rem;
-    line-height: 1.9;
-    color: #000000;
-    text-align: justify;
-    margin: 0;
+/* BOTÃO */
+
+.videoSection {
+    display: flex;
+    justify-content: center;
+    margin: 4rem 0;
+    padding: 0 1rem;
+}
+
+.videoBtn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 999px;
+    background: #8d1f1f;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.videoBtn:hover {
+    opacity: 0.9;
+}
+
+
+
+.loading {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@media (max-width: 900px) {
+    .hero,
+    .aboutBook {
+        grid-template-columns: 1fr;
+    }
+
+    .titleMain {
+        font-size: 3rem;
+        margin-top: 0;
+    }
+
+    .bookCover {
+        max-width: 18rem;
+        margin: 0 auto;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .container,
+    .hero,
+    .aboutBook {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .bookTitle h2,
+    .titleContainer {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .titleMain {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .quote {
+        font-size: 1.1rem;
+    }
+
+    .analysisText,
+    .textContainer p,
+    .textBox p {
+        font-size: 0.95rem;
+    }
+
+    .videoBtn {
+        width: 100%;
+        max-width: 20rem;
+    }
+
+    .textContainer {
+        padding: 1.5rem;
+    }
 }
