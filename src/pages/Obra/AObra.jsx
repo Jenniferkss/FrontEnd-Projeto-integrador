@@ -3,6 +3,7 @@ import styles from '../Obra/AObra.module.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
+import { request } from '../../services/api.js';
 
 import carolina from '../../../public/images/carolina.png';
 import livro from '../../../public/images/livro.png';
@@ -16,26 +17,12 @@ export default function ObraVestibular() {
     useEffect(() => {
         const carregarLivros = async () => {
             try {
-                const response = await fetch(
-                    'https://backend-projeto-integrador-rana.onrender.com/api/dicaVestibular',
-                    {
-                        method: 'GET',
-                        headers: {
-                            'x-api-key': 'amods',
-                            'Content-Type': 'application/json',
-                        },
+                const data = await request('/api/dicaVestibular', {
+                    method: 'GET',
+                    headers: {
+                        'x-api-key': 'amods',
                     },
-                );
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-
-                    console.error('Erro retornado pelo servidor:', errorText);
-
-                    throw new Error(`Erro ${response.status} ao buscar dados.`);
-                }
-
-                const data = await response.json();
+                });
 
                 setDados(Array.isArray(data) ? data[0] : data);
             } catch (error) {
