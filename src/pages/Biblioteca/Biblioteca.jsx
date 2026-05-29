@@ -4,7 +4,8 @@ import Footer from '../../components/Footer/Footer.jsx';
 import Header from '../../components/Header/Header.jsx';
 import styles from './Biblioteca.module.css';
 
-const BIBLIOTECA_URL = 'https://backend-projeto-integrador-rana.onrender.com/api/integracao/biblioteca';
+const BIBLIOTECA_URL =
+    'https://backend-projeto-integrador-rana.onrender.com/api/integracao/biblioteca';
 
 const truncateText = (value, maxLength = 180) => {
     const text = String(value || '').trim();
@@ -135,7 +136,10 @@ function BookCard({ livro, index }) {
 function FonteSection({ fonte, index }) {
     const livros = Array.isArray(fonte.conteudo) ? fonte.conteudo : [];
     const tituloFonte = fonte.livro || `Fonte ${index + 1}`;
-    const statusOnline = String(fonte.statusApi || '').trim().toLowerCase() === 'online';
+    const statusOnline =
+        String(fonte.statusApi || '')
+            .trim()
+            .toLowerCase() === 'online';
     const statusApi = statusOnline ? 'Online' : 'Indisponível';
     const statusStyles = statusOnline
         ? {
@@ -166,7 +170,9 @@ function FonteSection({ fonte, index }) {
             </div>
 
             {!statusOnline ? (
-                <p className={styles.sourceError}>{fonte.erro || 'Fonte indisponível no momento.'}</p>
+                <p className={styles.sourceError}>
+                    {fonte.erro || 'Fonte indisponível no momento.'}
+                </p>
             ) : null}
 
             {statusOnline && livros.length > 0 ? (
