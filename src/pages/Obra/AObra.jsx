@@ -112,29 +112,6 @@ export default function ObraVestibular() {
                     </div>
 
                     <div className={styles.cards}>
-                        {(
-                            dados.estatisticas || [
-                                {
-                                    nome: 'Publicação',
-                                    porcentagem: 30,
-                                },
-                                {
-                                    nome: 'Idiomas',
-                                    porcentagem: 72,
-                                },
-                                {
-                                    nome: 'Vendas',
-                                    porcentagem: 42,
-                                },
-                            ]
-                        ).map((est, index) => (
-                            <div key={index} className={styles.card}>
-                                <p>{est.nome}</p>
-
-                                <h3>{est.porcentagem}%</h3>
-                            </div>
-                        ))}
-
                         <div className={styles.card}>
                             <p>Publicação</p>
                             <h3>{dados.publicacao || '1960'}</h3>
