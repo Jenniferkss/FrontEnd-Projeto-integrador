@@ -29,51 +29,118 @@ const getBookAuthor = (livro) => {
     return nested || 'Autor desconhecido';
 };
 
+const coverFieldNames = [
+    'capaURL',
+    'capaUrl',
+    'capaURl',
+    'capa_url',
+    'capa',
+    'cover',
+    'image',
+    'imageUrl',
+    'imageURL',
+    'url_capa',
+    'urlCapa',
+    'imagem',
+    'imagemUrl',
+    'imagemURL',
+    'foto',
+    'fotoUrl',
+    'fotoURL',
+    'foto_url',
+    'urlImagem',
+];
+
+const extractCoverValue = (value) => {
+    if (typeof value === 'string') {
+        const text = value.trim();
+        return text || '';
+    }
+
+    if (Array.isArray(value)) {
+        for (const item of value) {
+            const resolved = extractCoverValue(item);
+            if (resolved) return resolved;
+        }
+        return '';
+    }
+
+    if (value && typeof value === 'object') {
+        const candidateKeys = [
+            'url',
+            'src',
+            'href',
+            'link',
+            'publicUrl',
+            'thumbnail',
+            'path',
+            'value',
+        ];
+
+        for (const key of candidateKeys) {
+            const resolved = extractCoverValue(value[key]);
+            if (resolved) return resolved;
+        }
+
+        for (const nestedValue of Object.values(value)) {
+            const resolved = extractCoverValue(nestedValue);
+            if (resolved) return resolved;
+        }
+    }
+
+    return '';
+};
+
+const getBookCoverUrl = (livro) => {
+    for (const fieldName of coverFieldNames) {
+        const coverUrl = extractCoverValue(livro?.[fieldName]);
+        if (coverUrl) return coverUrl;
+    }
+
+    return '';
+};
+
 function BookCard({ livro, index }) {
     const titulo = getBookTitle(livro, index);
     const autor = getBookAuthor(livro);
     const descricao = truncateText(livro.descricaoPT || livro.descricao || 'Resumo não informado.');
-    const capaUrl = livro.capaUrl || livro.capaURl || livro.capa_url || '';
-
-    const isQuartoDeDespejo = String(titulo).toLowerCase().includes('despejo');
+    const capaUrl = getBookCoverUrl(livro);
 
     return (
         <article className={styles.bookCard}>
-            <div
-                className={styles.coverFrame}
-                style={{
-                    height: isQuartoDeDespejo ? '126px' : '208px',
-                    minHeight: isQuartoDeDespejo ? '126px' : '208px',
-                    overflow: 'hidden',
-                    borderRadius: '22px 22px 0 0',
-                }}
-            >
-                {capaUrl ? (
-                    <img
-                        className={styles.coverImage}
-                        src={capaUrl}
-                        alt={titulo}
-                        loading="lazy"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                ) : (
-                    <div className={styles.coverPlaceholder} aria-label={`Sem capa para ${titulo}`}>
-                        <span style={{ fontSize: '0.95rem', fontWeight: 700 }}>Sem capa disponível</span>
-                    </div>
-                )}
+            <div className={styles.coverSection}>
+                <div className={styles.coverFrame}>
+                    {capaUrl ? (
+                        <img
+                            className={styles.coverImage}
+                            src={capaUrl}
+                            alt={titulo}
+                            loading='lazy'
+                        />
+                    ) : (
+                        <div className={styles.coverPlaceholder} aria-label={`Sem capa para ${titulo}`}>
+                            <div className={styles.placeholderGlyph}>
+                                {titulo.charAt(0).toUpperCase()}
+                            </div>
+                            <span className={styles.placeholderLabel}>Sem capa</span>
+                        </div>
+                    )}
+                </div>
             </div>
 
-            <div className={styles.bookBody}>
-                <div className={styles.bookMetaRow}>
-                    <span className={styles.bookYear}>
-                        {livro.ano || livro.anoPublicacao || 'Ano não informado'}
-                    </span>
-                    <span className={styles.bookAuthor}>{autor}</span>
-                </div>
+            <div className={styles.contentSection}>
+                <div className={styles.bookHeader}>
+                    <div className={styles.bookMetaRow}>
+                        <span className={styles.bookYear}>
+                            {livro.ano || livro.anoPublicacao || 'Ano não informado'}
+                        </span>
+                        <span className={styles.bookAuthor}>{autor}</span>
+                    </div>
 
-                <h3 className={styles.bookTitle} style={{ fontWeight: 800 }}>
-                    {titulo}
-                </h3>
+                    <h3 className={styles.bookTitle}>
+                        {titulo}
+                    </h3>
+                </div>
 
                 <div className={styles.synopsisGroup}>
                     <p className={styles.synopsisLabel}>Resumo</p>
@@ -158,8 +225,13 @@ export default function Biblioteca() {
         carregarBiblioteca();
     }, [reloadToken]);
 
-    const fontesOnline = fontes.filter((f) => String(f.statusApi || '').toLowerCase() === 'online').length;
-    const totalLivros = fontes.reduce((acc, f) => acc + (Array.isArray(f.conteudo) ? f.conteudo.length : 0), 0);
+    const fontesOnline = fontes.filter(
+        (f) => String(f.statusApi || '').toLowerCase() === 'online'
+    ).length;
+    const totalLivros = fontes.reduce(
+        (acc, f) => acc + (Array.isArray(f.conteudo) ? f.conteudo.length : 0),
+        0
+    );
 
     return (
         <div className={styles.page}>
@@ -170,7 +242,8 @@ export default function Biblioteca() {
                     <div className={styles.heroContent}>
                         <h1 className={styles.title}>Biblioteca Integrada</h1>
                         <p className={styles.lead}>
-                            As fontes chegam direto do agregador do backend, com leitura simples e cartões mais claros.
+                            As fontes chegam direto do agregador do backend, com leitura simples e
+                            cartões mais claros.
                         </p>
                     </div>
 
@@ -195,27 +268,30 @@ export default function Biblioteca() {
                         {loading
                             ? 'Buscando as fontes da biblioteca...'
                             : error
-                            ? 'Não conseguimos carregar a biblioteca agora.'
-                            : `Biblioteca pronta. ${fontesOnline} de ${fontes.length} fontes online.`}
+                              ? 'Não conseguimos carregar a biblioteca agora.'
+                              : `Biblioteca pronta. ${fontesOnline} de ${fontes.length} fontes online.`}
                     </p>
 
                     <button
-                        type="button"
+                        type='button'
                         className={styles.retryButton}
                         onClick={() => setReloadToken((prev) => prev + 1)}
-                        disabled={loading}
-                    >
+                        disabled={loading}>
                         {loading ? 'Carregando...' : 'Tentar novamente'}
                     </button>
                 </div>
 
                 {/* Loading, Error e Empty States mantidos iguais ao que você gostava */}
-                {loading && <section className={styles.loadingState}>Carregando biblioteca...</section>}
+                {loading && (
+                    <section className={styles.loadingState}>Carregando biblioteca...</section>
+                )}
 
                 {error && (
                     <section className={styles.errorState}>
                         <p>{error}</p>
-                        <button onClick={() => setReloadToken((prev) => prev + 1)} className={styles.retryButton}>
+                        <button
+                            onClick={() => setReloadToken((prev) => prev + 1)}
+                            className={styles.retryButton}>
                             Tentar novamente
                         </button>
                     </section>
