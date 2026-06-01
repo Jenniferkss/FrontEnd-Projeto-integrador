@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import { request } from '../../services/api.js';
@@ -148,6 +148,7 @@ function VideoPlayer({ video, onLoad }) {
 // ===== COMPONENTE PRINCIPAL =====
 export default function VideoAulas() {
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const [videos, setVideos] = useState([]);
     const [videoAtivo, setVideoAtivo] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -189,8 +190,8 @@ export default function VideoAulas() {
 
                 setVideos(videosEnriquecidos);
 
-                if (videosEnriquecidos.length > 0 && !videoAtivo) {
-                    setVideoAtivo(videosEnriquecidos[0]);
+                if (videosEnriquecidos.length > 0) {
+                    setVideoAtivo((currentVideo) => currentVideo ?? videosEnriquecidos[0]);
                 }
             } catch (err) {
                 if (!isActive) return;
@@ -394,7 +395,12 @@ export default function VideoAulas() {
                                     Questões de vestibulares e ENEM sobre as obras, com resolução
                                     detalhada pela equipe pedagógica.
                                 </p>
-                                <button className={styles.cardAction}>Abrir Caderno →</button>
+                                <button
+                                    type="button"
+                                    className={styles.cardAction}
+                                    onClick={() => navigate('/simulados')}>
+                                    Abrir Simulado →
+                                </button>
                             </article>
                         </div>
                     </section>
