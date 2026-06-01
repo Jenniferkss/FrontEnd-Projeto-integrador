@@ -15,7 +15,7 @@
     align-items: center;
     gap: 4rem;
     padding: 4rem 2rem;
-    margin-right: 9.7rem;
+    margin-left: 2.95rem;
 }
 
 .rightHero {
@@ -33,18 +33,21 @@
 }
 
 .titleMain {
-      font-size: 5rem;
+      font-size: 4rem;
       font-family: 'Playfair Display', serif;
       line-height: 0.6;
+      margin-top: 3rem;
 }
+
 .titleItalic {
+    font-size: 4rem;
     grid-template-columns: 1fr 0.8fr;
     align-items: center;
     gap: 3rem;
     padding: 2rem 2rem 0;
     box-sizing: border-box;
     margin-top: 1.1rem;
-    margin-left: 6.75rem;
+    margin-left: 6.6rem;
 }
 
 .leftHero {
@@ -71,16 +74,15 @@
 .redTitleMain {
     color: #8d1f1f;
     font-size: 5.5rem;
-    margin-left: 9rem;
     font-style: italic;
-    margin-left: 16rem;
+    margin-left: 14rem;
     font-family: 'Playfair Display', serif;
     font-size: 5rem;
 }
 
 .subtitle {
-    margin-top: 2rem;
-    font-size: 1.5rem;
+    margin-top: 3rem;
+    font-size: 3.5rem;
     line-height: 1.6;
     font-size: 1.3rem;
     color: #111;
@@ -89,11 +91,12 @@
 }
 
 .subtitleAuthor {
-    margin-top:1.5rem;
+    margin-top:2.5rem;
     font-size: 1rem;
     color: #111;
     font-family: 'Playfair Display', serif;
     font-style: bolder;
+
 }
 
 .quoteBox {
@@ -118,13 +121,13 @@
 
 .authorImage {
     width: 100%;
-    max-width: 25rem;
+    max-width: 20rem;
     display: block;
     object-fit: cover;
     border-radius: 0.75rem;
     margin-top: 0.6rem;
-    margin-right: 3rem;
-    margin-left: 1rem;
+    margin-right: 0.1rem;
+    margin-left: 2rem;
 }
 
 .rightHero {
@@ -174,15 +177,18 @@
 
 .bookCover {
     width: 100%;
-    max-width: 22rem;
+    max-width: 26.2rem;
     border-radius: 1rem;
     display: block;
+    margin-right: 2rem;
 }
 
 .bookInfo {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+    margin-top: -0.6rem;
+    margin-right: 2.2rem;
 }
 
 .bookTitle h2 {
@@ -222,7 +228,6 @@
     font-size: 1rem;
     word-break: break-word;
 }
-
 
 .textBox {
     display: flex;
@@ -320,4 +325,144 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+
+/* ========================= */
+/* TABLET */
+/* ========================= */
+@media (max-width: 1024px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3rem 2rem;
+        margin: 0 auto;
+    }
+
+    .leftHero,
+    .rightHero {
+        margin: 0;
+        align-items: center;
+        text-align: center;
+    }
+
+    .titleItalic,
+    .redTitleMain {
+        margin-left: 0;
+    }
+
+    .aboutBook {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .bookInfo {
+        margin-right: 0;
+    }
+
+    .bookCover {
+        max-width: 22rem;
+        margin: 0 auto;
+    }
+}
+
+/* ========================= */
+/* CELULAR */
+/* ========================= */
+@media (max-width: 768px) {
+    .hero {
+        padding: 2rem 1rem;
+    }
+
+    .titleMain,
+    .titleItalic,
+    .redTitleMain {
+        font-size: 3rem;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .subtitle,
+    .subtitleAuthor,
+    .quote,
+    .author {
+        text-align: center;
+    }
+
+    .authorImage {
+        max-width: 15rem;
+        margin: 0 auto;
+    }
+
+    .aboutBook {
+        padding: 0 1rem 3rem;
+    }
+
+    .bookTitle h2 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .bookInfo {
+        text-align: center;
+    }
+
+    .bookCover {
+        max-width: 18rem;
+        margin: 0 auto;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
+
+    .titleContainer {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .textContainer {
+        padding: 1.5rem;
+    }
+}
+
+/* ========================= */
+/* CELULARES PEQUENOS */
+/* ========================= */
+@media (max-width: 480px) {
+    .titleMain,
+    .titleItalic,
+    .redTitleMain {
+        font-size: 2.3rem;
+    }
+
+    .quote {
+        font-size: 1.3rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .bookTitle h2 {
+        font-size: 1.7rem;
+    }
+
+    .authorImage {
+        max-width: 13rem;
+    }
+
+    .bookCover {
+        max-width: 15rem;
+    }
+
+    .titleContainer {
+        font-size: 1.7rem;
+    }
 }
