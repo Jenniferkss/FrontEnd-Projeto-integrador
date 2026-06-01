@@ -62,26 +62,7 @@ export default function ObraVestibular() {
 
             <section className={styles.hero}>
                 <div className={styles.leftHero}>
-                    <div className={styles.titleBox}>
-                        <h2 className={styles.titleMain}>{dados.tituloPrincipal || 'Quarto de'}</h2>
-
-                        <h2 className={styles.titleItalic}>
-                            {dados.tituloSecundario || 'Despejo'}
-                        </h2>
-                    </div>
-
                     <div className={styles.quoteBox}>
-                        <p className={styles.quote}>
-                            “
-                            {dados.citacao ||
-                                'O Brasil precisa ser dirigido por alguém que já passou fome'}
-                            ”
-                        </p>
-
-                        <p className={styles.author}>
-                            {dados.autorCitacao || '- Carolina Maria de Jesus, 1960'}{' '}
-                        </p>
-
                         <h1 className={styles.titleMain}>
                             {language === 'en' ? 'Child of ' : 'Quarto de'}
                         </h1>
@@ -101,14 +82,6 @@ export default function ObraVestibular() {
                                 : ' - Carolina Maria de Jesus '}
                         </p>
                     </div>
-
-                    {dados.citacao && (
-                        <div className={styles.quoteBox}>
-                            <blockquote className={styles.quote}>“{dados.citacao}”</blockquote>
-
-                            <p className={styles.author}>Carolina Maria de Jesus</p>
-                        </div>
-                    )}
                 </div>
 
                 <div className={styles.rightHero}>
