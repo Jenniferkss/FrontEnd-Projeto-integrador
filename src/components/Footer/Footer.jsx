@@ -39,6 +39,9 @@ function Footer() {
                     <li>
                         <Link to="/Curiosidades">Curiosidades</Link>
                     </li>
+                    <li>
+                        <Link to="/VideoAulas">Vídeo Aulas</Link>
+                    </li>
                 </ul>
             </div>
 
