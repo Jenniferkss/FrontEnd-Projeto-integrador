@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import styles from './Vestibular.module.css';
-
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer.jsx';
-
 import { useLanguage } from '../../context/LanguageContext.jsx';
+import { FaPlayCircle } from 'react-icons/fa';
 
 export default function ObraVestibular() {
     const [dados, setDados] = useState(null);
@@ -197,9 +195,12 @@ export default function ObraVestibular() {
                         <div className={styles.videoBtnWrapper}>
                             {/* ROTA CORRIGIDA PARA MAIÚSCULAS AQUI */}
                             <Link to="/VideoAulas">
-                                <button className={styles.videoBtn}>
-                                    {language === 'en' ? 'Watch video-classes' : 'Veja as vídeo-aulas'}
-                                </button>
+                              <button className={styles.videoBtn}>
+                            <FaPlayCircle />
+                             {language === 'en'
+                            ? 'Watch video-classes'
+                            : 'Veja as vídeo-aulas'}
+                            </button>
                             </Link>
                         </div>
 

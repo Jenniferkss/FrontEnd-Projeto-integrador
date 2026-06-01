@@ -267,3 +267,52 @@
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
 }
+
+/* Monitores Full HD */
+@media (min-width: 1600px) {
+    .hero {
+        padding-top: 8rem;
+        padding-bottom: 4rem;
+    }
+
+    .title {
+        font-size: 6rem;
+    }
+
+    .description {
+        max-width: 70rem;
+        font-size: 1.4rem;
+        line-height: 1.8;
+    }
+
+    .btnGroup {
+        gap: 1.8rem;
+    }
+
+    .btn {
+        padding: 0.9rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Monitores muito grandes */
+@media (min-width: 1920px) {
+    .hero {
+        padding-top: 10rem;
+        padding-bottom: 6rem;
+    }
+
+    .title {
+        font-size: 7rem;
+    }
+
+    .description {
+        max-width: 80rem;
+        font-size: 1.6rem;
+    }
+
+    .btn {
+        padding: 1rem 2.4rem;
+        font-size: 1.2rem;
+    }
+}
