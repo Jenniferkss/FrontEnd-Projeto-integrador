@@ -1,4 +1,43 @@
 import { useState, useEffect } from 'react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import styles from './AObra.module.css';
+
+export default function AObra() {
+    const [dados, setDados] = useState({});
+
+    useEffect(() => {
+        const carregarDados = async () => {
+            try {
+                const response = await fetch(
+                    'https://backend-projeto-integrador-rana.onrender.com/api/aObra',
+                    {
+                        method: 'GET',
+                        headers: {
+                            'x-api-key': 'amods',
+                            'Content-Type': 'application/json',
+                        },
+                    },
+                );
+
+                if (!response.ok) {
+                    throw new Error(`Erro ${response.status} ao buscar dados.`);
+                }
+
+                const data = await response.json();
+
+                console.log('Dados recebidos:', data);
+
+                setDados(Array.isArray(data) ? data[0] : data);
+            } catch (error) {
+                console.error('Erro ao buscar dados:', error);
+            } 
+        };
+
+        carregarDados();
+    }, []);
+
+
 import styles from '../Obra/AObra.module.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer.jsx';
@@ -62,6 +101,25 @@ export default function ObraVestibular() {
             <section className={styles.hero}>
                 <div className={styles.leftHero}>
                     <div className={styles.titleBox}>
+                        <h2 className={styles.titleMain}>
+                            {dados.tituloPrincipal || 'Quarto de'}
+                        </h2>
+
+                        <h2 className={styles.titleItalic}>
+                            {dados.tituloSecundario || 'Despejo'}
+                        </h2>
+                    </div>
+
+                    <div className={styles.quoteBox}>
+                        <p className={styles.quote}>
+                            “
+                            {dados.citacao ||
+                                'O Brasil precisa ser dirigido por alguém que já passou fome'}
+                            ”
+                        </p>
+
+                        <p className={styles.author}>
+                            {dados.autorCitacao || '- Carolina Maria de Jesus, 1960'}
                         <h1 className={styles.titleMain}>
                             {language === 'en' ? 'Child of ' : 'Quarto de'}
                         </h1>
@@ -93,7 +151,7 @@ export default function ObraVestibular() {
 
                 <div className={styles.rightHero}>
                     <img
-                        src={carolina}
+                        src="/public/images/carolina.png"
                         alt="Carolina Maria de Jesus"
                         className={styles.authorImage}
                     />
@@ -103,19 +161,23 @@ export default function ObraVestibular() {
 
             <section className={styles.aboutBook}>
                 <div className={styles.bookImage}>
-                    <img src={livro} alt="Livro Quarto de Despejo" className={styles.bookCover} />
+                    <img
+                        src="/public/images/livro.png"
+                        alt="Livro Quarto de Despejo"
+                        className={styles.bookCover}
+                    />
                 </div>
 
                 <div className={styles.bookInfo}>
                     <p className={styles.sectionName}>
-                        {language === 'en' ? 'THE BOOK' : 'A OBRA'}
+                        {dados.nomeSecao || 'A OBRA'}
                     </p>
 
                     <div className={styles.bookTitle}>
-                        <h2>{language === 'en' ? 'A report' : 'Um relato'}</h2>
+                        <h2>{dados.subtitulo1 || 'Um relato que'}</h2>
 
                         <h2 className={styles.redTitle}>
-                            {language === 'en' ? ' that changed the Brazil' : 'que mudou o Brasil'}
+                            {dados.subtitulo2 || 'mudou o Brasil'}
                         </h2>
                     </div>
 
@@ -144,22 +206,52 @@ export default function ObraVestibular() {
                         ))}
 
                         <div className={styles.card}>
-                            <p>{language === 'en' ? 'Genre' : 'Gênero'}</p>
+                            <p>Publicação</p>
+                            <h3>{dados.publicacao || '1960'}</h3>
+                        </div>
 
-                            <h3>
-                                {language === 'en'
-                                    ? 'Diary / Autobiography'
-                                    : 'Diário / Autobiografia'}
-                            </h3>
+                        <div className={styles.card}>
+                            <p>Idiomas</p>
+                            <h3>{dados.idiomas || '13 traduções'}</h3>
+                        </div>
+
+                        <div className={styles.card}>
+                            <p>Vendas</p>
+                            <h3>{dados.vendas || '1 milhão +'}</h3>
+                        </div>
+
+                        <div className={styles.card}>
+                            <p>Gênero</p>
+                            <h3>{dados.genero || 'Diário / Autobiografia'}</h3>
                         </div>
                     </div>
 
                     <div className={styles.textBox}>
-                        <p>{dados.analiseCritica || 'Conteúdo indisponível.'}</p>
+                        {Array.isArray(dados.descricao) ? (
+                            dados.descricao.map((texto, index) => (
+                                <p key={index}>{texto}</p>
+                            ))
+                        ) : (
+                            <>
+                                <p>
+                                    "Quarto de Despejo: Diário de uma Favelada" é o relato visceral
+                                    e poético de Carolina Maria de Jesus sobre a sua vida na favela
+                                    do Canindé, em São Paulo.
+                                </p>
 
-                        <p>{dados.interpretacoes || 'Conteúdo indisponível.'}</p>
+                                <p>
+                                    Escrito entre 1955 e 1960, o diário documenta com uma
+                                    honestidade brutal a fome, a miséria e a luta diária pela
+                                    sobrevivência.
+                                </p>
 
-                        <p>{dados.contextoHist || 'Conteúdo indisponível.'}</p>
+                                <p>
+                                    A obra se tornou um fenômeno editorial, traduzida para mais de
+                                    13 idiomas e reconhecida como um dos mais importantes
+                                    testemunhos da literatura brasileira.
+                                </p>
+                            </>
+                        )}
                     </div>
                 </div>
             </section>
@@ -168,59 +260,15 @@ export default function ObraVestibular() {
             <section className={styles.container}>
                 <div className={styles.textContainer}>
                     <h2 className={styles.titleContainer}>
-                        {language === 'en' ? 'Work Analysis' : 'Análise da obra'}
+                        {dados.tituloAnalise || 'Análise da obra'}
                     </h2>
 
-                    <p className={styles.analysisText}>
-                        {dados.textoPrincipal || dados.resumo || 'Conteúdo indisponível.'}
+                    <p>
+                        {dados.analise ||
+                            `A obra Quarto de Despejo, de Carolina Maria de Jesus, é um relato autobiográfico em forma de diário que oferece uma visão direta e impactante da vida na favela do Canindé, em São Paulo, na década de 1950.`}
                     </p>
                 </div>
             </section>
-
-            <section className={styles.container}>
-                <div className={styles.textContainer}>
-                    <h2 className={styles.titleContainer}>
-                        {language === 'en' ? 'Essay Topics' : 'Temas Principais'}
-                    </h2>
-
-                    <div className={styles.redacaoList}>
-                        {Array.isArray(dados.temasRedacao) ? (
-                            dados.temasRedacao.map((tema, index) => (
-                                <div key={index} className={styles.redacaoItem}>
-                                    <p>{tema}</p>
-                                </div>
-                            ))
-                        ) : (
-                            <>
-                                <div className={styles.redacaoItem}>
-                                    <p>A invisibilidade social de populações marginalizadas.</p>
-                                </div>
-
-                                <div className={styles.redacaoItem}>
-                                    <p>Os obstáculos para garantia dos direitos humanos.</p>
-                                </div>
-
-                                <div className={styles.redacaoItem}>
-                                    <p>A exclusão social nas periferias urbanas.</p>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </section>
-
-            {/* PERSONAGENS */}
-            {dados.personagens && (
-                <section className={styles.container}>
-                    <div className={styles.textContainer}>
-                        <h2 className={styles.titleContainer}>
-                            {language === 'en' ? 'Main Characters' : 'Personagens Principais'}
-                        </h2>
-
-                        <p className={styles.analysisText}>{dados.personagens}</p>
-                    </div>
-                </section>
-            )}
 
             <Footer />
         </div>
