@@ -1,42 +1,4 @@
 import { useState, useEffect } from 'react';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-import styles from './AObra.module.css';
-
-export default function AObra() {
-    const [dados, setDados] = useState({});
-
-    useEffect(() => {
-        const carregarDados = async () => {
-            try {
-                const response = await fetch(
-                    'https://backend-projeto-integrador-rana.onrender.com/api/aObra',
-                    {
-                        method: 'GET',
-                        headers: {
-                            'x-api-key': 'amods',
-                            'Content-Type': 'application/json',
-                        },
-                    },
-                );
-
-                if (!response.ok) {
-                    throw new Error(`Erro ${response.status} ao buscar dados.`);
-                }
-
-                const data = await response.json();
-
-                console.log('Dados recebidos:', data);
-
-                setDados(Array.isArray(data) ? data[0] : data);
-            } catch (error) {
-                console.error('Erro ao buscar dados:', error);
-            } 
-        };
-
-        carregarDados();
-    }, []);
-
 
 import styles from '../Obra/AObra.module.css';
 import Header from '../../components/Header/Header';
@@ -101,9 +63,7 @@ export default function ObraVestibular() {
             <section className={styles.hero}>
                 <div className={styles.leftHero}>
                     <div className={styles.titleBox}>
-                        <h2 className={styles.titleMain}>
-                            {dados.tituloPrincipal || 'Quarto de'}
-                        </h2>
+                        <h2 className={styles.titleMain}>{dados.tituloPrincipal || 'Quarto de'}</h2>
 
                         <h2 className={styles.titleItalic}>
                             {dados.tituloSecundario || 'Despejo'}
@@ -119,7 +79,9 @@ export default function ObraVestibular() {
                         </p>
 
                         <p className={styles.author}>
-                            {dados.autorCitacao || '- Carolina Maria de Jesus, 1960'}
+                            {dados.autorCitacao || '- Carolina Maria de Jesus, 1960'}{' '}
+                        </p>
+
                         <h1 className={styles.titleMain}>
                             {language === 'en' ? 'Child of ' : 'Quarto de'}
                         </h1>
@@ -151,34 +113,29 @@ export default function ObraVestibular() {
 
                 <div className={styles.rightHero}>
                     <img
-                        src="/public/images/carolina.png"
+                        src={carolina}
                         alt="Carolina Maria de Jesus"
                         className={styles.authorImage}
                     />
                 </div>
             </section>
 
-
             <section className={styles.aboutBook}>
                 <div className={styles.bookImage}>
                     <img
-                        src="/public/images/livro.png"
+                        src={livro}
                         alt="Livro Quarto de Despejo"
                         className={styles.bookCover}
                     />
                 </div>
 
                 <div className={styles.bookInfo}>
-                    <p className={styles.sectionName}>
-                        {dados.nomeSecao || 'A OBRA'}
-                    </p>
+                    <p className={styles.sectionName}>{dados.nomeSecao || 'A OBRA'}</p>
 
                     <div className={styles.bookTitle}>
                         <h2>{dados.subtitulo1 || 'Um relato que'}</h2>
 
-                        <h2 className={styles.redTitle}>
-                            {dados.subtitulo2 || 'mudou o Brasil'}
-                        </h2>
+                        <h2 className={styles.redTitle}>{dados.subtitulo2 || 'mudou o Brasil'}</h2>
                     </div>
 
                     <div className={styles.cards}>
@@ -228,9 +185,7 @@ export default function ObraVestibular() {
 
                     <div className={styles.textBox}>
                         {Array.isArray(dados.descricao) ? (
-                            dados.descricao.map((texto, index) => (
-                                <p key={index}>{texto}</p>
-                            ))
+                            dados.descricao.map((texto, index) => <p key={index}>{texto}</p>)
                         ) : (
                             <>
                                 <p>
