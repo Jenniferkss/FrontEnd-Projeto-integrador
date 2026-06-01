@@ -6,8 +6,10 @@ function Footer() {
         <footer className={styles.footer}>
             <div className={styles.container}>
                 <div className={styles.brand}>
-                    <h2 className={styles.brandTitle}> Intertexto </h2>
-                    <p className={styles.brandText}>
+                    
+                <h2 className={styles.brandTitle}> Intertexto </h2>
+
+                <p className={styles.brandText}>
                     Aproximando os estudantes da literatura por meio de uma experiência moderna e
                     interativa.
                 </p>
