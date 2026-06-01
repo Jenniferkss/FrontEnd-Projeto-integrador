@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import styles from './Vestibular.module.css';
-
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer.jsx';
-
 import { useLanguage } from '../../context/LanguageContext.jsx';
 
 export default function ObraVestibular() {
@@ -30,14 +27,14 @@ export default function ObraVestibular() {
                 if (!response.ok) {
                     const errorText = await response.text();
                     console.error('Erro retornado pelo servidor:', errorText);
-                    throw new Error(`Erro ${response.status} ao buscar dados.`);
+                    throw new Error('Erro ${response.status} ao buscar dados.');
                 }
 
                 const data = await response.json();
                 console.log('Dados recebidos com sucesso:', data);
                 setDados(Array.isArray(data) ? data[0] : data);
             } catch (error) {
-                console.error('Erro ao conectar com o back-end:', error);
+                console.log('Dados recebidos com sucesso:', error);
             } finally {
                 setCarregando(false);
             }
@@ -48,13 +45,12 @@ export default function ObraVestibular() {
 
     if (carregando) {
         return (
-            <div
-                style={{
-                    textAlign: 'center',
-                    padding: '50px',
-                    color: '#333',
-                    fontSize: '18px',
-                }}>
+            <div style={{
+                textAlign: 'center',
+                padding: '50px',
+                color: '#333',
+                fontSize: '18px',
+            }}>
                 {language === 'en' ? 'Loading database info...' : 'Carregando dados do banco...'}
             </div>
         );
@@ -62,27 +58,23 @@ export default function ObraVestibular() {
 
     if (!dados) {
         return (
-            <div
-                style={{
-                    textAlign: 'center',
-                    padding: '50px',
-                    color: '#333',
-                    fontSize: '18px',
-                }}>
-                {language === 'en'
-                    ? 'No records found.'
-                    : 'Nenhum registro encontrado ou erro na API.'}
-            </div>
+            <div style={{
+                textAlign: 'center',
+                padding: '50px',
+                color: '#333',
+                fontSize: '18px',
+            }}>
+                {language === 'en' ? 'No records found.' : 'Nenhum registro encontrado ou erro na API.'}
+                </div>
         );
     }
 
     return (
         <div className={styles.pageContainer}>
             <Header />
-
             <div className={styles.contentWrapper}>
                 <header className={styles.mainHeader}>
-                    <p className={styles.kicker}>
+                    <p>
                         {language === 'en' ? 'Critical analysis' : 'ANÁLISE CRÍTICA'}
                     </p>
 
@@ -91,20 +83,17 @@ export default function ObraVestibular() {
                     </h1>
 
                     <p className={styles.lead}>
-                        {language === 'en'
-                            ? 'Understand the literary work through interpretation, social criticism and essay themes.'
-                            : 'Entenda a obra através de interpretações, crítica social e possíveis temas de redação.'}
+                        {language === 'en' ? 'Understand the literary work through interpretation, social criticism and essay themes.' : 'Entenda a obra através de interpretações, crítica social e possíveis temas de redação.'}
                     </p>
                 </header>
 
-                {/* GRID SUPERIOR */}
-                <section className={styles.topCardsGrid}>
+                <section className={styles.topCardGrid}>
                     <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
                         <h2 className={styles.cardTopTitle}>
-                            {language === 'en' ? 'Critical Analysis' : 'Análise crítica'}
+                            {language === 'en' ? 'Critical Analysis': 'Análise crítica'}
                         </h2>
                         <p className={styles.cardTopText}>
-                            {dados.analiseCritica || 'Indisponível.'}
+                            {dados.analiseCritica || 'Indisponível'}
                         </p>
                     </div>
 
@@ -113,7 +102,7 @@ export default function ObraVestibular() {
                             {language === 'en' ? 'Interpretations' : 'Interpretações e análises'}
                         </h2>
                         <p className={styles.cardTopText}>
-                            {dados.interpretacoes || 'Indisponível.'}
+                            {dados.interpretacoes || 'Indisponível'}
                         </p>
                     </div>
 
@@ -125,35 +114,30 @@ export default function ObraVestibular() {
                             {Array.isArray(dados.temasRedacao) ? (
                                 dados.temasRedacao.map((tema, index) => <li key={index}>{tema}</li>)
                             ) : (
-                                <>
-                                    <li>A invisibilidade social de populações marginalizadas.</li>
-                                    <li>Os obstáculos para a garantia dos direitos humanos no Brasil.</li>
-                                    <li>A exclusão social nas periferias urbanas.</li>
-                                </>
+                                    <>
+                                        <li> A invisibilidade social de populações marginalizadas.</li>
+                                        <li> Os obstáculos para a garantia dos direitos humanos no Brasil.</li>
+                                        <li> A exclusão social nas periferias urbanas.</li>
+                                    </>
                             )}
                         </ul>
                     </div>
                 </section>
 
-                {/* PARTE INFERIOR */}
                 <div className={styles.mainLayout}>
-                    {/* CONTEÚDO */}
-                    <main className={styles.contentBox}>
+                    <main className={styles.contextBox}>
                         <h2 className={styles.contentTitle}>
                             {dados.tituloPrincipal || 'A Dupla Perspectiva: Carolina vs. o Leitor'}
                         </h2>
-
                         <p className={styles.contentText}>
                             {dados.textoPrincipal || dados.resumo || 'Conteúdo indisponível.'}
                         </p>
-
                         {dados.citacao && (
                             <blockquote className={styles.quoteBlock}>
                                 <div className={styles.quoteLine}></div>
-                                <p className={styles.quoteText}>“{dados.citacao}”</p>
+                                <p className={styles.quoteText}> "{dados.citacao}"</p>
                             </blockquote>
                         )}
-
                         <h3 className={styles.vectorsTitle}>
                             {language === 'en' ? 'Key Analytical Vectors' : 'Vetores Analíticos Chave'}
                         </h3>
@@ -162,23 +146,23 @@ export default function ObraVestibular() {
                             {dados.contextoHist ? (
                                 <p className={styles.contentText}>{dados.contextoHist}</p>
                             ) : (
-                                <div className={styles.vectorListFallback}>
-                                    <p>
-                                        <strong>A Retórica da Sobrevivência:</strong> Note como
+                                    <div className={styles.vectorListFallback}>
+                                        <p>
+                                        A Retórica da Sobrevivência: Note como
                                         Carolina usa a linguagem crua e direta para descrever sua
                                         fome, trabalho e luta diária.
-                                    </p>
-                                    <p>
+                                        </p>
+                                        <p>
                                         <strong>Olhar Atento:</strong> A atenção aos detalhes da
                                         favela funciona como símbolo da percepção aguda sobre a
                                         desigualdade.
-                                    </p>
-                                    <p>
+                                        </p>
+                                        <p>
                                         <strong>Rigidez Social:</strong> A influência do preconceito
                                         racial e da estrutura social brasileira molda as
                                         oportunidades.
-                                    </p>
-                                </div>
+                                        </p>
+                                        </div>
                             )}
                         </div>
 
@@ -187,15 +171,13 @@ export default function ObraVestibular() {
                                 <h3 className={styles.vectorsTitle}>
                                     {language === 'en' ? 'Main Characters' : 'Personagens Principais'}
                                 </h3>
-                                <p className={styles.contentText}>{dados.personagens}</p>
+                                <p className={styles.contentText}>{dados.personagem}</p>
                             </div>
                         )}
                     </main>
 
-                    {/* COLUNA DIREITA */}
                     <div className={styles.sidebar}>
                         <div className={styles.videoBtnWrapper}>
-                            {/* ROTA CORRIGIDA PARA MAIÚSCULAS AQUI */}
                             <Link to="/VideoAulas">
                                 <button className={styles.videoBtn}>
                                     {language === 'en' ? 'Watch video-classes' : 'Veja as vídeo-aulas'}
@@ -222,7 +204,7 @@ export default function ObraVestibular() {
                                             <p>{est.porcentagem}%</p>
                                         </div>
 
-                                        <div className={styles.progressBg}>
+                                         <div className={styles.progressBg}>
                                             <div
                                                 className={styles.progressBar}
                                                 style={{
