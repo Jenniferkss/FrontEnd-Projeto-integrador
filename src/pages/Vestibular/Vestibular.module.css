@@ -4,7 +4,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #fffaf7; /* Tom creme suave de fundo dos mockups */
+    background-color: #fdf0f2; /* Tom creme suave de fundo dos mockups */
     box-sizing: border-box;
 }
 
@@ -20,6 +20,28 @@
     gap: 32px;
 }
 
+.lead {
+    max-width: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 1rem 0 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+    line-height: 1.75;
+    color: #4d403c;
+}
+
+.kicker {
+    margin: 0 0 0.8rem;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #7d0f0f;
+}
+
 /* Título superior estilizado */
 .mainHeader {
     width: 100%;
@@ -30,7 +52,7 @@
     font-family: 'Georgia', serif;
     font-size: 2.6rem;
     font-weight: bold;
-    color: #4a1c1d; /* Vinho escuro idêntico às imagens */
+    color: #000000; /* Vinho escuro idêntico às imagens */
     line-height: 1.15;
     margin: 0;
 }
@@ -60,16 +82,12 @@
 }
 
 .cardRedBorder {
-    border: 1.5px solid #4a1c1d;
-}
-
-.cardBlueBorder {
-    border: 1.5px solid #0056b3; /* Borda azul central */
+    border: 1.5px solid #7d0f0f;
 }
 
 .cardTopTitle {
     font-family: 'Georgia', serif;
-    color: #4a1c1d;
+    color: #7d0f0f;
     font-size: 1.3rem;
     font-weight: bold;
     text-align: center;
@@ -107,7 +125,7 @@
 .contentBox {
     flex: 2; /* Ocupa cerca de 66% do espaço horizontal */
     background-color: #fffdfb;
-    border: 1.5px solid #4a1c1d;
+    border: 1.5px solid #7d0f0f;
     border-radius: 12px;
     padding: 32px;
     box-sizing: border-box;
@@ -115,7 +133,7 @@
 
 .contentTitle {
     font-family: 'Georgia', serif;
-    color: #4a1c1d;
+    color: #7d0f0f;
     font-size: 1.45rem;
     font-weight: bold;
     margin-top: 0;
@@ -141,7 +159,7 @@
 
 .quoteLine {
     width: 3px;
-    background-color: #4a1c1d;
+    background-color: #7d0f0f;
     border-radius: 2px;
 }
 
@@ -149,14 +167,14 @@
     font-family: 'Georgia', serif;
     font-style: italic;
     font-size: 1.15rem;
-    color: #4a1c1d;
+    color: #7d0f0f;
     margin: 0;
     line-height: 1.45;
 }
 
 .vectorsTitle {
     font-family: 'Georgia', serif;
-    color: #4a1c1d;
+    color: #7d0f0f;
     font-size: 1.3rem;
     font-weight: bold;
     margin-top: 28px;
@@ -190,7 +208,7 @@
 
 .videoBtn {
     width: 100%;
-    background-color: #350f10;
+    background-color: #7d0f0f;
     color: #ffffff;
     font-family: system-ui, -apple-system, sans-serif;
     font-weight: bold;
@@ -206,14 +224,9 @@
     background-color: #361314;
 }
 
-.videoBtn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
 /* Card vinho de estatísticas */
 .statsCard {
-    background-color: #4a1c1d;
+    background-color: #7d0f0f;
     color: #ffffff;
     border-radius: 12px;
     padding: 24px;
@@ -259,7 +272,7 @@
 }
 
 .progressBar {
-    background-color: #ffffff;
+    background-color: #FFF5EB;
     height: 100%;
     border-radius: 5px;
 }

@@ -38,6 +38,62 @@ export default function AObra() {
     }, []);
 
 
+import styles from '../Obra/AObra.module.css';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer.jsx';
+import { useLanguage } from '../../context/LanguageContext.jsx';
+import { request } from '../../services/api.js';
+
+import carolina from '../../../public/images/carolina.png';
+import livro from '../../../public/images/livro.png';
+
+export default function ObraVestibular() {
+    const [dados, setDados] = useState(null);
+    const [carregando, setCarregando] = useState(true);
+
+    const { language } = useLanguage();
+
+    useEffect(() => {
+        const carregarLivros = async () => {
+            try {
+                const data = await request('/api/dicaVestibular', {
+                    method: 'GET',
+                    headers: {
+                        'x-api-key': 'amods',
+                    },
+                });
+
+                setDados(Array.isArray(data) ? data[0] : data);
+            } catch (error) {
+                console.error('Erro ao conectar com o back-end:', error);
+            } finally {
+                setCarregando(false);
+            }
+        };
+
+        carregarLivros();
+    }, []);
+
+    if (carregando) {
+        return (
+            <div className={styles.loading}>
+                <p>
+                    {language === 'en'
+                        ? 'Loading database info...'
+                        : 'Carregando dados do banco...'}
+                </p>
+            </div>
+        );
+    }
+
+    if (!dados) {
+        return (
+            <div className={styles.loading}>
+                <p>{language === 'en' ? 'No records found.' : 'Nenhum registro encontrado.'}</p>
+            </div>
+        );
+    }
+
     return (
         <div className={styles.page}>
             <Header />
@@ -64,8 +120,33 @@ export default function AObra() {
 
                         <p className={styles.author}>
                             {dados.autorCitacao || '- Carolina Maria de Jesus, 1960'}
+                        <h1 className={styles.titleMain}>
+                            {language === 'en' ? 'Child of ' : 'Quarto de'}
+                        </h1>
+                        <h1 className={styles.redTitleMain}>
+                            {language === 'en' ? 'the Dark' : 'Despejo'}
+                        </h1>
+
+                        <p className={styles.subtitle}>
+                            {language === 'en'
+                                ? ' “Brazil needs to be led by someone who has already experienced hunger.” '
+                                : ' “O Brasil precisa ser dirigido por alguém que já passou fome” '}
+                        </p>
+
+                        <p className={styles.subtitleAuthor}>
+                            {language === 'en'
+                                ? ' - Carolina Maria de Jesus '
+                                : ' - Carolina Maria de Jesus '}
                         </p>
                     </div>
+
+                    {dados.citacao && (
+                        <div className={styles.quoteBox}>
+                            <blockquote className={styles.quote}>“{dados.citacao}”</blockquote>
+
+                            <p className={styles.author}>Carolina Maria de Jesus</p>
+                        </div>
+                    )}
                 </div>
 
                 <div className={styles.rightHero}>
@@ -76,6 +157,7 @@ export default function AObra() {
                     />
                 </div>
             </section>
+
 
             <section className={styles.aboutBook}>
                 <div className={styles.bookImage}>
@@ -100,6 +182,29 @@ export default function AObra() {
                     </div>
 
                     <div className={styles.cards}>
+                        {(
+                            dados.estatisticas || [
+                                {
+                                    nome: 'Publicação',
+                                    porcentagem: 30,
+                                },
+                                {
+                                    nome: 'Idiomas',
+                                    porcentagem: 72,
+                                },
+                                {
+                                    nome: 'Vendas',
+                                    porcentagem: 42,
+                                },
+                            ]
+                        ).map((est, index) => (
+                            <div key={index} className={styles.card}>
+                                <p>{est.nome}</p>
+
+                                <h3>{est.porcentagem}%</h3>
+                            </div>
+                        ))}
+
                         <div className={styles.card}>
                             <p>Publicação</p>
                             <h3>{dados.publicacao || '1960'}</h3>
@@ -151,6 +256,7 @@ export default function AObra() {
                 </div>
             </section>
 
+            {/* ANÁLISE */}
             <section className={styles.container}>
                 <div className={styles.textContainer}>
                     <h2 className={styles.titleContainer}>
