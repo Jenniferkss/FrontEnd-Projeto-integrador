@@ -1,86 +1,43 @@
-.pageContainer{
-    background-color: #fdf0f2;
-    min-height: 100vh;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-.boxedLayout {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #fdf0f2;
+.cardsContainer {
     display: flex;
-    flex-direction: column;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background-color: #fffcf0;
-    border-bottom: 1.5px solid #7d0f0f;
-}
-
-.logoGroup {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-
-.brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #7d0f0f;
-    margin-bottom: 0.58rem;
-}
-
-.menu {
-    display: flex;
-    list-style: none;
-    gap: 1.5rem;
-}
-
-.menu li {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 1rem;
-    color: #555;
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    cursor: pointer;
-}
-
-.menu li:hover{
-    color: #7d0f0f;
-    text-decoration: underline;
-}
-
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.9rem;
-    color: #7d0f0f;
-    font-weight: bold;
-}
-
-.searchIcon {
-    width: 1.3rem;
-    color:  #7d0f0f;
-}
-
-.hero {
-    display: flex;
-    flex-direction: column;
+    gap: 20px;
     justify-content: center;
-    padding: 2rem;
-    font-size: 1.7rem;
-    font-family: 'Playfair Display', serif;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
 
-    color: black;
+.card {
+    width: 280px;
+    background: #ffe9ec;
+    border: 2px solid #c4002f;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.cardTitle {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.imageBox img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #c4002f;
+}
+
+.cardText {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.tag {
+    margin-top: 10px;
+    background: #fff3c4;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 6px;
 }
