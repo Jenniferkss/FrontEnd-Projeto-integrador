@@ -5,6 +5,8 @@ import Header from '../../components/Header/Header.jsx';
 import { request } from '../../services/api.js';
 import styles from './Biblioteca.module.css';
 
+const CAPITAES_DA_AREIA_COVER_URL = '/images/capitaes-da-areia.jpg';
+
 const truncateText = (value, maxLength = 180) => {
     const text = String(value || '').trim();
     if (!text) return '';
@@ -104,7 +106,8 @@ function BookCard({ livro, index }) {
     const titulo = getBookTitle(livro, index);
     const autor = getBookAuthor(livro);
     const descricao = truncateText(livro.descricaoPT || livro.descricao || 'Resumo não informado.');
-    const capaUrl = getBookCoverUrl(livro);
+    const isCapitaesDaAreia = titulo.toLowerCase().includes('capitães da areia');
+    const capaUrl = getBookCoverUrl(livro) || (isCapitaesDaAreia ? CAPITAES_DA_AREIA_COVER_URL : '');
 
     return (
         <article className={styles.bookCard}>
@@ -206,23 +209,36 @@ export default function Biblioteca() {
     const [error, setError] = useState('');
     const [reloadToken, setReloadToken] = useState(0);
 
-    const carregarBiblioteca = async () => {
-        setLoading(true);
-        setError('');
-
-        try {
-            const data = await request('/api/integracao/biblioteca');
-            setFontes(Array.isArray(data) ? data : []);
-        } catch (err) {
-            setError(err.message || 'Não foi possível carregar a biblioteca.');
-            setFontes([]);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
-        carregarBiblioteca();
+        let isActive = true;
+
+        const carregarBiblioteca = async () => {
+            setLoading(true);
+            setError('');
+
+            try {
+                const data = await request('/api/integracao/biblioteca');
+
+                if (!isActive) return;
+
+                setFontes(Array.isArray(data) ? data : []);
+            } catch (err) {
+                if (!isActive) return;
+
+                setError(err.message || 'Não foi possível carregar a biblioteca.');
+                setFontes([]);
+            } finally {
+                if (isActive) {
+                    setLoading(false);
+                }
+            }
+        };
+
+        void carregarBiblioteca();
+
+        return () => {
+            isActive = false;
+        };
     }, [reloadToken]);
 
     const fontesOnline = fontes.filter(
