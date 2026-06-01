@@ -70,6 +70,7 @@ export default function Contexto() {
                     </section>
                 </main>
             </div>
+            <Footer />
         </div>
     );
 }

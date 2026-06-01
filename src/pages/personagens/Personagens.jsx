@@ -1,0 +1,219 @@
+import { useEffect, useState } from 'react';
+import styles from './Personagens.module.css';
+
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+
+import personagem1 from '../../../public/images/personagem1.png';
+import personagem2 from '../../../public/images/personagem2.png';
+import personagem3 from '../../../public/images/personagem3.png';
+import personagem4 from '../../../public/images/personagem4.png';
+import personagem5 from '../../../public/images/personagem5.png';
+import personagem6 from '../../../public/images/personagem6.png';
+import personagem7 from '../../../public/images/personagem7.png';
+
+export default function Inicio() {
+    const [livro, setLivro] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const carregarLivros = async () => {
+            try {
+                const response = await fetch(
+                    'https://backend-projeto-integrador-rana.onrender.com/api/livro',
+                    {
+                        headers: {
+                            'x-api-key': 'amods',
+                        },
+                    }
+                );
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.log('Erro retornado por /api/livro:', errorText);
+                    throw new Error(`Erro ${response.status} ao buscar /api/livro`);
+                }
+
+                const data = await response.json();
+                console.log('Resposta de /api/livro:', data);
+
+                setLivro(Array.isArray(data) ? data[0] : data);
+            } catch (error) {
+                console.error('Erro ao buscar os dados do personagem:', error);
+                setError('Nao foi possivel carregar os dados do personagem.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        carregarLivros();
+    }, []);
+
+
+    if (error) {
+        return <p>{error}</p>;
+    }
+
+    return (
+        <div className={styles.page}>
+            <Header />
+
+            <main className={styles.hero}>
+                <div className={styles.tituloDiv}>
+                    <h1 className={styles.title}>Personagens</h1>
+
+                    <h1
+                        className={styles.title}
+                        style={{ color: '#6D0000', marginTop: '35px' }}
+                    >
+                        principais
+                    </h1>
+                </div>
+
+                <div className={styles.divGrandeQuestoes}>
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem1}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[0] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                            Narradora e protagonista da obra. Mulher negra, catadora de papel e mãe solteira que vive na favela do Canindé, em São Paulo. Carolina é observadora, crítica e extremamente consciente da desigualdade social ao seu redor. A escrita funciona como forma de resistência e denúncia.
+                        </p>
+
+                        </div>
+
+                    </div>
+
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem2}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[1] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                            Filho de Carolina. É apresentado como uma criança mais rebelde e difícil de controlar. Muitas vezes aparece em conflitos comuns da vida na favela, mostrando as dificuldades da maternidade em situação de pobreza extrema.
+                        </p>
+
+                        </div>
+                    </div>
+
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem3}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[2] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                           Outro filho de Carolina. Geralmente descrito como mais sensível e obediente. A autora demonstra forte preocupação com sua alimentação, educação e futuro.
+                        </p>
+
+                        </div>
+                    </div>
+
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem4}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                       <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[3] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                          Filha caçula de Carolina. Representa inocência e esperança dentro do livro. Carolina frequentemente expressa o desejo de oferecer uma vida melhor para ela.
+                        </p>
+
+                        </div>
+                    </div>
+
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem5}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando obra...'
+                                : livro?.personagens[4] || 'Nome personagem'}
+                            </h1>
+                        <p>
+Embora muitos apareçam apenas por nomes ou episódios rápidos, eles formam um “personagem coletivo”. Representam:
+ a solidariedade entre os pobres;
+ os conflitos causados pela miséria;
+ violência, alcoolismo e disputas;
+ a luta diária pela sobrevivência.
+Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se considerar diferente.
+                        </p>
+
+                        </div>
+                    </div>
+
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem6}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[5] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
+                        </p>
+
+                        </div>
+                    </div>
+
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem7}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <p>
+                            (G) A construção indica alienação da narradora, que
+                            perde a capacidade de distinguir realidade e
+                            imaginação.
+                        </p>
+                    </div>
+                </div>
+            </main>
+
+            <Footer />
+        </div>
+    );
+}

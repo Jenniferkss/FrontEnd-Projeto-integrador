@@ -1,0 +1,58 @@
+.card{
+    width: 20rem;
+    text-align: center;
+}
+
+.card{
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.imageBox{
+    height: 250px;
+
+    border: 3px solid #8b1e1e;
+
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f8eeee;
+}
+
+.imageBox img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.description{
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    background-color: #f5f0de;
+
+    border: 1px solid #8b1e1e;
+
+    font-size: 1.4rem;
+    font-style: italic;
+}
+
+.quote{
+    margin-top: 20px;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    border: 1px solid #8b1e1e;
+
+    background-color: #f8dfe4;
+
+    font-style: italic;
+}

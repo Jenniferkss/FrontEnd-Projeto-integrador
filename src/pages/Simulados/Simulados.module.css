@@ -2,191 +2,168 @@
     background-color: #fdf0f2;
     min-height: 100vh;
     width: 100%;
-    padding: 0;
+    display: flex;
+    justify-content: center;
     margin: 0;
+    padding: 0;
 }
 
 .boxedLayout {
-    width: 100%;
+    width: 90%;
+    max-width: 1200px;
     min-height: 100vh;
     background-color: #fdf0f2;
     display: flex;
     flex-direction: column;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 3rem;
-    background-color: #fffcf0;
-    border-bottom: 1.5px solid #7d0f0f;
-}
-
-.logoGroup {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-.brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #7d0f0f;
-    margin-bottom: 0.58rem;
-    transition: color 0.3s ease;
-}
-
-.menu {
-    display: flex;
-    list-style: none;
-    gap: 1.5rem;
-}
-
-.menu li {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
-    color: #555;
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.menu li:hover {
-    color: #7d0f0f;
-    text-decoration: underline;
-}
-
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.9rem;
-    color: #7d0f0f;
-    font-weight: bold;
-}
-
-.searchIcon {
-    width: 1.3rem;
-    color: #7d0f0f;
 }
 
 .hero {
-    flex: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    padding: 2rem;
+    padding: 2rem 0;
     gap: 30px;
 }
 
 .tituloDiv {
-    width: 100%;
-    text-align: start;
+    width: 80%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    line-height: 1.05;
+    font-size: 3rem;
     color: #1a1a1a;
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 .falaJesus {
-    width: 100%;
+    font-family: 'Montserrat', sans-serif;;
+    width: 80%;
+    max-width: 1100px;
     border-radius: 15px;
     border: 2px solid #1a1a1a;
     padding: 20px;
-    background-color: #fffaf5;
+    background-color: #FFEBEF;
 }
 
 .divTextoJesus {
-    width: 100%;
     color: #1a1a1a;
-    text-align: start;
-    margin-bottom: 15px;
+    text-align: left;
 }
 
 .divGrandeQuestoes {
+    font-family: 'Montserrat', sans-serif;
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    margin-top: 20px;
+    align-items: center;
+    gap: 20px;
 }
 
 .questoes {
-    width: 100%;
-    color: #1a1a1a;
-    min-height: px;
-    border: 2px solid #7d0f0f;
+    width: 80%;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    color: #2d2c2c;
+    min-height: 70px;
+
     border-radius: 12px;
     background-color: #D9D9D9;
-    padding: 10px;
-    text-align: start;
+
+    padding: 18px 20px;
+    text-align: left;
 }
 
-.questoesCerta {
-    width: 100%;
-    color: #1a1a1a;
-    min-height: px;
-    border: 2px solid #7d0f0f;
-    border-radius: 12px;
+.questoes:hover {
     background-color: #7d0f0f;
-    padding: 10px;
-    text-align: start;
+    color: white;
+    transition: all ease 0.5s;
 }
 
-.italicTitle {
-    color: #7d0f0f;
-    font-style: italic;
-    font-weight: 550;
+.enunciado {
+    font-family: 'Montserrat', sans-serif;
+    width: 63rem;
+    height: 4rem;
+    font-size: 19px;
 }
 
-.description {
-    font-family: 'Playfair Display', serif;
-    max-width: 48rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #333;
-    margin-bottom: 3rem;
+.letraQuestao {
+    min-width: 40px;
+    height: 40px;
+    border: 2px solid #7d0f0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
-.highlight {
-    color: #7d0f0f;
-    font-weight: 600;
+.textoQuestao {
+    flex: 1;
 }
 
 .btnGroup {
+    width: 80%;
+    max-width: 1100px;
+
     display: flex;
-    gap: 1.2rem;
+    justify-content: space-between;
+    margin-top: 20px;
 }
+
+.divBotao {
+    height: 5rem;
+    width: 63rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttonVa {
+    height: 3rem;
+    width: 7rem;
+    border-radius: 17px;
+    background-color: #7d0f0f;
+    color: #fdf0f2;
+}
+
+.buttonVa:hover {
+    background-color: #c53434;
+    color: rgb(0, 0, 0);
+    transition: all ease 0.5s;
+}
+
 
 .btn {
     font-family: 'Montserrat', sans-serif;
     background-color: #7d0f0f;
     color: white;
     border: none;
-    padding: 0.5rem 1.2rem;
-    border-radius: 0.5rem;
-    font-size: 0.9rem;
-    font-weight: 500;
+    padding: 0.8rem 1.5rem;
+    border-radius: 999px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
 
-.bookIcon {
-    width: 2rem;
-    height: 2rem;
-    color: #7d0f0f;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    margin-bottom: 0.30rem;
+.btn:hover {
+    opacity: 0.9;
 }
 
-.logoGroup:hover .bookIcon {
-    transform: scale(1.2) rotate(-5deg);
-    filter: drop-shadow(0 0 8px rgba(125, 15, 15, 0.3));
+.footer {
+    width: 100%;
+    background-color: #efe5dd;
+    color: #1a1a1a;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: auto;
 }

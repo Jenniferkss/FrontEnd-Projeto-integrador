@@ -1,85 +1,269 @@
-.pageContainer{
-    background-color: #fdf0f2;
-    min-height: 100vh;
+/* Container de escopo global da página */
+.pageContainer {
     width: 100%;
-    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fdf0f2; /* Tom creme suave de fundo dos mockups */
+    box-sizing: border-box;
+}
+
+/* Embrulho centralizado do conteúdo principal */
+.contentWrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Título superior estilizado */
+.mainHeader {
+    width: 100%;
+    text-align: left;
+}
+
+.headerTitle {
+    font-family: 'Georgia', serif;
+    font-size: 2.6rem;
+    font-weight: bold;
+    color: #000000; /* Vinho escuro idêntico às imagens */
+    line-height: 1.15;
     margin: 0;
 }
 
-.boxedLayout {
+.headerSubtitle {
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* Grid superior com distribuição uniforme em 3 colunas */
+.topCardsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
     width: 100%;
-    min-height: 100vh;
-    background-color: #fdf0f2;
+}
+
+/* Estilo unificado dos cards com bordas customizadas */
+.cardTop {
+    background-color: #fffdfb;
+    border-radius: 12px;
+    padding: 24px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    min-height: 200px;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background-color: #fffcf0;
-    border-bottom: 1.5px solid #7d0f0f;
+.cardRedBorder {
+    border: 1.5px solid #7d0f0f;
 }
 
-.logoGroup {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-
-.brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
+.cardTopTitle {
+    font-family: 'Georgia', serif;
     color: #7d0f0f;
-    margin-bottom: 0.58rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 16px;
+    line-height: 1.2;
 }
 
-.menu {
+.cardTopText {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #333333;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.cardTopList {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #333333;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* Seção estrutural inferior em duas colunas equilibradas */
+.mainLayout {
     display: flex;
-    list-style: none;
-    gap: 1.5rem;
+    gap: 32px;
+    width: 100%;
+    align-items: flex-start;
 }
 
-.menu li {
-    font-family: 'Montserrat', sans-serif;
+/* Caixa de texto principal à esquerda */
+.contentBox {
+    flex: 2; /* Ocupa cerca de 66% do espaço horizontal */
+    background-color: #fffdfb;
+    border: 1.5px solid #7d0f0f;
+    border-radius: 12px;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+.contentTitle {
+    font-family: 'Georgia', serif;
+    color: #7d0f0f;
+    font-size: 1.45rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.contentText {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #333333;
+    font-size: 0.96rem;
+    line-height: 1.65;
+    margin-bottom: 20px;
+}
+
+/* Estruturação correta da citação com barra lateral esquerda */
+.quoteBlock {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+    margin: 28px 0;
+    padding: 0;
+}
+
+.quoteLine {
+    width: 3px;
+    background-color: #7d0f0f;
+    border-radius: 2px;
+}
+
+.quoteText {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: #7d0f0f;
+    margin: 0;
+    line-height: 1.45;
+}
+
+.vectorsTitle {
+    font-family: 'Georgia', serif;
+    color: #7d0f0f;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 28px;
+    margin-bottom: 16px;
+}
+
+.vectorListContainer {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: #333333;
+}
+
+.vectorListFallback p {
+    margin-bottom: 12px;
+}
+
+/* Coluna Lateral da direita */
+.sidebar {
+    flex: 1; /* Ocupa cerca de 33% do espaço horizontal */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 280px;
+    box-sizing: border-box;
+}
+
+.videoBtnWrapper {
+    width: 100%;
+}
+
+.videoBtn {
+    width: 100%;
+    background-color: #7d0f0f;
+    color: #ffffff;
+    font-family: system-ui, -apple-system, sans-serif;
     font-weight: bold;
     font-size: 1rem;
-    color: #555;
-    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
     cursor: pointer;
-    transition: color 0.3s ease;
-    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.menu li:hover{
-    color: #7d0f0f;
-    text-decoration: underline;
+.videoBtn:hover:not(:disabled) {
+    background-color: #361314;
 }
 
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.9rem;
-    color: #7d0f0f;
+/* Card vinho de estatísticas */
+.statsCard {
+    background-color: #7d0f0f;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.statsTitle {
+    font-family: 'Georgia', serif;
+    font-size: 1.3rem;
     font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 24px;
+    text-align: center;
+    line-height: 1.2;
 }
 
-.searchIcon {
-    width: 1.3rem;
-    color:  #7d0f0f;
-}
-
-.hero {
-    flex: 1;
+.progressGroup {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
+    gap: 20px;
+}
+
+.statsItem {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.progressLabels {
+    display: flex;
+    justify-content: space-between;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+.progressBg {
+    background-color: rgba(255, 255, 255, 0.25);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.progressBar {
+    background-color: #FFF5EB;
+    height: 100%;
+    border-radius: 5px;
+}
+
+/* Responsividade básica para telas menores */
+@media (max-width: 900px) {
+    .topCardsGrid {
+        grid-template-columns: 1fr;
+    }
+    .mainLayout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+    }
 }
