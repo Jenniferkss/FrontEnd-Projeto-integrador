@@ -197,8 +197,6 @@
     font-style: italic;
 }
 
-/* CARDS */
-
 .cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -225,7 +223,6 @@
     word-break: break-word;
 }
 
-/* TEXTOS */
 
 .textBox {
     display: flex;
@@ -296,8 +293,6 @@
     margin: 0;
 }
 
-/* BOTÃO */
-
 .videoSection {
     display: flex;
     justify-content: center;
@@ -320,75 +315,9 @@
     opacity: 0.9;
 }
 
-
-
 .loading {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-
-
-@media (max-width: 900px) {
-    .hero,
-    .aboutBook {
-        grid-template-columns: 1fr;
-    }
-
-    .titleMain {
-        font-size: 3rem;
-        margin-top: 0;
-    }
-
-    .bookCover {
-        max-width: 18rem;
-        margin: 0 auto;
-    }
-
-    .cards {
-        grid-template-columns: 1fr;
-    }
-
-    .container,
-    .hero,
-    .aboutBook {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
-
-    .bookTitle h2,
-    .titleContainer {
-        font-size: 2.2rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .titleMain {
-        font-size: 2.5rem;
-    }
-
-    .subtitle {
-        font-size: 0.9rem;
-    }
-
-    .quote {
-        font-size: 1.1rem;
-    }
-
-    .analysisText,
-    .textContainer p,
-    .textBox p {
-        font-size: 0.95rem;
-    }
-
-    .videoBtn {
-        width: 100%;
-        max-width: 20rem;
-    }
-
-    .textContainer {
-        padding: 1.5rem;
-    }
 }
