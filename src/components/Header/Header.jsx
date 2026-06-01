@@ -10,6 +10,7 @@ const links = [
     { to: '/sobre', labelPt: 'Sobre', labelEn: 'About' },
     { to: '/vestibular', labelPt: 'Vestibular', labelEn: 'Exam Prep' },
     { to: '/curiosidades', labelPt: 'Curiosidades', labelEn: 'Curiosities' },
+    { to: '/personagens', labelPt: 'Personagens', labelEn: 'Characters' },
 ];
 
 const Header = () => {

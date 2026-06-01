@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 
 export default function Inicio() {
     const [equipe, setEquipe] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -29,13 +28,10 @@ export default function Inicio() {
                 const data = await response.json();
                 console.log('Resposta de /api/equipe:', data);
 
-                // Mude o setEquipe para guardar tudo:
                 setEquipe(Array.isArray(data) ? data : [data]);
             } catch (error) {
                 console.error('Erro ao buscar os dados do integrante:', error);
                 setError('Nao foi possivel carregar os dados do integrante.');
-            } finally {
-                setLoading(false);
             }
         };
 
@@ -60,7 +56,7 @@ export default function Inicio() {
                         <div className={styles.integrante}>
                             <img
                                 style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
+                                src={equipe?.[0]?.fotoEquipe?.[0]}
                                 alt="integrante 1"
                             />
                             <h4>{equipe?.find((e) => e.id === 2)?.nome || 'Nome integrante'}</h4>
@@ -69,7 +65,7 @@ export default function Inicio() {
                         <div className={styles.integrante}>
                             <img
                                 style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
+                                src={equipe?.find((e) => e.id === 3)?.fotoEquipe || 'Nome integrante'}
                                 alt="integrante 1"
                             />
                             <h4>{equipe?.find((e) => e.id === 3)?.nome || 'Nome integrante'}</h4>
@@ -160,3 +156,4 @@ export default function Inicio() {
         </div>
     );
 };
+    
