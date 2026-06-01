@@ -5,45 +5,41 @@ function Footer() {
     return (
         <footer className={styles.footer}>
             <div className={styles.container}>
-                <h2 className={styles.brandTitle}> Intertexto </h2>
-                <p className={styles.brandText}>
+                <div className={styles.brand}>
+                    <h2 className={styles.brandTitle}> Intertexto </h2>
+                    <p className={styles.brandText}>
                     Aproximando os estudantes da literatura por meio de uma experiência moderna e
                     interativa.
                 </p>
             </div>
+            
             <div className={styles.nav}>
                 <h3> Explorar:</h3>
                 <ul>
                     <li>
-                        {' '}
                         <Link to="/">Início</Link>
                     </li>
                     <li>
-                        {' '}
                         <Link to="/Obra">Obra</Link>
                     </li>
                     <li>
-                        {' '}
                         <Link to="/Biblioteca">Biblioteca</Link>
                     </li>
                     <li>
-                        {' '}
                         <Link to="/Simulado">Simulado</Link>
                     </li>
                     <li>
-                        {' '}
                         <Link to="/Sobre">Sobre</Link>
                     </li>
                     <li>
-                        {' '}
                         <Link to="/Vestibular">Vestibular</Link>
                     </li>
                     <li>
-                        {' '}
                         <Link to="/Curiosidades">Curiosidades</Link>
                     </li>
                 </ul>
             </div>
+
             <div className={styles.contact}>
                 <h3>Contato</h3>
 
@@ -66,6 +62,7 @@ function Footer() {
                     Av. Faria Lima, 1983 - São Paulo
                 </a>
             </div>
+        </div>
 
             <hr className={styles.divider} />
 

@@ -27,6 +27,7 @@
     color: #5d4f4f;
     font-size: 0.88rem;
     line-height: 1.6;
+    margin-top: 1rem;
 }
 
 .nav h3,
@@ -98,12 +99,6 @@
 
         gap: 28px;
     }
-
-    .supportBtn {
-        width: 100%;
-
-        text-align: center;
-    }
 }
 
 @media (max-width: 600px) {
@@ -114,9 +109,5 @@
 
     .brandTitle {
         font-size: 1.4rem;
-    }
-
-    .logo {
-        width: 95px;
     }
 }
