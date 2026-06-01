@@ -1,0 +1,35 @@
+.pageContainer {
+    min-height: 100vh;
+    background-color: #f5e7e9;
+}
+
+.boxedLayout {
+      width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero {
+    padding: 50px;
+    width: 100%;
+}
+
+
+.hero h2 {
+    font-size: 4rem;
+    margin-bottom: 50px;
+}
+
+.hero span {
+    font-style: italic;
+}
+
+.cardsContainer{
+    display: flex;
+    flex: 4;
+    gap: 30px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+}

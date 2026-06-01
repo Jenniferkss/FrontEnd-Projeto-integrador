@@ -1,86 +1,41 @@
-.pageContainer{
-    background-color: #fdf0f2;
-    min-height: 100vh;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-.boxedLayout {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #fdf0f2;
+.timeline {
     display: flex;
     flex-direction: column;
+    gap: 30px;
+    position: relative;
+    margin: 40px 0;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background-color: #fffcf0;
-    border-bottom: 1.5px solid #7d0f0f;
-}
-
-.logoGroup {
+.timelineItem {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 20px;
 }
 
-
-.brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #7d0f0f;
-    margin-bottom: 0.58rem;
+.bola {
+    width: 12px;
+    height: 12px;
+    background: #8b0000;
+    border-radius: 50%;
 }
 
-.menu {
+.cards {
     display: flex;
-    list-style: none;
-    gap: 1.5rem;
-}
-
-.menu li {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 1rem;
-    color: #555;
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    cursor: pointer;
-}
-
-.menu li:hover{
-    color: #7d0f0f;
-    text-decoration: underline;
-}
-
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.9rem;
-    color: #7d0f0f;
-    font-weight: bold;
-}
-
-.searchIcon {
-    width: 1.3rem;
-    color:  #7d0f0f;
-}
-
-.hero {
-    display: flex;
-    flex-direction: column;
+    gap: 20px;
+    flex-wrap: wrap;
     justify-content: center;
-    padding: 2rem;
-    font-size: 1.7rem;
-    font-family: 'Playfair Display', serif;
+}
 
-    color: black;
+.card {
+    background: #ffe9ec;
+    border: 2px solid #c4002f;
+    padding: 15px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+.frase {
+    margin-top: 30px;
+    font-style: italic;
+    text-align: center;
 }
