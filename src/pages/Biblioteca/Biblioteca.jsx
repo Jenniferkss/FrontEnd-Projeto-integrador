@@ -5,7 +5,7 @@ import { request } from '../../services/api.js';
 import styles from './Biblioteca.module.css';
 
 // ===== CONFIGURAÇÕES =====
-const CAPITAES_DA_AREIA_COVER_URL = '/images/capitaes-da-areia.jpg';
+const CAPITAES_DA_AREIA_COVER_URL = '/images/CapitaesDaAreia.webp';
 const DEFAULT_MAX_LENGTH = 320;
 const EXPANDED_MAX_LENGTH = 2000;
 
