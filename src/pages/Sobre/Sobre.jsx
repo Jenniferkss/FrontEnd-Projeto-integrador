@@ -55,7 +55,7 @@ export default function Inicio() {
 
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px' }}
 
                                 src={equipe?.find((e) => e.id === 5)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
@@ -65,7 +65,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px' }}
                                 src={equipe?.find((e) => e.id === 6)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -74,7 +74,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px'  }}
                                 src={equipe?.find((e) => e.id === 7)?.fotoEquipe || 'Foto do integrante'}   
                                 alt="integrante 1"
                             />
@@ -83,7 +83,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px' }}
                                 src={equipe?.find((e) => e.id === 8)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -92,7 +92,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px'  }}
                                 src={equipe?.find((e) => e.id === 9)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -101,7 +101,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px' }}
                                 src={equipe?.find((e) => e.id === 10)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -110,7 +110,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px'  }}
                                 src={equipe?.find((e) => e.id === 11)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -125,7 +125,7 @@ export default function Inicio() {
                         
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px' }}
                                 src={equipe?.find((e) => e.id === 12)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -134,7 +134,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{width: '120px', borderRadius: '15px', height: '155px' }}
                                 src={equipe?.find((e) => e.id === 13)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -143,7 +143,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px' }}
                                 src={equipe?.find((e) => e.id === 14)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -152,7 +152,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px' }}
                                 src={equipe?.find((e) => e.id === 15)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -161,7 +161,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px' }}
                                 src={equipe?.find((e) => e.id === 16)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -170,7 +170,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px' }}
                                 src={equipe?.find((e) => e.id === 17)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
@@ -179,7 +179,7 @@ export default function Inicio() {
                         </div>
                         <div className={styles.integrante}>
                             <img
-                                style={{ width: '90px' }}
+                                style={{ width: '120px', borderRadius: '15px', height: '155px' }}
                                 src={equipe?.find((e) => e.id === 18)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
