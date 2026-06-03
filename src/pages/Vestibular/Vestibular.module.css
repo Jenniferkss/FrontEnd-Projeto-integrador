@@ -1,17 +1,16 @@
-/* Container de escopo global da página */
 .pageContainer {
     width: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #fdf0f2; /* Tom creme suave de fundo dos mockups */
+    background: linear-gradient(180deg, #fff8f8, #fdf0f2);
     box-sizing: border-box;
 }
 
 /* Embrulho centralizado do conteúdo principal */
 .contentWrapper {
-    width: 100%;
-    max-width: 1200px;
+    width: 92%;
+    max-width: 1700px;
     margin: 0 auto;
     padding: 40px 24px;
     box-sizing: border-box;
@@ -20,19 +19,40 @@
     gap: 32px;
 }
 
-/* Título superior estilizado */
+.lead {
+    max-width: 100%;
+    white-space: normal;
+    margin: 1rem 0 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.8;
+    color: #4d403c;
+}
+
+.kicker {
+    margin: 0 0 0.8rem;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #7d0f0f;
+}
+
+/* Cabeçalho */
 .mainHeader {
     width: 100%;
     text-align: left;
 }
 
 .headerTitle {
-    font-family: 'Georgia', serif;
-    font-size: 2.6rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
     font-weight: bold;
-    color: #000000; /* Vinho escuro idêntico às imagens */
-    line-height: 1.15;
+    color: #000;
+    line-height: 1.1;
     margin: 0;
+    letter-spacing: -1px;
 }
 
 .headerSubtitle {
@@ -40,7 +60,7 @@
     font-weight: bold;
 }
 
-/* Grid superior com distribuição uniforme em 3 colunas */
+/* Cards superiores */
 .topCardsGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -48,19 +68,25 @@
     width: 100%;
 }
 
-/* Estilo unificado dos cards com bordas customizadas */
 .cardTop {
     background-color: #fffdfb;
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 24px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    min-height: 200px;
+    min-height: 220px;
+    box-shadow: 0 4px 20px rgba(125, 15, 15, 0.08);
+    transition: all 0.3s ease;
+}
+
+.cardTop:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(125, 15, 15, 0.15);
 }
 
 .cardRedBorder {
-    border: 1.5px solid #7d0f0f;
+    border: 1px solid rgba(125, 15, 15, 0.25);
 }
 
 .cardTopTitle {
@@ -74,71 +100,69 @@
     line-height: 1.2;
 }
 
-.cardTopText {
+.cardTopText,
+.cardTopList {
     font-family: system-ui, -apple-system, sans-serif;
-    color: #333333;
-    font-size: 0.92rem;
-    line-height: 1.55;
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.7;
     margin: 0;
 }
 
 .cardTopList {
-    font-family: system-ui, -apple-system, sans-serif;
-    color: #333333;
-    font-size: 0.92rem;
-    line-height: 1.6;
-    margin: 0;
     padding-left: 20px;
 }
 
-/* Seção estrutural inferior em duas colunas equilibradas */
+/* Layout principal */
 .mainLayout {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(320px, 1fr);
     gap: 32px;
     width: 100%;
-    align-items: flex-start;
+    align-items: start;
 }
 
-/* Caixa de texto principal à esquerda */
+/* Conteúdo principal */
 .contentBox {
-    flex: 2; /* Ocupa cerca de 66% do espaço horizontal */
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
     background-color: #fffdfb;
-    border: 1.5px solid #7d0f0f;
-    border-radius: 12px;
-    padding: 32px;
+    border: 1px solid rgba(125, 15, 15, 0.2);
+    border-radius: 16px;
+    padding: 36px;
     box-sizing: border-box;
+    box-shadow: 0 8px 25px rgba(125, 15, 15, 0.08);
 }
 
 .contentTitle {
-    font-family: 'Georgia', serif;
+    font-family: 'Playfair Display', serif;
     color: #7d0f0f;
-    font-size: 1.45rem;
+    font-size: 1.6rem;
     font-weight: bold;
     margin-top: 0;
-    margin-bottom: 18px;
-}
-
-.contentText {
-    font-family: system-ui, -apple-system, sans-serif;
-    color: #333333;
-    font-size: 0.96rem;
-    line-height: 1.65;
     margin-bottom: 20px;
 }
 
-/* Estruturação correta da citação com barra lateral esquerda */
+.contentText {
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* Citação */
 .quoteBlock {
     display: flex;
     gap: 16px;
     align-items: stretch;
-    margin: 28px 0;
-    padding: 0;
+    margin: 32px 0;
 }
 
 .quoteLine {
-    width: 3px;
+    width: 4px;
     background-color: #7d0f0f;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 
 .quoteText {
@@ -146,79 +170,75 @@
     font-style: italic;
     font-size: 1.15rem;
     color: #7d0f0f;
-    margin: 0;
-    line-height: 1.45;
-}
-
-.vectorsTitle {
-    font-family: 'Georgia', serif;
-    color: #7d0f0f;
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-top: 28px;
-    margin-bottom: 16px;
-}
-
-.vectorListContainer {
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: 0.94rem;
     line-height: 1.6;
-    color: #333333;
+    margin: 0;
 }
 
-.vectorListFallback p {
-    margin-bottom: 12px;
-}
-
-/* Coluna Lateral da direita */
+/* Sidebar */
 .sidebar {
-    flex: 1; /* Ocupa cerca de 33% do espaço horizontal */
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    min-width: 280px;
-    box-sizing: border-box;
 }
 
-.videoBtnWrapper {
+/* Botão de vídeo */
+.videoBtnWrapper a {
+    text-decoration: none;
+    display: block;
     width: 100%;
 }
 
 .videoBtn {
     width: 100%;
-    background-color: #7d0f0f;
-    color: #ffffff;
+    background: linear-gradient(135deg, #7d0f0f, #a61a1a);
+    color: white;
+
     font-family: system-ui, -apple-system, sans-serif;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 1rem;
+
     border: none;
-    border-radius: 8px;
-    padding: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.videoBtn:hover:not(:disabled) {
-    background-color: #361314;
-}
-
-/* Card vinho de estatísticas */
-.statsCard {
-    background-color: #7d0f0f;
-    color: #ffffff;
     border-radius: 12px;
+    padding: 16px;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.videoBtn svg {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.videoBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(125, 15, 15, 0.25);
+}
+
+/* Card de estatísticas */
+.statsCard {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(180deg, #7d0f0f, #5f0909);
+    color: white;
+    border-radius: 16px;
     padding: 24px;
     box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(125, 15, 15, 0.2);
 }
 
 .statsTitle {
     font-family: 'Georgia', serif;
     font-size: 1.3rem;
     font-weight: bold;
+    text-align: center;
     margin-top: 0;
     margin-bottom: 24px;
-    text-align: center;
-    line-height: 1.2;
 }
 
 .progressGroup {
@@ -236,34 +256,65 @@
 .progressLabels {
     display: flex;
     justify-content: space-between;
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
 .progressBg {
-    background-color: rgba(255, 255, 255, 0.25);
-    height: 10px;
-    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    height: 12px;
+    border-radius: 20px;
     overflow: hidden;
-    width: 100%;
 }
 
 .progressBar {
-    background-color: #FFF5EB;
+    background: linear-gradient(90deg, #fff5eb, #ffffff);
     height: 100%;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
-/* Responsividade básica para telas menores */
+/* Responsividade */
+@media (max-width: 1200px) {
+    .contentWrapper {
+        width: 96%;
+    }
+}
+
 @media (max-width: 900px) {
     .topCardsGrid {
         grid-template-columns: 1fr;
     }
+
     .mainLayout {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
-    .sidebar {
-        width: 100%;
+}
+
+@media (max-width: 600px) {
+    .contentWrapper {
+        padding: 24px 16px;
+    }
+
+    .headerTitle {
+        font-size: 2.3rem;
+    }
+
+    .contentBox {
+        padding: 24px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .contentWrapper {
+        width: 95%;
+        max-width: 1900px;
+    }
+
+    .cardTop {
+        min-height: 260px;
+    }
+
+    .contentBox {
+        padding: 42px;
     }
 }

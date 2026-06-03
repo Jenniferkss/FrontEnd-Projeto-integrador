@@ -1,387 +1,351 @@
-import { useEffect, useState } from 'react';
-
+import { useEffect, useState, useMemo } from 'react';
 import Footer from '../../components/Footer/Footer.jsx';
 import Header from '../../components/Header/Header.jsx';
-import { useLanguage } from '../../context/LanguageContext.jsx';
-import { fetchBiblioteca } from '../../services/bibliotecaService.js';
+import { request } from '../../services/api.js';
 import styles from './Biblioteca.module.css';
 
-const splitValues = (value) => {
-    if (typeof value !== 'string') {
-        return [];
-    }
+// ===== CONFIGURAÇÕES =====
+const CAPITAES_DA_AREIA_COVER_URL = '/images/CapitaesDaAreia.webp';
+const DEFAULT_MAX_LENGTH = 320;
+const EXPANDED_MAX_LENGTH = 2000;
 
-    return value
-        .split(/\s*(?:,|;|\/|\||•)\s*/)
-        .map((item) => item.trim())
-        .filter(Boolean);
+// ===== UTILITÁRIOS =====
+const truncateText = (value, maxLength = DEFAULT_MAX_LENGTH, showEllipsis = true) => {
+    const text = String(value || '').trim();
+    if (!text) return '';
+    if (text.length <= maxLength) return text;
+    return showEllipsis ? `${text.slice(0, maxLength).trimEnd()}...` : text;
 };
 
-const pickText = (...values) => {
-    for (const value of values) {
-        if (typeof value === 'string' && value.trim()) {
-            return value.trim();
+const formatYear = (year) => {
+    if (!year || year === 'N/A' || year === 'Ano não informado') return null;
+    const num = parseInt(year, 10);
+    return (!isNaN(num) && num > 1000 && num <= new Date().getFullYear() + 10)
+        ? String(num)
+        : null;
+};
+
+// ===== RESOLUÇÃO DE TÍTULO =====
+const getBookTitle = (livro, index) => {
+    const candidates = [
+        livro.tituloPT, livro.tituloPt, livro.titulo_pt,
+        livro.tituloOriginal, livro.tituloDoLivro, livro.titulo,
+        livro.name, livro.title, livro.nomeLivro, livro.obraPt, livro.obraPT
+    ];
+    return candidates.find(t => t && String(t).trim()) || `Livro ${index + 1}`;
+};
+
+// ===== RESOLUÇÃO DE AUTOR =====
+const getBookAuthor = (livro) => {
+    const candidates = [
+        livro.autor, livro.autora, livro.author, livro.authors,
+        livro.autores?.[0]?.nome, livro.autores?.[0]?.name,
+        livro.autorNome, livro.escritor, livro.nomeAutor
+    ];
+
+    for (const candidate of candidates) {
+        if (Array.isArray(candidate) && candidate[0]) {
+            const first = candidate[0];
+            const name = first.nome || first.name || first;
+            if (name && String(name).trim() && String(name).toLowerCase() !== 'autor não informado') {
+                return String(name).trim();
+            }
+        }
+        if (candidate && String(candidate).trim() && String(candidate).toLowerCase() !== 'autor não informado') {
+            return String(candidate).trim();
         }
     }
+    return 'Autor desconhecido';
+};
 
+// ===== RESOLUÇÃO DE GÊNERO/CATEGORIA =====
+const getBookGenre = (livro) => {
+    const candidates = [
+        livro.generoPT, livro.generoPt, livro.genero_pt,
+        livro.genero, livro.genre, livro.genre_pt,
+        livro.categoria, livro.category,
+        livro.categorias?.[0], livro.tags?.[0], livro.tematica
+    ];
+    const found = candidates.find(g => g && String(g).trim());
+    return found ? String(found).trim() : null;
+};
+
+// ===== RESOLUÇÃO DE EDITORA =====
+const getBookPublisher = (livro) => {
+    const candidates = [
+        livro.editora, livro.editor, livro.publishing,
+        livro.publicadora, livro.casaEditorial
+    ];
+    return candidates.find(p => p && String(p).trim()) || null;
+};
+
+// ===== RESOLUÇÃO DE IDIOMA =====
+const getBookLanguage = (livro) => {
+    const lang = livro.idioma || livro.language || livro.lingua;
+    if (!lang) return null;
+    const map = {
+        'pt': 'Português', 'pt-br': 'Português (BR)', 'pt-pt': 'Português (PT)',
+        'en': 'Inglês', 'es': 'Espanhol', 'fr': 'Francês'
+    };
+    return map[String(lang).toLowerCase()] || String(lang).trim();
+};
+
+// ===== RESOLUÇÃO DE PÁGINAS =====
+const getBookPages = (livro) => {
+    const pages = livro.paginas || livro.pages || livro.numPaginas;
+    if (!pages) return null;
+    const num = parseInt(pages, 10);
+    return (!isNaN(num) && num > 0) ? `${num} páginas` : null;
+};
+
+// ===== RESOLUÇÃO DE CAPA (COM FALLBACK ESPECIAL) =====
+const coverFieldNames = [
+    'capaURL', 'capaUrl', 'capaURl', 'capa_url', 'capa',
+    'cover', 'image', 'imageUrl', 'imageURL', 'img',
+    'url_capa', 'urlCapa', 'imagem', 'imagemUrl', 'imagemURL',
+    'foto', 'fotoUrl', 'fotoURL', 'foto_url', 'urlImagem',
+    'thumbnail', 'thumb', 'poster'
+];
+
+const extractCoverValue = (value) => {
+    if (typeof value === 'string') {
+        const text = value.trim();
+        return text.startsWith('http') || text.startsWith('/') ? text : '';
+    }
+    if (Array.isArray(value)) {
+        for (const item of value) {
+            const resolved = extractCoverValue(item);
+            if (resolved) return resolved;
+        }
+        return '';
+    }
+    if (value && typeof value === 'object') {
+        const candidateKeys = ['url', 'src', 'href', 'link', 'publicUrl', 'thumbnail', 'path', 'value', 'image'];
+        for (const key of candidateKeys) {
+            if (value[key] !== undefined) {
+                const resolved = extractCoverValue(value[key]);
+                if (resolved) return resolved;
+            }
+        }
+        for (const nestedValue of Object.values(value)) {
+            const resolved = extractCoverValue(nestedValue);
+            if (resolved) return resolved;
+        }
+    }
     return '';
 };
 
-const getLocalizedText = (language, ptValues, enValues, fallback = '') => {
-    const preferred = language === 'en' ? pickText(...enValues) : pickText(...ptValues);
-
-    if (preferred) {
-        return preferred;
-    }
-
-    const secondary = language === 'en' ? pickText(...ptValues) : pickText(...enValues);
-
-    return secondary || fallback;
-};
-
-const copy = {
-    pt: {
-        kicker: 'Backend centralizador em Render',
-        title: 'Biblioteca integrada',
-        lead: 'Os livros agora chegam do backend centralizador, com fontes renderizadas individualmente, status visível e cards responsivos para cada obra.',
-        sourcesLabel: 'Fontes',
-        validBooksLabel: 'Livros válidos',
-        alertSourcesLabel: 'Fontes com alerta',
-        loadingToolbar: 'Buscando dados no backend centralizador...',
-        loadingButton: 'Carregando...',
-        errorToolbar: 'Houve um problema na última tentativa de carregamento.',
-        successToolbar: 'Conteúdo sincronizado com o endpoint de integração da biblioteca.',
-        retryButton: 'Tentar novamente',
-        loadingTitle: 'Carregando biblioteca',
-        loadingText: 'Consultando o backend centralizador e preparando as fontes.',
-        errorLabel: 'Falha no carregamento',
-        errorTitle: 'Não foi possível acessar a biblioteca agora.',
-        errorText: 'Não foi possível carregar a biblioteca.',
-        emptyLabel: 'Nada disponível',
-        emptyTitle: 'O backend respondeu, mas não trouxe fontes no momento.',
-        emptyText:
-            'Quando houver livros válidos, eles vão aparecer aqui em cartões separados por fonte.',
-        emptyBooksLabel: 'Sem livros válidos',
-        emptyBooksTitle: 'Nenhuma fonte trouxe conteúdo utilizável nesta resposta.',
-        emptyBooksText:
-            'As fontes continuam visíveis abaixo para indicar qual integração está indisponível ou vazia.',
-        sourceLabel: 'Fonte',
-        sourceEmptyTitle: 'Sem livros válidos nesta fonte.',
-        sourceEmptyUnavailable: 'A fonte não respondeu com conteúdo utilizável no momento.',
-        sourceEmptyReady: 'A resposta chegou, mas o campo de conteúdo veio vazio.',
-        sourceErrorFallback: 'Erro informado pela fonte.',
-        availableStatus: 'Disponível',
-        unavailableStatus: 'Indisponível',
-        bookFallback: (index) => `Livro ${index + 1}`,
-        authorFallback: 'Autor não informado',
-        yearFallback: 'Ano não informado',
-        coverFallback: 'Sem capa',
-        synopsisLabel: 'Resumo',
-        synopsisFallback: 'Resumo não informado.',
-        genreFallback: 'Gênero não informado.',
-        itemsLabel: (count) => `${count} ${count === 1 ? 'item' : 'itens'}`,
-    },
-    en: {
-        kicker: 'Render central backend',
-        title: 'Integrated library',
-        lead: 'Books now come from the central backend, with individually rendered sources, visible status, and responsive cards for each work.',
-        sourcesLabel: 'Sources',
-        validBooksLabel: 'Valid books',
-        alertSourcesLabel: 'Sources with alert',
-        loadingToolbar: 'Fetching data from the central backend...',
-        loadingButton: 'Loading...',
-        errorToolbar: 'There was a problem during the last loading attempt.',
-        successToolbar: 'Content synced with the library integration endpoint.',
-        retryButton: 'Try again',
-        loadingTitle: 'Loading library',
-        loadingText: 'Checking the central backend and preparing the sources.',
-        errorLabel: 'Loading failed',
-        errorTitle: 'We could not access the library right now.',
-        errorText: 'Could not load the library.',
-        emptyLabel: 'Nothing available',
-        emptyTitle: 'The backend responded but did not return any sources.',
-        emptyText:
-            'When valid books are available, they will appear here in cards grouped by source.',
-        emptyBooksLabel: 'No valid books',
-        emptyBooksTitle: 'No source returned usable content in this response.',
-        emptyBooksText:
-            'The sources remain visible below to show which integration is unavailable or empty.',
-        sourceLabel: 'Source',
-        sourceEmptyTitle: 'No valid books in this source.',
-        sourceEmptyUnavailable: 'The source did not return usable content at the moment.',
-        sourceEmptyReady: 'The response arrived, but the content field was empty.',
-        sourceErrorFallback: 'Error reported by the source.',
-        availableStatus: 'Available',
-        unavailableStatus: 'Unavailable',
-        bookFallback: (index) => `Book ${index + 1}`,
-        authorFallback: 'Author not provided',
-        yearFallback: 'Year not provided',
-        coverFallback: 'No cover',
-        synopsisLabel: 'Summary',
-        synopsisFallback: 'Summary unavailable.',
-        genreFallback: 'Genre unavailable.',
-        itemsLabel: (count) => `${count} ${count === 1 ? 'item' : 'items'}`,
-    },
-};
-
-const isUnavailableStatus = (statusLabel) => {
-    const normalizedStatus = typeof statusLabel === 'string' ? statusLabel.toLowerCase() : '';
-
-    return normalizedStatus.includes('indispon') || normalizedStatus.includes('unavail');
-};
-
-const getStatusLabel = (statusApi, erro, language, texts) => {
-    const normalizedStatus = typeof statusApi === 'string' ? statusApi.trim() : '';
-
-    if (normalizedStatus) {
-        if (normalizedStatus.toLowerCase().includes('indispon')) {
-            return language === 'en' ? texts.unavailableStatus : texts.unavailableStatus;
+const getBookCoverUrl = (livro, titulo) => {
+    const isCapitaesDaAreia = titulo?.toLowerCase().includes('capitães da areia') || 
+                              titulo?.toLowerCase().includes('capitaes da areia');
+    
+    for (const fieldName of coverFieldNames) {
+        if (livro?.[fieldName] !== undefined) {
+            const coverUrl = extractCoverValue(livro[fieldName]);
+            if (coverUrl) return coverUrl;
         }
-
-        if (normalizedStatus.toLowerCase().includes('unavail')) {
-            return language === 'pt' ? texts.unavailableStatus : texts.unavailableStatus;
-        }
-
-        if (normalizedStatus.toLowerCase().includes('dispon')) {
-            return language === 'en' ? texts.availableStatus : texts.availableStatus;
-        }
-
-        if (normalizedStatus.toLowerCase().includes('avail')) {
-            return language === 'pt' ? texts.availableStatus : texts.availableStatus;
-        }
-
-        return normalizedStatus;
     }
-
-    return erro ? texts.unavailableStatus : texts.availableStatus;
+    if (livro?.imagens?.[0]) {
+        const fallback = extractCoverValue(livro.imagens[0]);
+        if (fallback) return fallback;
+    }
+    
+    return isCapitaesDaAreia ? CAPITAES_DA_AREIA_COVER_URL : '';
 };
 
-const getSourceTitle = (livro, fallbackIndex) => {
-    if (typeof livro === 'string' && livro.trim()) {
-        return livro.trim();
-    }
-
-    if (livro && typeof livro === 'object') {
-        return (
-            livro.titulo ||
-            livro.tituloPt ||
-            livro.tituloPT ||
-            livro.tituloEn ||
-            livro.tituloEN ||
-            livro.nome ||
-            livro.nomePt ||
-            livro.nomePT ||
-            livro.obra ||
-            livro.obraPt ||
-            livro.obraPT ||
-            `Fonte ${fallbackIndex + 1}`
-        );
-    }
-
-    return `Fonte ${fallbackIndex + 1}`;
+// ===== RESOLUÇÃO DE DESCRIÇÃO =====
+const getBookDescription = (livro) => {
+    const candidates = [
+        livro.descricaoPT, livro.descricaoPt, livro.descricao_pt,
+        livro.descricao, livro.enredo_pt, livro.enredoPt, livro.enredoPT,
+        livro.sinopse, livro.sinopsePT, livro.enredo,
+        livro.resumo, livro.abstract, livro.description, livro.summary
+    ];
+    return candidates.find(d => d && String(d).trim()) || 'Resumo não informado.';
 };
 
-const getStatusTone = (statusLabel) => {
-    return isUnavailableStatus(statusLabel) ? styles.statusUnavailable : styles.statusAvailable;
-};
+// ===== COMPONENTE BOOK CARD =====
+function BookCard({ livro, index }) {
+    const [isExpanded, setIsExpanded] = useState(false);
 
-function BookCard({ livro, fallbackIndex, language, texts }) {
-    const [imageFailed, setImageFailed] = useState(false);
-
-    const title = getLocalizedText(
-        language,
-        [livro.titulo_pt, livro.tituloPt, livro.tituloPT, livro.titulo, livro.nomePt, livro.nomePT],
-        [livro.titulo_en, livro.tituloEn, livro.tituloEN, livro.titulo, livro.nomeEn, livro.nomeEN],
-        texts.bookFallback(fallbackIndex)
+    const titulo = useMemo(() => getBookTitle(livro, index), [livro, index]);
+    const autor = useMemo(() => getBookAuthor(livro), [livro]);
+    const genero = useMemo(() => getBookGenre(livro), [livro]);
+    const ano = useMemo(() => formatYear(livro.ano || livro.anoPublicacao || livro.anoLancamento || livro.ano_publicacao), [livro]);
+    const editora = useMemo(() => getBookPublisher(livro), [livro]);
+    const idioma = useMemo(() => getBookLanguage(livro), [livro]);
+    const paginas = useMemo(() => getBookPages(livro), [livro]);
+    const descricaoCompleta = useMemo(() => getBookDescription(livro), [livro]);
+    const descricao = useMemo(() => 
+        truncateText(descricaoCompleta, isExpanded ? EXPANDED_MAX_LENGTH : DEFAULT_MAX_LENGTH, !isExpanded), 
+        [descricaoCompleta, isExpanded]
     );
-    const author =
-        pickText(livro.autor, livro.autora, livro.nomeAutor, livro.nomeAutora) ||
-        texts.authorFallback;
-    const coverUrl = livro.capa_url || livro.capaUrl || livro.capaURl;
-    const year = livro.ano || livro.anoPublicacao || texts.yearFallback;
-    const genres = splitValues(
-        getLocalizedText(
-            language,
-            [livro.genero_pt, livro.generoPt, livro.generoPT, livro.genero],
-            [livro.genero_en, livro.generoEn, livro.generoEN, livro.genero],
-            ''
-        )
-    );
-    const synopsis = getLocalizedText(
-        language,
-        [livro.enredo_pt, livro.descricaoPT, livro.descricaoPt, livro.descricao, livro.conteudoPt],
-        [livro.enredo_en, livro.descricaoEN, livro.descricaoEn, livro.descricao, livro.conteudoEn],
-        texts.synopsisFallback
-    );
-    const showCover = Boolean(coverUrl) && !imageFailed;
-    const coverAlt = showCover ? `Capa de ${title}` : `${texts.coverFallback} para ${title}`;
+    const capaUrl = useMemo(() => getBookCoverUrl(livro, titulo), [livro, titulo]);
+
+    const canExpand = descricaoCompleta.length > DEFAULT_MAX_LENGTH;
+
+    const metaBadges = useMemo(() => {
+        const badges = [];
+        if (ano) badges.push({ label: ano, icon: '📅', type: 'year' });
+        if (autor) badges.push({ label: autor, icon: '✍️', type: 'author' });
+        if (genero) badges.push({ label: genero, icon: '📚', type: 'genre' });
+        if (editora) badges.push({ label: editora, icon: '🏢', type: 'publisher' });
+        if (idioma) badges.push({ label: idioma, icon: '🌐', type: 'language' });
+        if (paginas) badges.push({ label: paginas, icon: '📄', type: 'pages' });
+        return badges;
+    }, [ano, autor, genero, editora, idioma, paginas]);
 
     return (
         <article className={styles.bookCard}>
-            <div className={styles.coverFrame}>
-                {showCover ? (
-                    <img
-                        className={styles.coverImage}
-                        src={coverUrl}
-                        alt={coverAlt}
-                        loading='lazy'
-                        onError={() => setImageFailed(true)}
-                    />
-                ) : (
-                    <div
-                        className={styles.coverPlaceholder}
-                        aria-label={`${texts.coverFallback} para ${title}`}>
-                        <span className={styles.placeholderGlyph} aria-hidden='true'>
-                            LB
-                        </span>
-                        <span className={styles.placeholderLabel}>{texts.coverFallback}</span>
-                    </div>
-                )}
+            <div className={styles.coverSection}>
+                <div className={styles.coverFrame}>
+                    {capaUrl ? (
+                        <img
+                            className={styles.coverImage}
+                            src={capaUrl}
+                            alt={`Capa do livro ${titulo}`}
+                            loading="lazy"
+                            onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.parentElement.classList.add(styles.coverPlaceholder);
+                            }}
+                        />
+                    ) : (
+                        <div className={styles.coverPlaceholder} aria-label={`Sem capa para ${titulo}`}>
+                            <div className={styles.placeholderGlyph}>
+                                {titulo.charAt(0).toUpperCase()}
+                            </div>
+                            <span className={styles.placeholderLabel}>Sem capa</span>
+                        </div>
+                    )}
+                </div>
             </div>
 
-            <div className={styles.bookBody}>
-                <div className={styles.bookMetaRow}>
-                    <span className={styles.bookYear}>{year}</span>
-                    <span className={styles.bookAuthor}>{author}</span>
-                </div>
-
-                <h3 className={styles.bookTitle}>{title}</h3>
-
-                <div className={styles.tagsGrid}>
-                    {genres.length > 0 ? (
-                        genres.map((genre) => (
-                            <span key={genre} className={styles.genreTag}>
-                                {genre}
-                            </span>
-                        ))
-                    ) : (
-                        <span className={`${styles.genreTag} ${styles.genreTagGhost}`}>
-                            {texts.genreFallback}
-                        </span>
+            <div className={styles.contentSection}>
+                <div className={styles.bookHeader}>
+                    {metaBadges.length > 0 && (
+                        <div className={styles.bookMetaRow}>
+                            {metaBadges.map((badge, i) => (
+                                <span 
+                                    key={i} 
+                                    className={`${styles.metaBadge} ${styles[`metaBadge${badge.type.charAt(0).toUpperCase() + badge.type.slice(1)}`]}`}
+                                >
+                                    <span className={styles.metaBadgeIcon}>{badge.icon}</span>
+                                    <span>{badge.label}</span>
+                                </span>
+                            ))}
+                        </div>
                     )}
+
+                    <h3 className={styles.bookTitle} title={titulo}>
+                        {titulo}
+                    </h3>
                 </div>
 
                 <div className={styles.synopsisGroup}>
-                    <div>
-                        <p className={styles.synopsisLabel}>{texts.synopsisLabel}</p>
-                        <p className={styles.synopsisText}>{synopsis || texts.synopsisFallback}</p>
-                    </div>
+                    <p className={styles.synopsisLabel}>Sobre a obra</p>
+                    <p className={styles.synopsisText} id={`synopsis-${index}`}>
+                        {descricao}
+                    </p>
+                    {canExpand && (
+                        <button
+                            type="button"
+                            className={styles.expandButton}
+                            onClick={() => setIsExpanded(prev => !prev)}
+                            aria-expanded={isExpanded}
+                            aria-controls={`synopsis-${index}`}
+                        >
+                            <span className={styles.expandIcon}>{isExpanded ? '▲' : '▼'}</span>
+                            {isExpanded ? 'Ver menos' : 'Ler mais'}
+                        </button>
+                    )}
                 </div>
             </div>
         </article>
     );
 }
 
-function SourceSection({ fonte, index, language, texts }) {
-    const livros = Array.isArray(fonte.conteudo) ? fonte.conteudo.filter(Boolean) : [];
-    const validBooks = livros.length;
-    const sourceTitle = getSourceTitle(fonte.livro, index);
-    const statusLabel = getStatusLabel(fonte.statusApi, fonte.erro, language, texts);
-    const statusTone = getStatusTone(statusLabel);
-    const totalItens = Number.isFinite(Number(fonte.totalItens))
-        ? Number(fonte.totalItens)
-        : validBooks;
-    const sourceUnavailable = Boolean(fonte.erro) || isUnavailableStatus(statusLabel);
+// ===== COMPONENTE FONTE SECTION =====
+function FonteSection({ fonte, index }) {
+    const livros = useMemo(() => Array.isArray(fonte.conteudo) ? fonte.conteudo : [], [fonte]);
+    const tituloFonte = useMemo(() => fonte.livro || fonte.nome || fonte.source || `Fonte ${index + 1}`, [fonte, index]);
+    const statusOnline = useMemo(() => String(fonte.statusApi || fonte.status || '').toLowerCase() === 'online', [fonte]);
 
     return (
         <section className={styles.sourceCard}>
             <div className={styles.sourceHeader}>
-                <div>
-                    <p className={styles.sourceLabel}>
-                        {texts.sourceLabel} {index + 1}
-                    </p>
-                    <h2 className={styles.sourceTitle}>{sourceTitle}</h2>
+                <div className={styles.sourceHeaderLeft}>
+                    <p className={styles.sourceLabel}>Fonte {index + 1}</p>
+                    <h2 className={styles.sourceTitle}>{tituloFonte}</h2>
                 </div>
-
                 <div className={styles.sourceStats}>
-                    <div className={`${styles.statusBadge} ${statusTone}`}>{statusLabel}</div>
-                    <div className={styles.countBadge}>{texts.itemsLabel(totalItens)}</div>
+                    <div className={`${styles.statusBadge} ${statusOnline ? styles.statusOnline : styles.statusOffline}`}>
+                        <span className={styles.statusDot}></span>
+                        {statusOnline ? 'Online' : 'Indisponível'}
+                    </div>
+                    <div className={styles.countBadge}>
+                        {livros.length} {livros.length === 1 ? 'item' : 'itens'}
+                    </div>
                 </div>
             </div>
 
-            {fonte.erro ? <p className={styles.sourceError}>{fonte.erro}</p> : null}
+            {!statusOnline && (
+                <p className={styles.sourceError}>
+                    {fonte.erro || fonte.errorMessage || 'Fonte indisponível no momento. Tente recarregar.'}
+                </p>
+            )}
 
-            {validBooks > 0 ? (
+            {statusOnline && livros.length > 0 && (
                 <div className={styles.booksGrid}>
                     {livros.map((livro, livroIndex) => (
-                        <BookCard
-                            key={`${sourceTitle}-${livro.titulo || livroIndex}-${livroIndex}`}
-                            livro={livro}
-                            fallbackIndex={livroIndex}
-                            language={language}
-                            texts={texts}
-                        />
+                        <BookCard key={`${index}-${livroIndex}`} livro={livro} index={livroIndex} />
                     ))}
                 </div>
-            ) : (
-                <div className={styles.sourceEmpty}>
-                    <strong>{texts.sourceEmptyTitle}</strong>
-                    <span>
-                        {sourceUnavailable ? texts.sourceEmptyUnavailable : texts.sourceEmptyReady}
-                    </span>
-                </div>
+            )}
+
+            {statusOnline && livros.length === 0 && (
+                <p className={styles.sourceEmpty}>Nenhum livro encontrado nesta fonte.</p>
             )}
         </section>
     );
 }
 
+// ===== COMPONENTE PRINCIPAL =====
 export default function Biblioteca() {
-    const { language } = useLanguage();
-    const texts = copy[language];
     const [fontes, setFontes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [reloadToken, setReloadToken] = useState(0);
 
+    // ✅ useEffect corrigido - abordagem React 18+
     useEffect(() => {
-        const controller = new AbortController();
-
         const carregarBiblioteca = async () => {
             setLoading(true);
             setError('');
-
             try {
-                const fontesRecebidas = await fetchBiblioteca(controller.signal);
-
-                if (controller.signal.aborted) {
-                    return;
-                }
-
-                setFontes(fontesRecebidas);
-            } catch (fetchError) {
-                if (fetchError.name === 'AbortError' || controller.signal.aborted) {
-                    return;
-                }
-
+                const data = await request('/api/integracao/biblioteca');
+                setFontes(Array.isArray(data) ? data : []);
+            } catch (err) {
+                console.error('Erro ao carregar biblioteca:', err);
+                setError(err.message || 'Não foi possível carregar a biblioteca. Verifique sua conexão.');
                 setFontes([]);
-                setError(fetchError.message || 'Não foi possível carregar a biblioteca.');
             } finally {
-                if (!controller.signal.aborted) {
-                    setLoading(false);
-                }
+                setLoading(false);
             }
         };
 
         carregarBiblioteca();
-
-        return () => controller.abort();
     }, [reloadToken]);
 
-    const totalLivrosValidos = fontes.reduce(
-        (total, fonte) =>
-            total + (Array.isArray(fonte.conteudo) ? fonte.conteudo.filter(Boolean).length : 0),
-        0
+    const fontesOnline = useMemo(() =>
+        fontes.filter(f => String(f.statusApi || f.status || '').toLowerCase() === 'online').length,
+        [fontes]
     );
 
-    const fontesComErro = fontes.filter((fonte) => {
-        const status = typeof fonte.statusApi === 'string' ? fonte.statusApi.toLowerCase() : '';
-
-        return status.includes('indispon') || status.includes('unavail') || Boolean(fonte.erro);
-    }).length;
-
-    const handleRetry = () => {
-        setReloadToken((currentValue) => currentValue + 1);
-    };
+    const totalLivros = useMemo(() =>
+        fontes.reduce((acc, f) => acc + (Array.isArray(f.conteudo) ? f.conteudo.length : 0), 0),
+        [fontes]
+    );
 
     return (
         <div className={styles.page}>
@@ -390,23 +354,27 @@ export default function Biblioteca() {
             <main className={styles.shell}>
                 <section className={styles.hero}>
                     <div className={styles.heroContent}>
-                        <p className={styles.kicker}>{texts.kicker}</p>
-                        <h1 className={styles.title}>{texts.title}</h1>
-                        <p className={styles.lead}>{texts.lead}</p>
+                        <p className={styles.kicker}>Explore nossa coleção</p>
+                        <h1 className={styles.title}>Biblioteca Integrada</h1>
+                        <p className={styles.lead}>
+                            Acesse obras de múltiplas fontes em um só lugar.
+                            Cada card exibe informações completas: capa, título, autor, ano, gênero,
+                            editora e resumo detalhado.
+                        </p>
                     </div>
 
                     <div className={styles.heroPanel}>
                         <div className={styles.heroStat}>
-                            <span>{texts.sourcesLabel}</span>
-                            <strong>{fontes.length}</strong>
+                            <span className={styles.heroStatLabel}>Fontes</span>
+                            <strong className={styles.heroStatValue}>{fontes.length}</strong>
                         </div>
                         <div className={styles.heroStat}>
-                            <span>{texts.validBooksLabel}</span>
-                            <strong>{totalLivrosValidos}</strong>
+                            <span className={styles.heroStatLabel}>Online</span>
+                            <strong className={styles.heroStatValue}>{fontesOnline}</strong>
                         </div>
                         <div className={styles.heroStat}>
-                            <span>{texts.alertSourcesLabel}</span>
-                            <strong>{fontesComErro}</strong>
+                            <span className={styles.heroStatLabel}>Livros</span>
+                            <strong className={styles.heroStatValue}>{totalLivros}</strong>
                         </div>
                     </div>
                 </section>
@@ -414,68 +382,78 @@ export default function Biblioteca() {
                 <div className={styles.toolbar}>
                     <p className={styles.toolbarCopy}>
                         {loading
-                            ? texts.loadingToolbar
+                            ? '🔍 Buscando fontes na biblioteca...'
                             : error
-                              ? texts.errorToolbar
-                              : texts.successToolbar}
+                                ? `⚠️ ${error}`
+                                : `✓ ${fontesOnline} de ${fontes.length} fontes online • ${totalLivros} livros disponíveis`}
                     </p>
 
-                    <button type='button' className={styles.retryButton} onClick={handleRetry}>
-                        {loading ? texts.loadingButton : texts.retryButton}
+                    <button
+                        type="button"
+                        className={styles.retryButton}
+                        onClick={() => setReloadToken(prev => prev + 1)}
+                        disabled={loading}
+                        aria-label={loading ? 'Carregando' : 'Recarregar biblioteca'}
+                    >
+                        {loading ? '⏳ Carregando...' : '↻ Recarregar'}
                     </button>
                 </div>
 
-                {loading ? (
-                    <section className={styles.loadingState} aria-live='polite'>
-                        <div className={styles.loadingSpinner} aria-hidden='true' />
+                {loading && (
+                    <section className={styles.loadingState} role="status" aria-live="polite">
+                        <div className={styles.loadingSpinner}></div>
                         <div>
-                            <strong>{texts.loadingTitle}</strong>
-                            <p>{texts.loadingText}</p>
+                            <strong>Carregando biblioteca...</strong>
+                            <p>Buscamos as fontes e organizamos as obras para você.</p>
                         </div>
                     </section>
-                ) : error ? (
-                    <section className={styles.errorState} role='alert'>
-                        <div>
-                            <p className={styles.errorLabel}>{texts.errorLabel}</p>
-                            <h2>{texts.errorTitle}</h2>
-                            <p>{error || texts.errorText}</p>
-                        </div>
+                )}
 
-                        <button type='button' className={styles.retryButton} onClick={handleRetry}>
-                            {texts.retryButton}
+                {error && !loading && (
+                    <section className={styles.errorState} role="alert">
+                        <p><strong>Ops!</strong> {error}</p>
+                        <button
+                            onClick={() => setReloadToken(prev => prev + 1)}
+                            className={styles.retryButton}
+                        >
+                            ↻ Tentar novamente
                         </button>
                     </section>
-                ) : null}
+                )}
 
-                {!loading && !error && fontes.length === 0 ? (
+                {!loading && !error && fontes.length === 0 && (
                     <section className={styles.emptyState}>
-                        <p className={styles.emptyLabel}>{texts.emptyLabel}</p>
-                        <h2>{texts.emptyTitle}</h2>
-                        <p>{texts.emptyText}</p>
+                        <p><strong>Nada por aqui ainda.</strong></p>
+                        <p>As fontes podem estar em manutenção ou sem conteúdo disponível.</p>
+                        <button
+                            onClick={() => setReloadToken(prev => prev + 1)}
+                            className={styles.retryButton}
+                        >
+                            ↻ Verificar novamente
+                        </button>
                     </section>
-                ) : null}
+                )}
 
-                {!loading && !error && totalLivrosValidos === 0 && fontes.length > 0 ? (
+                {!loading && !error && fontes.length > 0 && fontesOnline === 0 && (
                     <section className={styles.emptyState}>
-                        <p className={styles.emptyLabel}>{texts.emptyBooksLabel}</p>
-                        <h2>{texts.emptyBooksTitle}</h2>
-                        <p>{texts.emptyBooksText}</p>
+                        <p><strong>Todas as fontes estão indisponíveis.</strong></p>
+                        <p>Verifique sua conexão ou tente mais tarde.</p>
+                        <button
+                            onClick={() => setReloadToken(prev => prev + 1)}
+                            className={styles.retryButton}
+                        >
+                            ↻ Tentar reconectar
+                        </button>
                     </section>
-                ) : null}
+                )}
 
-                {!loading && !error && fontes.length > 0 ? (
+                {!loading && !error && fontesOnline > 0 && (
                     <section className={styles.sourcesStack}>
                         {fontes.map((fonte, index) => (
-                            <SourceSection
-                                key={`${getSourceTitle(fonte.livro, index)}-${index}`}
-                                fonte={fonte}
-                                index={index}
-                                language={language}
-                                texts={texts}
-                            />
+                            <FonteSection key={fonte.id || index} fonte={fonte} index={index} />
                         ))}
                     </section>
-                ) : null}
+                )}
             </main>
 
             <Footer />

@@ -4,12 +4,14 @@ import styles from './Header.module.css';
 
 const links = [
     { to: '/', labelPt: 'Início', labelEn: 'Home', end: true },
-    { to: '/obra', labelPt: 'Obra', labelEn: 'Work' },
+    { to: '/obra', labelPt: 'Obra', labelEn: 'Book' },
     { to: '/biblioteca', labelPt: 'Biblioteca', labelEn: 'Library' },
     { to: '/simulados', labelPt: 'Simulado', labelEn: 'Quiz' },
     { to: '/sobre', labelPt: 'Sobre', labelEn: 'About' },
     { to: '/vestibular', labelPt: 'Vestibular', labelEn: 'Exam Prep' },
     { to: '/curiosidades', labelPt: 'Curiosidades', labelEn: 'Curiosities' },
+    { to: '/personagens', labelPt: 'Personagens', labelEn: 'Characters' },
+    { to: '/videoaulas', labelPt: 'Vídeo Aulas', labelEn: 'Video Lessons' }
 ];
 
 const Header = () => {

@@ -285,5 +285,4 @@ function Simulados({ idiomaDoSite = 'PT' }) {
         </div>
     );
 }
-
 export default Simulados;

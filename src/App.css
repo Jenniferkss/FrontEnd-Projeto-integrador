@@ -1,4 +1,3 @@
-/* Reset total para tirar margens e linhas indesejadas */
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +9,6 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  /* Garante que o fundo rosa cubra tudo se o componente falhar */
   background-color: #ffeff1;
   overflow-x: hidden;
 }
