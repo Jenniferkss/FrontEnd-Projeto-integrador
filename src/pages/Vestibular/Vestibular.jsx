@@ -4,7 +4,6 @@ import styles from './Vestibular.module.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
-import { FaPlayCircle } from 'react-icons/fa';
 
 export default function ObraVestibular() {
     const [dados, setDados] = useState(null);
