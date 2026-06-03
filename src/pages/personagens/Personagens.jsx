@@ -4,14 +4,6 @@ import styles from './Personagens.module.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
-import personagem1 from '../../../public/images/personagem1.png';
-import personagem2 from '../../../public/images/personagem2.png';
-import personagem3 from '../../../public/images/personagem3.png';
-import personagem4 from '../../../public/images/personagem4.png';
-import personagem5 from '../../../public/images/personagem5.png';
-import personagem6 from '../../../public/images/personagem6.png';
-import personagem7 from '../../../public/images/personagem7.png';
-
 export default function Inicio() {
     const [livro, setLivro] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -74,7 +66,9 @@ export default function Inicio() {
                 <div className={styles.divGrandeQuestoes}>
                     <div className={styles.questoes}>
                         <img
-                            src={personagem1}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[0] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
@@ -94,7 +88,9 @@ export default function Inicio() {
 
                     <div className={styles.questoes}>
                         <img
-                            src={personagem2}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[1] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
@@ -114,7 +110,9 @@ export default function Inicio() {
 
                     <div className={styles.questoes}>
                         <img
-                            src={personagem3}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[2] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
@@ -134,10 +132,12 @@ export default function Inicio() {
 
                     <div className={styles.questoes}>
                         <img
-                            src={personagem4}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[3] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
-                        />
+                            />
 
                        <div className={styles.divNomeDesc}>
                             <h1 className="title-main" style={{marginBottom: '20px'}}>
@@ -154,7 +154,9 @@ export default function Inicio() {
 
                     <div className={styles.questoes}>
                         <img
-                            src={personagem5}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[4] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
@@ -179,7 +181,9 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
 
                     <div className={styles.questoes}>
                         <img
-                            src={personagem6}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[5] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
@@ -198,7 +202,9 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                     </div>
                     <div className={styles.questoes}>
                         <img
-                            src={personagem6}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[6] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
@@ -217,7 +223,9 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                     </div>
                     <div className={styles.questoes}>
                         <img
-                            src={personagem6}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[7] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
@@ -236,7 +244,9 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                     </div>
                     <div className={styles.questoes}>
                         <img
-                            src={personagem6}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[8] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
@@ -255,7 +265,9 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                     </div>
                     <div className={styles.questoes}>
                         <img
-                            src={personagem6}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[9] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
@@ -274,7 +286,9 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                     </div>
                     <div className={styles.questoes}>
                         <img
-                            src={personagem6}
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[10] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
@@ -293,7 +307,9 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                     </div>
                     <div className={styles.questoes}>
                         <img
-                            src={personagem6}
+                            src= {loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[11] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
