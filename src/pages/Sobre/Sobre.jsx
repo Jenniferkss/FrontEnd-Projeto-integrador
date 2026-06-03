@@ -60,96 +60,134 @@ export default function Inicio() {
                         <div className={styles.integrante}>
                             <img
                                 style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
-                                alt="integrante 1"
-                            />
-                            <h4>{equipe?.find((e) => e.id === 2)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 2)?.curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
-                                alt="integrante 1"
-                            />
-                            <h4>{equipe?.find((e) => e.id === 3)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 3)?.curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
-                                alt="integrante 1"
-                            />
-                            <h4>{equipe?.find((e) => e.id === 4)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 4)?.curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
+                                src={equipe?.find((e) => e.id === 5)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
                             <h4>{equipe?.find((e) => e.id === 5)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 5)?.curso || 'Curso integrante'}</p>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 5)?.curso || 'Curso integrante'}</p>
                         </div>
                         <div className={styles.integrante}>
                             <img
                                 style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
+                                src={equipe?.find((e) => e.id === 6)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
                             <h4>{equipe?.find((e) => e.id === 6)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 6)?.curso || 'Curso integrante'}</p>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 6)?.curso || 'Curso integrante'}</p>
+                        </div>
+                        <div className={styles.integrante}>
+                            <img
+                                style={{ width: '90px' }}
+                                src={equipe?.find((e) => e.id === 7)?.fotoEquipe || 'Foto do integrante'}   
+                                alt="integrante 1"
+                            />
+                            <h4>{equipe?.find((e) => e.id === 7)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 7)?.curso || 'Curso integrante'}</p>
+                        </div>
+                        <div className={styles.integrante}>
+                            <img
+                                style={{ width: '90px' }}
+                                src={equipe?.find((e) => e.id === 8)?.fotoEquipe || 'Foto do integrante'}
+                                alt="integrante 1"
+                            />
+                            <h4>{equipe?.find((e) => e.id === 8)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 8)?.curso || 'Curso integrante'}</p>
+                        </div>
+                        <div className={styles.integrante}>
+                            <img
+                                style={{ width: '90px' }}
+                                src={equipe?.find((e) => e.id === 9)?.fotoEquipe || 'Foto do integrante'}
+                                alt="integrante 1"
+                            />
+                            <h4>{equipe?.find((e) => e.id === 9)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 9)?.curso || 'Curso integrante'}</p>
+                        </div>
+                        <div className={styles.integrante}>
+                            <img
+                                style={{ width: '90px' }}
+                                src={equipe?.find((e) => e.id === 10)?.fotoEquipe || 'Foto do integrante'}
+                                alt="integrante 1"
+                            />
+                            <h4>{equipe?.find((e) => e.id === 10)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 10)?.curso || 'Curso integrante'}</p>
+                        </div>
+                        <div className={styles.integrante}>
+                            <img
+                                style={{ width: '90px' }}
+                                src={equipe?.find((e) => e.id === 11)?.fotoEquipe || 'Foto do integrante'}
+                                alt="integrante 1"
+                            />
+                            <h4>{equipe?.find((e) => e.id === 11)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso} >{equipe?.find((e) => e.id === 11)?.curso || 'Curso integrante'}</p>
                         </div>
 
                     </div>
                     <div className={styles.linhaIntegrantes}>
 
+                        
+                        
                         <div className={styles.integrante}>
                             <img
                                 style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
+                                src={equipe?.find((e) => e.id === 12)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
-                            <h4>{equipe?.find((e) => e.id === 7)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 7)?.curso || 'Curso integrante'}</p>
+                            <h4>{equipe?.find((e) => e.id === 12)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 12)?.curso || 'Curso integrante'}</p>
                         </div>
                         <div className={styles.integrante}>
                             <img
                                 style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
+                                src={equipe?.find((e) => e.id === 13)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
-                            <h4>{equipe?.find((e) => e.id === 8)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 8)?.curso || 'Curso integrante'}</p>
+                            <h4>{equipe?.find((e) => e.id === 13)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}   >{equipe?.find((e) => e.id === 13)?.curso || 'Curso integrante'}</p>
                         </div>
                         <div className={styles.integrante}>
                             <img
                                 style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
+                                src={equipe?.find((e) => e.id === 14)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
-                            <h4>{equipe?.find((e) => e.id === 9)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 9)?.curso || 'Curso integrante'}</p>
+                            <h4>{equipe?.find((e) => e.id === 14)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 14)?.curso || 'Curso integrante'}</p>
                         </div>
                         <div className={styles.integrante}>
                             <img
                                 style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
+                                src={equipe?.find((e) => e.id === 15)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
-                            <h4>{equipe?.find((e) => e.id === 10)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 10)?.curso || 'Curso integrante'}</p>
+                            <h4>{equipe?.find((e) => e.id === 15)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 15)?.curso || 'Curso integrante'}</p>
                         </div>
                         <div className={styles.integrante}>
                             <img
                                 style={{ width: '90px' }}
-                                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/sonic-icon.png"
+                                src={equipe?.find((e) => e.id === 16)?.fotoEquipe || 'Foto do integrante'}
                                 alt="integrante 1"
                             />
-                            <h4>{equipe?.find((e) => e.id === 11)?.nome || 'Nome integrante'}</h4>
-                            <p>{equipe?.find((e) => e.id === 11)?.curso || 'Curso integrante'}</p>
+                            <h4>{equipe?.find((e) => e.id === 16)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 16)?.curso || 'Curso integrante'}</p>
+                        </div>
+                        <div className={styles.integrante}>
+                            <img
+                                style={{ width: '90px' }}
+                                src={equipe?.find((e) => e.id === 17)?.fotoEquipe || 'Foto do integrante'}
+                                alt="integrante 1"
+                            />
+                            <h4>{equipe?.find((e) => e.id === 17)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 17)?.curso || 'Curso integrante'}</p>
+                        </div>
+                        <div className={styles.integrante}>
+                            <img
+                                style={{ width: '90px' }}
+                                src={equipe?.find((e) => e.id === 18)?.fotoEquipe || 'Foto do integrante'}
+                                alt="integrante 1"
+                            />
+                            <h4>{equipe?.find((e) => e.id === 18)?.nome || 'Nome integrante'}</h4>
+                            <p className={styles.integranteCurso}>{equipe?.find((e) => e.id === 18)?.curso || 'Curso integrante'}</p>
                         </div>
 
                     </div>
