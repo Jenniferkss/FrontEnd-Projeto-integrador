@@ -196,20 +196,122 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
 
                         </div>
                     </div>
-
                     <div className={styles.questoes}>
                         <img
-                            src={personagem7}
+                            src={personagem6}
                             alt="Carolina Maria de Jesus"
                             style={{ width: '13rem' }}
                         />
 
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[6] || 'Nome personagem'}
+                            </h1>
                         <p>
-                            (G) A construção indica alienação da narradora, que
-                            perde a capacidade de distinguir realidade e
-                            imaginação.
+                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
                         </p>
+
+                        </div>
                     </div>
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem6}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[7] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
+                        </p>
+
+                        </div>
+                    </div>
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem6}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[8] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
+                        </p>
+
+                        </div>
+                    </div>
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem6}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[9] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
+                        </p>
+
+                        </div>
+                    </div>
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem6}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[10] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
+                        </p>
+
+                        </div>
+                    </div>
+                    <div className={styles.questoes}>
+                        <img
+                            src={personagem6}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[11] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
+                        </p>
+
+                        </div>
+                    </div>
+
+                    
                 </div>
             </main>
 
