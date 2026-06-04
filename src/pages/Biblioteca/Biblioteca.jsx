@@ -164,8 +164,29 @@ const getBookDescription = (livro) => {
     return candidates.find(d => d && String(d).trim()) || 'Resumo não informado.';
 };
 
+// ===== SKELETON BOOK CARD =====
+function SkeletonBookCard() {
+    return (
+        <article className={styles.bookCard}>
+            <div className={styles.coverSection}>
+                <div className={styles.skeletonCover} />
+            </div>
+            <div className={styles.contentSection}>
+                <div className={styles.skeletonBadge} />
+                <div className={styles.skeletonTitle} />
+                <div className={styles.skeletonLine} style={{ width: '60%' }} />
+                <div className={styles.skeletonSynopsis}>
+                    <div className={styles.skeletonLine} />
+                    <div className={styles.skeletonLine} style={{ width: '85%' }} />
+                    <div className={styles.skeletonLine} style={{ width: '70%' }} />
+                </div>
+            </div>
+        </article>
+    );
+}
+
 // ===== COMPONENTE BOOK CARD =====
-function BookCard({ livro, index }) {
+function BookCard({ livro, index, gridView }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const titulo = useMemo(() => getBookTitle(livro, index), [livro, index]);
@@ -194,6 +215,38 @@ function BookCard({ livro, index }) {
         if (paginas) badges.push({ label: paginas, icon: '📄', type: 'pages' });
         return badges;
     }, [ano, autor, genero, editora, idioma, paginas]);
+
+    if (gridView) {
+        return (
+            <article className={styles.bookCardGrid}>
+                <div className={styles.coverFrameGrid}>
+                    {capaUrl ? (
+                        <img
+                            className={styles.coverImageGrid}
+                            src={capaUrl}
+                            alt={`Capa do livro ${titulo}`}
+                            loading="lazy"
+                            onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.parentElement.classList.add(styles.coverPlaceholderGrid);
+                            }}
+                        />
+                    ) : (
+                        <div className={styles.coverPlaceholderGrid}>
+                            <span className={styles.placeholderGlyphGrid}>
+                                {titulo.charAt(0).toUpperCase()}
+                            </span>
+                        </div>
+                    )}
+                </div>
+                <div className={styles.bookInfoGrid}>
+                    <h3 className={styles.bookTitleGrid} title={titulo}>{titulo}</h3>
+                    <span className={styles.bookAuthorGrid}>{autor}</span>
+                    {ano && <span className={styles.bookYearGrid}>{ano}</span>}
+                </div>
+            </article>
+        );
+    }
 
     return (
         <article className={styles.bookCard}>
@@ -266,10 +319,23 @@ function BookCard({ livro, index }) {
 }
 
 // ===== COMPONENTE FONTE SECTION =====
-function FonteSection({ fonte, index }) {
+function FonteSection({ fonte, index, searchQuery, gridView }) {
     const livros = useMemo(() => Array.isArray(fonte.conteudo) ? fonte.conteudo : [], [fonte]);
     const tituloFonte = useMemo(() => fonte.livro || fonte.nome || fonte.source || `Fonte ${index + 1}`, [fonte, index]);
     const statusOnline = useMemo(() => String(fonte.statusApi || fonte.status || '').toLowerCase() === 'online', [fonte]);
+
+    // Filtro por busca
+    const livrosFiltrados = useMemo(() => {
+        if (!searchQuery.trim()) return livros;
+        const q = searchQuery.toLowerCase();
+        return livros.filter(livro => {
+            const titulo = getBookTitle(livro, 0).toLowerCase();
+            const autor = getBookAuthor(livro).toLowerCase();
+            return titulo.includes(q) || autor.includes(q);
+        });
+    }, [livros, searchQuery]);
+
+    if (searchQuery.trim() && livrosFiltrados.length === 0) return null;
 
     return (
         <section className={styles.sourceCard}>
@@ -284,7 +350,7 @@ function FonteSection({ fonte, index }) {
                         {statusOnline ? 'Online' : 'Indisponível'}
                     </div>
                     <div className={styles.countBadge}>
-                        {livros.length} {livros.length === 1 ? 'item' : 'itens'}
+                        {livrosFiltrados.length} {livrosFiltrados.length === 1 ? 'item' : 'itens'}
                     </div>
                 </div>
             </div>
@@ -295,15 +361,19 @@ function FonteSection({ fonte, index }) {
                 </p>
             )}
 
-            {statusOnline && livros.length > 0 && (
-                <div className={styles.booksGrid}>
-                    {livros.map((livro, livroIndex) => (
-                        <BookCard key={`${index}-${livroIndex}`} livro={livro} index={livroIndex} />
+            {statusOnline && livrosFiltrados.length > 0 && (
+                <div className={`${styles.booksGrid} ${gridView ? styles.booksGridCompact : ''}`}>
+                    {livrosFiltrados.map((livro, livroIndex) => (
+                        <BookCard key={`${index}-${livroIndex}`} livro={livro} index={livroIndex} gridView={gridView} />
                     ))}
                 </div>
             )}
 
-            {statusOnline && livros.length === 0 && (
+            {statusOnline && livrosFiltrados.length === 0 && searchQuery.trim() && (
+                <p className={styles.sourceEmpty}>Nenhum livro encontrado para "{searchQuery}" nesta fonte.</p>
+            )}
+
+            {statusOnline && livros.length === 0 && !searchQuery.trim() && (
                 <p className={styles.sourceEmpty}>Nenhum livro encontrado nesta fonte.</p>
             )}
         </section>
@@ -316,8 +386,9 @@ export default function Biblioteca() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [reloadToken, setReloadToken] = useState(0);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [gridView, setGridView] = useState(false);
 
-    // ✅ useEffect corrigido - abordagem React 18+
     useEffect(() => {
         const carregarBiblioteca = async () => {
             setLoading(true);
@@ -380,32 +451,76 @@ export default function Biblioteca() {
                 </section>
 
                 <div className={styles.toolbar}>
-                    <p className={styles.toolbarCopy}>
-                        {loading
-                            ? '🔍 Buscando fontes na biblioteca...'
-                            : error
-                                ? `⚠️ ${error}`
-                                : `✓ ${fontesOnline} de ${fontes.length} fontes online • ${totalLivros} livros disponíveis`}
-                    </p>
+                    <div className={styles.toolbarLeft}>
+                        <div className={styles.searchWrapper}>
+                            <span className={styles.searchIcon}>🔍</span>
+                            <input
+                                type="text"
+                                className={styles.searchInput}
+                                placeholder="Buscar por título ou autor..."
+                                value={searchQuery}
+                                onChange={e => setSearchQuery(e.target.value)}
+                            />
+                            {searchQuery && (
+                                <button
+                                    className={styles.searchClear}
+                                    onClick={() => setSearchQuery('')}
+                                    aria-label="Limpar busca"
+                                >
+                                    ✕
+                                </button>
+                            )}
+                        </div>
+                    </div>
 
-                    <button
-                        type="button"
-                        className={styles.retryButton}
-                        onClick={() => setReloadToken(prev => prev + 1)}
-                        disabled={loading}
-                        aria-label={loading ? 'Carregando' : 'Recarregar biblioteca'}
-                    >
-                        {loading ? '⏳ Carregando...' : '↻ Recarregar'}
-                    </button>
+                    <div className={styles.toolbarRight}>
+                        <button
+                            className={`${styles.viewToggle} ${!gridView ? styles.viewToggleActive : ''}`}
+                            onClick={() => setGridView(false)}
+                            title="Visualização em lista"
+                        >
+                            ☰ Lista
+                        </button>
+                        <button
+                            className={`${styles.viewToggle} ${gridView ? styles.viewToggleActive : ''}`}
+                            onClick={() => setGridView(true)}
+                            title="Visualização em grade"
+                        >
+                            ⊞ Grade
+                        </button>
+                        <button
+                            type="button"
+                            className={styles.retryButton}
+                            onClick={() => setReloadToken(prev => prev + 1)}
+                            disabled={loading}
+                            aria-label={loading ? 'Carregando' : 'Recarregar biblioteca'}
+                        >
+                            {loading ? '⏳' : '↻'}
+                        </button>
+                    </div>
                 </div>
 
+                <p className={styles.toolbarCopy}>
+                    {loading
+                        ? '🔍 Buscando fontes na biblioteca...'
+                        : error
+                            ? `⚠️ ${error}`
+                            : `✓ ${fontesOnline} de ${fontes.length} fontes online • ${totalLivros} livros disponíveis`}
+                </p>
+
+                {/* Skeleton Loading */}
                 {loading && (
-                    <section className={styles.loadingState} role="status" aria-live="polite">
-                        <div className={styles.loadingSpinner}></div>
-                        <div>
-                            <strong>Carregando biblioteca...</strong>
-                            <p>Buscamos as fontes e organizamos as obras para você.</p>
-                        </div>
+                    <section className={styles.sourcesStack}>
+                        {[1, 2, 3].map(i => (
+                            <section key={i} className={styles.sourceCard}>
+                                <div className={styles.skeletonSourceHeader}>
+                                    <div className={styles.skeletonSourceTitle} />
+                                    <div className={styles.skeletonSourceBadge} />
+                                </div>
+                                <SkeletonBookCard />
+                                <SkeletonBookCard />
+                            </section>
+                        ))}
                     </section>
                 )}
 
@@ -434,7 +549,7 @@ export default function Biblioteca() {
                     </section>
                 )}
 
-                {!loading && !error && fontes.length > 0 && fontesOnline === 0 && (
+                {!loading && !error && fontes.length > 0 && fontesOnline === 0 && !searchQuery && (
                     <section className={styles.emptyState}>
                         <p><strong>Todas as fontes estão indisponíveis.</strong></p>
                         <p>Verifique sua conexão ou tente mais tarde.</p>
@@ -450,9 +565,23 @@ export default function Biblioteca() {
                 {!loading && !error && fontesOnline > 0 && (
                     <section className={styles.sourcesStack}>
                         {fontes.map((fonte, index) => (
-                            <FonteSection key={fonte.id || index} fonte={fonte} index={index} />
+                            <FonteSection key={fonte.id || index} fonte={fonte} index={index} searchQuery={searchQuery} gridView={gridView} />
                         ))}
                     </section>
+                )}
+
+                {!loading && searchQuery && !error && fontesOnline > 0 && (
+                    fontes.every(f => {
+                        if (String(f.statusApi || f.status || '').toLowerCase() !== 'online') return true;
+                        const livros = Array.isArray(f.conteudo) ? f.conteudo : [];
+                        const q = searchQuery.toLowerCase();
+                        return livros.every(l => !getBookTitle(l, 0).toLowerCase().includes(q) && !getBookAuthor(l).toLowerCase().includes(q));
+                    }) && (
+                        <section className={styles.emptyState}>
+                            <p><strong>Nenhum resultado para "{searchQuery}"</strong></p>
+                            <p>Tente buscar por outro título ou autor.</p>
+                        </section>
+                    )
                 )}
             </main>
 
