@@ -1,10 +1,13 @@
 import Header from '../../components/Header/Header';
 import styles from './Inicio.module.css';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 import AuthorImg from '/images/foto-carolina.png';
 import PaginaLivro from '/images/pagina-livro.png';
 import Footer from '../../components/Footer/Footer.jsx';
 import { Link } from 'react-router-dom';
 const Inicio = () => {
+    const { language, t } = useLanguage();
+
     return (
         <div className={styles.pageContainer}>
             <div className={styles.boxedLayout}>
@@ -12,28 +15,28 @@ const Inicio = () => {
 
                 <main className={styles.hero}>
                     <h1 className={styles.title}>
-                        Bem-Vindos ao <br />
+                        {t('welcome_to')} <br />
                         <span className={styles.italicTitle}>Intertexto!</span>
                     </h1>
 
                     <p className={styles.description}>
-                        Neste site você terá acesso à análise das obras clássicas brasileiras,
-                        principalmente à obra Quarto de Despejo: Diário de Uma Favelada, de Carolina
-                        Maria de Jesus.
+                        {language === 'en'
+                            ? 'On this site you will find analyses of classic Brazilian works, especially Child of the Dark: Diary of a Favela Woman by Carolina Maria de Jesus.'
+                            : 'Neste site você terá acesso à análise das obras clássicas brasileiras, principalmente à obra Quarto de Despejo: Diário de Uma Favelada, de Carolina Maria de Jesus.'}
                     </p>
 
                     <div className={styles.btnGroup}>
 
                         <Link to="/Obra" className={styles.logoGroup}>
-                        <button className={styles.btn}>Conheça Quarto de Despejo</button>
+                        <button className={styles.btn}>{language === 'en' ? 'Discover Child of the Dark' : 'Conheça Quarto de Despejo'}</button>
                         </Link>
 
                         <Link to="/Biblioteca" className={styles.logoGroup}>
-                            <button className={styles.btn}>Conheça outras obras</button>
+                            <button className={styles.btn}>{language === 'en' ? 'Discover other works' : 'Conheça outras obras'}</button>
                         </Link>
 
                         <Link to="/Sobre" className={styles.logoGroup}>
-                        <button className={styles.btn}>Conheça nossa equipe</button>
+                        <button className={styles.btn}>{language === 'en' ? 'Meet our team' : 'Conheça nossa equipe'}</button>
                         </Link>
                     </div>
                 </main>
@@ -42,21 +45,17 @@ const Inicio = () => {
             <section className={styles.contentSection}>
                 <div className={styles.leftColumn}>
                     <div className={styles.badgeGroup}>
-                        <div className={styles.badge}>Critica Social</div>
-                        <div className={styles.badge}>Resiliência</div>
+                        <div className={styles.badge}>{t('badge_social')}</div>
+                        <div className={styles.badge}>{t('badge_resilience')}</div>
                     </div>
 
-                    <h2 className={styles.bookTitle}>Livro: Quarto de despejo</h2>
+                    <h2 className={styles.bookTitle}>{t('book_title')}</h2>
 
-                    <p className={styles.textBody}>
-                        O livro é um testemunho real e impactante da miséria urbana no Brasil, ao
-                        mesmo tempo em que revela a força, a dignidade e a esperança de uma mulher
-                        que encontra na escrita uma forma de resistência.
-                    </p>
+                    <p className={styles.textBody}>{t('inicio_section_desc')}</p>
 
                     <blockquote className={styles.quote}>
-                        <p className={styles.quote}>"A vida não é para covardes"</p>
-                        <footer className={styles.quoteAuthor}>- Carolina Maria de Jesus</footer>
+                        <p className={styles.quote}>{t('quote_life_not_for_cowards')}</p>
+                        <footer className={styles.quoteAuthor}>{t('quote_author')}</footer>
                     </blockquote>
                 </div>
 
@@ -69,11 +68,7 @@ const Inicio = () => {
                         />
                     </div>
 
-                    <div className={styles.infoBox}>
-                        Carolina Maria de Jesus foi uma escritora brasileira, catadora de papel e
-                        moradora de favela, que ficou famosa ao publicar Quarto de Despejo: Diário
-                        de uma Favelada, onde relata a pobreza e a desigualdade social no Brasil.
-                    </div>
+                    <div className={styles.infoBox}>{t('author_info')}</div>
                 </div>
 
                 <div className={styles.rightColumn}>
@@ -82,11 +77,11 @@ const Inicio = () => {
                     </div>
 
                     <div className={styles.themeBox}>
-                        <h3 className={styles.themeTitle}>Tema essencial:</h3>
+                        <h3 className={styles.themeTitle}>{t('theme_title')}</h3>
                         <ul className={styles.themeList}>
-                            <li>Deslocamento Urbano</li>
-                            <li>Pobreza Estrutural</li>
-                            <li>Preconceito Racial</li>
+                            <li>{t('theme_item1')}</li>
+                            <li>{t('theme_item2')}</li>
+                            <li>{t('theme_item3')}</li>
                         </ul>
                     </div>
                 </div>
