@@ -5,7 +5,22 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 
-export default function Inicio() {
+const DESCRIPTIONS = [
+    'Descrição do personagem',
+    'Filho de Carolina. É apresentado como uma criança mais rebelde e difícil de controlar. Muitas vezes aparece em conflitos comuns da vida na favela, mostrando as dificuldades da maternidade em situação de pobreza extrema.',
+    'Outro filho de Carolina. Geralmente descrito como mais sensível e obediente. A autora demonstra forte preocupação com sua alimentação, educação e futuro.',
+    'Filha caçula de Carolina. Representa inocência e esperança dentro do livro. Carolina frequentemente expressa o desejo de oferecer uma vida melhor para ela.',
+    'Embora muitos apareçam apenas por nomes ou episódios rápidos, eles formam um "personagem coletivo". Representam a solidariedade entre os pobres, os conflitos causados pela miséria, violência, alcoolismo e disputas, e a luta diária pela sobrevivência.',
+    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
+    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
+    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
+    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
+    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
+    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
+    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
+];
+
+export default function Personagens() {
     const [livro, setLivro] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -16,11 +31,7 @@ export default function Inicio() {
             try {
                 const response = await fetch(
                     'https://backend-projeto-integrador-rana.onrender.com/api/livro',
-                    {
-                        headers: {
-                            'x-api-key': 'amods',
-                        },
-                    }
+                    { headers: { 'x-api-key': 'amods' } }
                 );
 
                 if (!response.ok) {
@@ -42,16 +53,11 @@ export default function Inicio() {
         carregarLivros();
     }, [t]);
 
-
-    if (error) {
-        return <p>{error}</p>;
-    }
+    if (error) return <p>{error}</p>;
 
     const characters = selectField(livro, 'personagens') || livro?.personagens || [];
     const photos = selectField(livro, 'fotoPersonagens') || livro?.fotoPersonagens || [];
-
     const count = Math.max(characters.length || 0, 12);
-    const indices = Array.from({ length: count }, (_, i) => i);
 
     return (
         <div className={styles.page}>
@@ -60,7 +66,6 @@ export default function Inicio() {
             <main className={styles.hero}>
                 <div className={styles.tituloDiv}>
                     <h1 className={styles.title}>{t('characters_title')}</h1>
-
                     <h1
                         className={styles.title}
                         style={{ color: '#6D0000', marginTop: '35px' }}
@@ -70,279 +75,18 @@ export default function Inicio() {
                 </div>
 
                 <div className={styles.divGrandeQuestoes}>
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[0] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px' }}
-                        />
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[0] || 'Nome personagem'}
-
-
-                            </h1>
-                        <p>
-                           {loading
-                                ? 'Carregando personagem...'
-                                : livro?.descricaoPersonagensPT || 'Descrição do personagem'}
-                        </p>
-
-                        </div>
-
-                    </div>
-
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[1] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px'  }}
-                        />
-
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[1] || 'Nome personagem'}
-                            </h1>
-                        <p>
-                            Filho de Carolina. É apresentado como uma criança mais rebelde e difícil de controlar. Muitas vezes aparece em conflitos comuns da vida na favela, mostrando as dificuldades da maternidade em situação de pobreza extrema.
-                        </p>
-
-                        </div>
-                    </div>
-
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[2] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px'  }}
-                        />
-
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[2] || 'Nome personagem'}
-                            </h1>
-                        <p>
-                           Outro filho de Carolina. Geralmente descrito como mais sensível e obediente. A autora demonstra forte preocupação com sua alimentação, educação e futuro.
-                        </p>
-
-                        </div>
-                    </div>
-
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[3] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px'  }}
+                    {Array.from({ length: count }, (_, i) => (
+                        <div key={i} className={styles.questoes}>
+                            <img
+                                src={loading ? '' : photos[i] || ''}
+                                alt={loading ? 'Carregando...' : characters[i] || 'Personagem'}
+                                style={{ width: '13rem', borderRadius: '15px' }}
                             />
-
-                       <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[3] || 'Nome personagem'}
-                            </h1>
-                        <p>
-                          Filha caçula de Carolina. Representa inocência e esperança dentro do livro. Carolina frequentemente expressa o desejo de oferecer uma vida melhor para ela.
-                        </p>
-
-                        </div>
-                    </div>
-
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[4] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px'  }}
-                        />
-
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando obra...'
-                                : livro?.personagens[4] || 'Nome personagem'}
-                            </h1>
-                        <p>
-Embora muitos apareçam apenas por nomes ou episódios rápidos, eles formam um “personagem coletivo”. Representam:
- a solidariedade entre os pobres;
- os conflitos causados pela miséria;
- violência, alcoolismo e disputas;
- a luta diária pela sobrevivência.
-Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se considerar diferente.
-                        </p>
-
-                        </div>
-                    </div>
-
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[5] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px'  }}
-                        />
-
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[5] || 'Nome personagem'}
-                            </h1>
-                        <p>
-                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
-                        </p>
-
-                        </div>
-                    </div>
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[6] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px'  }}
-                        />
-
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[6] || 'Nome personagem'}
-                            </h1>
-                        <p>
-                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
-                        </p>
-
-                        </div>
-                    </div>
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[7] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px'  }}
-                        />
-
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[7] || 'Nome personagem'}
-                            </h1>
-                        <p>
-                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
-                        </p>
-
-                        </div>
-                    </div>
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[8] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px'  }}
-                        />
-
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[8] || 'Nome personagem'}
-                            </h1>
-                        <p>
-                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
-                        </p>
-
-                        </div>
-                    </div>
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[9] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px' }}
-                        />
-
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[9] || 'Nome personagem'}
-                            </h1>
-                        <p>
-                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
-                        </p>
-
-                        </div>
-                    </div>
-                    <div className={styles.questoes}>
-                        <img
-                            src={loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[10] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px'  }}
-                        />
-
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[10] || 'Nome personagem'}
-                            </h1>
-                        <p>
-                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
-                        </p>
-
-                        </div>
-                    </div>
-                    <div className={styles.questoes}>
-                        <img
-                            src= {loading
-                                ? 'Carregando personagem...'
-                                : livro?.fotoPersonagens[11] || 'Nome personagem'}
-                            alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem', borderRadius: '15px'  }}
-                        />
-
-                        <div className={styles.divNomeDesc}>
-                            <h1 className="title-main" style={{marginBottom: '20px'}}>
-                                {loading
-                                ? 'Carregando personagem...'
-                                : livro?.personagens[11] || 'Nome personagem'}
-                            </h1>
-                        <p>
-                         Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.
-                        </p>
-
-                        </div>
-                    </div>
-
-                    
                             <div className={styles.divNomeDesc}>
                                 <h1 className="title-main" style={{ marginBottom: '20px' }}>
-                                    {loading ? t('loading_character') : characters[idx] || t('name_placeholder')}
+                                    {loading ? 'Carregando personagem...' : characters[i] || 'Nome personagem'}
                                 </h1>
-                                <p>{t(`char_desc_${idx}`)}</p>
+                                <p>{DESCRIPTIONS[i] || 'Descrição do personagem'}</p>
                             </div>
                         </div>
                     ))}

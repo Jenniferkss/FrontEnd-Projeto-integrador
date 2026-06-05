@@ -36,9 +36,9 @@ export default function Inicio() {
         carregarEquipe();
     }, []);
 
-    const ids = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-
     if (error) return <p>{error}</p>;
+
+    const ids = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 
     return (
         <div className={styles.pageContainer}>
@@ -49,143 +49,33 @@ export default function Inicio() {
                 </div>
                 <div className={styles.divGrandeIntegrantes}>
                     <div className={styles.linhaIntegrantes}>
-
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={getMember(5).fotoEquipe || equipe?.find((e) => e.id === 5)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(5).nome || (language === 'en' ? 'Member name' : 'Nome integrante')}</h4>
-                            <p className={styles.integranteCurso}>{getMember(5).curso || (language === 'en' ? 'Member course' : 'Curso integrante')}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={getMember(6).fotoEquipe || equipe?.find((e) => e.id === 6)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(6).nome || (language === 'en' ? 'Member name' : 'Nome integrante')}</h4>
-                            <p className={styles.integranteCurso}>{getMember(6).curso || (language === 'en' ? 'Member course' : 'Curso integrante')}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 7)?.fotoEquipe || 'Foto do integrante'}   
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(7).nome || (language === 'en' ? 'Member name' : 'Nome integrante')}</h4>
-                            <p className={styles.integranteCurso}>{getMember(7).curso || (language === 'en' ? 'Member course' : 'Curso integrante')}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 8)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(8).nome || (language === 'en' ? 'Member name' : 'Nome integrante')}</h4>
-                            <p className={styles.integranteCurso}>{getMember(8).curso || (language === 'en' ? 'Member course' : 'Curso integrante')}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 9)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(9).nome || 'Nome integrante'}</h4>
-                            <p className={styles.integranteCurso}>{getMember(9).curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 10)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(10).nome || 'Nome integrante'}</h4>
-                            <p className={styles.integranteCurso}>{getMember(10).curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 11)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(11).nome || 'Nome integrante'}</h4>
-                            <p className={styles.integranteCurso} >{getMember(11).curso || 'Curso integrante'}</p>
-                        </div>
-
+                        {[5, 6, 7, 8, 9, 10, 11].map((id) => (
+                            <div key={id} className={styles.integrante}>
+                                <img
+                                    style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
+                                    src={getMember(id).fotoEquipe || equipe?.find((e) => e.id === id)?.fotoEquipe || ''}
+                                    alt={`integrante ${id}`}
+                                />
+                                <h4>{getMember(id).nome || (language === 'en' ? 'Member name' : 'Nome integrante')}</h4>
+                                <p className={styles.integranteCurso}>{getMember(id).curso || (language === 'en' ? 'Member course' : 'Curso integrante')}</p>
+                            </div>
+                        ))}
                     </div>
                     <div className={styles.linhaIntegrantes}>
-
-                        
-                        
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 12)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(12).nome || 'Nome integrante'}</h4>
-                            <p className={styles.integranteCurso}>{getMember(12).curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f'   }}
-                                src={equipe?.find((e) => e.id === 13)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(13).nome || 'Nome integrante'}</h4>
-                            <p className={styles.integranteCurso}   >{getMember(13).curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 14)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(14).nome || 'Nome integrante'}</h4>
-                            <p className={styles.integranteCurso}>{getMember(14).curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 15)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(15).nome || 'Nome integrante'}</h4>
-                            <p className={styles.integranteCurso}>{getMember(15).curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 16)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(16).nome || 'Nome integrante'}</h4>
-                            <p className={styles.integranteCurso}>{getMember(16).curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 17)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(17).nome || 'Nome integrante'}</h4>
-                            <p className={styles.integranteCurso}>{getMember(17).curso || 'Curso integrante'}</p>
-                        </div>
-                        <div className={styles.integrante}>
-                            <img
-                                style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
-                                src={equipe?.find((e) => e.id === 18)?.fotoEquipe || 'Foto do integrante'}
-                                alt="integrante 1"
-                            />
-                            <h4>{getMember(18).nome || 'Nome integrante'}</h4>
-                            <p className={styles.integranteCurso}>{getMember(18).curso || 'Curso integrante'}</p>
-                        </div>
-
+                        {[12, 13, 14, 15, 16, 17, 18].map((id) => (
+                            <div key={id} className={styles.integrante}>
+                                <img
+                                    style={{ width: '120px', borderRadius: '15px', height: '155px', border: '2px solid #7d0f0f' }}
+                                    src={getMember(id).fotoEquipe || equipe?.find((e) => e.id === id)?.fotoEquipe || ''}
+                                    alt={`integrante ${id}`}
+                                />
+                                <h4>{getMember(id).nome || (language === 'en' ? 'Member name' : 'Nome integrante')}</h4>
+                                <p className={styles.integranteCurso}>{getMember(id).curso || (language === 'en' ? 'Member course' : 'Curso integrante')}</p>
+                            </div>
+                        ))}
                     </div>
-                </main>
-            </div>
+                </div>
+            </main>
             <Footer />
         </div>
     );
