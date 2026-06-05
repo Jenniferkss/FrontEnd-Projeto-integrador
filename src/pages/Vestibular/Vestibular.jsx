@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Vestibular.module.css';
+import { FaPlayCircle } from 'react-icons/fa';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
