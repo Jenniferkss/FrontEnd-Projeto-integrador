@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Vestibular.module.css';
 import Header from '../../components/Header/Header';
+import { FaPlayCircle } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
+import fieldsMap from '../../mapeamento/mapeamento';
 
 export default function ObraVestibular() {
     const [dados, setDados] = useState(null);
     const [carregando, setCarregando] = useState(true);
-    const { language } = useLanguage();
+    const {  t, mapFields, selectField } = useLanguage();
+    const localized = dados ? mapFields(dados, fieldsMap.vestibular) : {};
 
     useEffect(() => {
         const carregarLivros = async () => {
@@ -31,8 +34,10 @@ export default function ObraVestibular() {
                 }
 
                 const data = await response.json();
-                console.log('Dados recebidos com sucesso:', data);
-                setDados(Array.isArray(data) ? data[0] : data);
+                console.debug('Vestibular - raw data from API:', data);
+                const processed = Array.isArray(data) ? data[0] : data;
+                console.debug('Vestibular - processed dados:', processed);
+                setDados(processed);
             } catch (error) {
                 console.error('Erro ao conectar com o back-end:', error);
             } finally {
@@ -46,7 +51,7 @@ export default function ObraVestibular() {
     if (carregando) {
         return (
             <div style={{ textAlign: 'center', padding: '50px', fontSize: '18px' }}>
-                {language === 'en' ? 'Loading database info...' : 'Carregando dados do banco...'}
+                {t('loading_database')}
             </div>
         );
     }
@@ -54,9 +59,7 @@ export default function ObraVestibular() {
     if (!dados) {
         return (
             <div style={{ textAlign: 'center', padding: '50px', fontSize: '18px' }}>
-                {language === 'en'
-                    ? 'No records found.'
-                    : 'Nenhum registro encontrado ou erro na API.'}
+                {t('no_records')}
             </div>
         );
     }
@@ -67,57 +70,38 @@ export default function ObraVestibular() {
 
             <div className={styles.contentWrapper}>
                 <header className={styles.mainHeader}>
-                    <p className={styles.kicker}>
-                        {language === 'en' ? 'Critical analysis' : 'ANÁLISE CRÍTICA'}
-                    </p>
+                    <p className={styles.kicker}>{t('vest_kicker')}</p>
 
-                    <h1 className={styles.headerTitle}>
-                        {language === 'en' ? 'The work in Exam Prep' : 'A obra no vestibular'}
-                    </h1>
+                    <h1 className={styles.headerTitle}>{t('vest_headerTitle')}</h1>
 
-                    <p className={styles.lead}>
-                        {language === 'en'
-                            ? 'Understand the literary work through interpretation, social criticism and essay themes.'
-                            : 'Entenda a obra através de interpretações, crítica social e possíveis temas de redação.'}
-                    </p>
+                    <p className={styles.lead}>{t('vest_lead')}</p>
                 </header>
 
                 {/* GRID SUPERIOR */}
                 <section className={styles.topCardsGrid}>
                     <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
-                        <h2 className={styles.cardTopTitle}>
-                            {language === 'en' ? 'Critical Analysis' : 'Análise crítica'}
-                        </h2>
-                        <p className={styles.cardTopText}>
-                            {dados.analiseCritica || 'Indisponível.'}
-                        </p>
+                        <h2 className={styles.cardTopTitle}>{t('vest_card_critical')}</h2>
+                        <p className={styles.cardTopText}>{localized.analiseCritica || t('unavailable')}</p>
+                    </div>
+
+                    <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
+                        <h2 className={styles.cardTopTitle}>{t('vest_card_interpret')}</h2>
+                        <p className={styles.cardTopText}>{localized.interpretacoes || t('unavailable')}</p>
                     </div>
 
                     <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
                         <h2 className={styles.cardTopTitle}>
-                            {language === 'en' ? 'Interpretations' : 'Interpretações e análises'}
-                        </h2>
-                        <p className={styles.cardTopText}>
-                            {dados.interpretacoes || 'Indisponível.'}
-                        </p>
-                    </div>
-
-                    <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
-                        <h2 className={styles.cardTopTitle}>
-                            {language === 'en' ? 'Essay Topics' : 'Possíveis temas para redação'}
+                            {t('vest_card_essayTopics')}
                         </h2>
 
                         <ul className={styles.cardTopList}>
-                            {Array.isArray(dados.temasRedacao) ? (
-                                dados.temasRedacao.map((tema, index) => <li key={index}>{tema}</li>)
+                            {Array.isArray(localized.temasRedacao) ? (
+                                localized.temasRedacao.map((tema, index) => <li key={index}>{tema}</li>)
                             ) : (
                                 <>
-                                    <li>A invisibilidade social de populações marginalizadas.</li>
-                                    <li>
-                                        Os obstáculos para a garantia dos direitos humanos no
-                                        Brasil.
-                                    </li>
-                                    <li>A exclusão social nas periferias urbanas.</li>
+                                    <li>{t('essay_topic1')}</li>
+                                    <li>{t('essay_topic2')}</li>
+                                    <li>{t('essay_topic3')}</li>
                                 </>
                             )}
                         </ul>
@@ -127,13 +111,9 @@ export default function ObraVestibular() {
                 {/* PARTE INFERIOR */}
                 <div className={styles.mainLayout}>
                     <main className={styles.contentBox}>
-                        <h2 className={styles.contentTitle}>
-                            {dados.tituloPrincipal || 'A Dupla Perspectiva: Carolina vs. o Leitor'}
-                        </h2>
+                        <h2 className={styles.contentTitle}>{selectField(dados, 'titulo') || localized.tituloPrincipal || t('vest_default_title')}</h2>
 
-                        <p className={styles.contentText}>
-                            {dados.textoPrincipal || dados.resumo || 'Conteúdo indisponível.'}
-                        </p>
+                        <p className={styles.contentText}>{selectField(dados, 'conteudo') || selectField(dados, 'texto') || localized.textoPrincipal || localized.resumo || t('content_unavailable')}</p>
 
                         {dados.citacao && (
                             <blockquote className={styles.quoteBlock}>
@@ -142,28 +122,21 @@ export default function ObraVestibular() {
                             </blockquote>
                         )}
 
-                        <h3 className={styles.vectorsTitle}>
-                            {language === 'en'
-                                ? 'Key Analytical Vectors'
-                                : 'Vetores Analíticos Chave'}
-                        </h3>
+                        <h3 className={styles.vectorsTitle}>{t('key_vectors')}</h3>
 
                         <div className={styles.vectorListContainer}>
                             {dados.contextoHist ? (
-                                <p className={styles.contentText}>{dados.contextoHist}</p>
+                                <p className={styles.contentText}>{localized.contextoHist}</p>
                             ) : (
                                 <div className={styles.vectorListFallback}>
                                     <p>
-                                        <strong>A Retórica da Sobrevivência:</strong> linguagem
-                                        direta e crua sobre a fome e luta diária.
+                                        <strong>{t('vector1_title')}</strong> {t('vector1_text')}
                                     </p>
                                     <p>
-                                        <strong>Olhar Atento:</strong> percepção da desigualdade nas
-                                        pequenas coisas do cotidiano.
+                                        <strong>{t('vector2_title')}</strong> {t('vector2_text')}
                                     </p>
                                     <p>
-                                        <strong>Rigidez Social:</strong> impacto do preconceito e
-                                        estrutura social nas oportunidades.
+                                        <strong>{t('vector3_title')}</strong> {t('vector3_text')}
                                     </p>
                                 </div>
                             )}
@@ -171,12 +144,8 @@ export default function ObraVestibular() {
 
                         {dados.personagens && (
                             <div>
-                                <h3 className={styles.vectorsTitle}>
-                                    {language === 'en'
-                                        ? 'Main Characters'
-                                        : 'Personagens Principais'}
-                                </h3>
-                                <p className={styles.contentText}>{dados.personagens}</p>
+                                <h3 className={styles.vectorsTitle}>{t('main_characters')}</h3>
+                                <p className={styles.contentText}>{localized.personagens}</p>
                             </div>
                         )}
                     </main>
@@ -187,19 +156,13 @@ export default function ObraVestibular() {
                             <Link to="/VideoAulas">
                                 <button className={styles.videoBtn}>
                                     <FaPlayCircle />
-                                    {language === 'en'
-                                        ? 'Watch video-classes'
-                                        : 'Veja as vídeo-aulas'}
+                                    {t('watch_video_classes')}
                                 </button>
                             </Link>
                         </div>
 
                         <div className={styles.statsCard}>
-                            <h3 className={styles.statsTitle}>
-                                {language === 'en'
-                                    ? 'Exam Frequency'
-                                    : 'Frequência nos vestibulares'}
-                            </h3>
+                            <h3 className={styles.statsTitle}>{t('exam_frequency')}</h3>
 
                             <div className={styles.progressGroup}>
                                 {(

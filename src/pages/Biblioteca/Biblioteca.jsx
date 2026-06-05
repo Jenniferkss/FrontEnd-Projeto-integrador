@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import { request } from '../../services/api.js';
+import { useLanguage } from '../../context/LanguageContext.jsx';
+
 import styles from './Biblioteca.module.css';
 
 const API_KEY = import.meta.env.VITE_API_KEY ?? 'amods';
@@ -31,10 +33,17 @@ function resolverCapa(livro) {
 }
 
 // Extrai o nome do autor (pode vir como string, array ou objeto)
-function nomeAutor(autor) {
-    if (!autor) return 'Autor não informado';
-    if (Array.isArray(autor)) return autor[0]?.nome || 'Autor não informado';
-    if (typeof autor === 'object') return autor.nome || 'Autor não informado';
+function nomeAutor(autor, language, selectField) {
+    if (!autor) return language === 'en' ? 'Author not informed' : 'Autor não informado';
+    if (Array.isArray(autor)) {
+        const a = autor[0];
+        if (!a) return language === 'en' ? 'Author not informed' : 'Autor não informado';
+        if (typeof a === 'object') return selectField(a, 'nome') || a.nome || String(a);
+        return String(a);
+    }
+    if (typeof autor === 'object') {
+        return selectField(autor, 'nome') || autor.nome || (language === 'en' ? 'Author not informed' : 'Autor não informado');
+    }
     return String(autor);
 }
 
@@ -42,6 +51,7 @@ export default function Biblioteca() {
     const [livros, setLivros] = useState([]);
     const [loading, setLoading] = useState(true);
     const [erro, setErro] = useState('');
+    const { language, selectField } = useLanguage();
 
     useEffect(() => {
         async function carregar() {
@@ -51,14 +61,14 @@ export default function Biblioteca() {
                 });
 
                 // data: [{ id, livro, statusApi, conteudo: [{ titulo, autor, capa_url, ... }] }]
-                const lista = (Array.isArray(data) ? data : [])
+                        const lista = (Array.isArray(data) ? data : [])
                     .filter((item) => item.statusApi === 'Online' && Array.isArray(item.conteudo))
                     .map((item) => {
                         const c = item.conteudo[0] || {};
                         const livro = {
                             id: item.id,
-                            titulo: c.titulo || item.livro || 'Sem título',
-                            autor: nomeAutor(c.autor),
+                            titulo: selectField(c, 'titulo') || c.titulo || item.livro || (language === 'en' ? 'Untitled' : 'Sem título'),
+                            autor: nomeAutor(c.autor, language, selectField),
                             capa: resolverCapa(c),
                         };
                         return livro;
@@ -79,7 +89,7 @@ export default function Biblioteca() {
         return (
             <div className={styles.page}>
                 <Header />
-                <div className={styles.loading}>Carregando biblioteca...</div>
+                <div className={styles.loading}>{language === 'en' ? 'Loading library...' : 'Carregando biblioteca...'}</div>
                 <Footer />
             </div>
         );
@@ -89,7 +99,7 @@ export default function Biblioteca() {
         return (
             <div className={styles.page}>
                 <Header />
-                <div className={styles.loading}>{erro}</div>
+                <div className={styles.loading}>{language === 'en' ? 'Could not load library.' : erro}</div>
                 <Footer />
             </div>
         );
@@ -101,10 +111,10 @@ export default function Biblioteca() {
 
             <main className={styles.main}>
                 <section className={styles.banner}>
-                    <p className={styles.kicker}>Explore nossa coleção</p>
-                    <h1 className={styles.titulo}>Biblioteca Integrada</h1>
+                    <p className={styles.kicker}>{language === 'en' ? 'Explore our collection' : 'Explore nossa coleção'}</p>
+                    <h1 className={styles.titulo}>{language === 'en' ? 'Integrated Library' : 'Biblioteca Integrada'}</h1>
                     <p className={styles.subtitulo}>
-                        Obras de múltiplas fontes em um só lugar.
+                        {language === 'en' ? 'Works from multiple sources in one place.' : 'Obras de múltiplas fontes em um só lugar.'}
                     </p>
                 </section>
 
