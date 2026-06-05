@@ -77,9 +77,13 @@ export default function Inicio() {
                                 {loading
                                 ? 'Carregando personagem...'
                                 : livro?.personagens[0] || 'Nome personagem'}
+
+
                             </h1>
                         <p>
-                            Narradora e protagonista da obra. Mulher negra, catadora de papel e mãe solteira que vive na favela do Canindé, em São Paulo. Carolina é observadora, crítica e extremamente consciente da desigualdade social ao seu redor. A escrita funciona como forma de resistência e denúncia.
+                           {loading
+                                ? 'Carregando personagem...'
+                                : livro?.descricaoPersonagensPT || 'Descrição do personagem'}
                         </p>
 
                         </div>
