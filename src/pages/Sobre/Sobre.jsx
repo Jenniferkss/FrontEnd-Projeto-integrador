@@ -17,39 +17,31 @@ export default function Inicio() {
             try {
                 const response = await fetch(
                     'https://backend-projeto-integrador-rana.onrender.com/api/equipe',
-                    {
-                        headers: {
-                            'x-api-key': 'amods',
-                        },
-                    },
+                    { headers: { 'x-api-key': 'amods' } },
                 );
 
                 if (!response.ok) {
                     const errorText = await response.text();
-                    console.log('Erro retornado por /api/equipe:', errorText);
-                    throw new Error(`Erro ${response.status} ao buscar /api/equipe: ${errorText}`);
+                    throw new Error(`Erro ${response.status}: ${errorText}`);
                 }
 
                 const data = await response.json();
-                console.log('Resposta de /api/equipe:', data);
-
                 setEquipe(Array.isArray(data) ? data : [data]);
             } catch (error) {
-                console.error('Erro ao buscar os dados do integrante:', error);
-                setError('Nao foi possivel carregar os dados do integrante.');
+                console.error('Erro ao buscar os dados:', error);
+                setError('Não foi possível carregar os dados da equipe.');
             }
         };
 
         carregarEquipe();
     }, []);
 
+    const ids = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 
-    if (error) {
-        return <p>{language === 'en' ? 'Could not load team data.' : error}</p>;
-    }
+    if (error) return <p>{error}</p>;
 
     return (
-        <div className={styles.page}>
+        <div className={styles.pageContainer}>
             <Header />
             <main className={styles.hero}>
                 <div className={styles.tituloDiv}>
@@ -192,11 +184,9 @@ export default function Inicio() {
                         </div>
 
                     </div>
-
-                </div>
-            </main>
+                </main>
+            </div>
             <Footer />
         </div>
     );
-};
-    
+}
