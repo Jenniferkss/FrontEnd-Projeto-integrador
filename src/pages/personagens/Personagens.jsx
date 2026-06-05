@@ -70,16 +70,83 @@ export default function Inicio() {
                 </div>
 
                 <div className={styles.divGrandeQuestoes}>
-                    {indices.map((idx) => (
-                        <div key={idx} className={styles.questoes}>
-                            <img
-                                src={
-                                    loading
-                                        ? '/images/livro.png'
-                                        : photos[idx] || '/images/livro.png'
-                                }
-                                alt={characters[idx] || t('name_placeholder')}
-                                style={{ width: '13rem' }}
+                    <div className={styles.questoes}>
+                        <img
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[0] || 'Nome personagem'}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[0] || 'Nome personagem'}
+
+
+                            </h1>
+                        <p>
+                           {loading
+                                ? 'Carregando personagem...'
+                                : livro?.descricaoPersonagensPT || 'Descrição do personagem'}
+                        </p>
+
+                        </div>
+
+                    </div>
+
+                    <div className={styles.questoes}>
+                        <img
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[1] || 'Nome personagem'}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[1] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                            Filho de Carolina. É apresentado como uma criança mais rebelde e difícil de controlar. Muitas vezes aparece em conflitos comuns da vida na favela, mostrando as dificuldades da maternidade em situação de pobreza extrema.
+                        </p>
+
+                        </div>
+                    </div>
+
+                    <div className={styles.questoes}>
+                        <img
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[2] || 'Nome personagem'}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
+                        />
+
+                        <div className={styles.divNomeDesc}>
+                            <h1 className="title-main" style={{marginBottom: '20px'}}>
+                                {loading
+                                ? 'Carregando personagem...'
+                                : livro?.personagens[2] || 'Nome personagem'}
+                            </h1>
+                        <p>
+                           Outro filho de Carolina. Geralmente descrito como mais sensível e obediente. A autora demonstra forte preocupação com sua alimentação, educação e futuro.
+                        </p>
+
+                        </div>
+                    </div>
+
+                    <div className={styles.questoes}>
+                        <img
+                            src={loading
+                                ? 'Carregando personagem...'
+                                : livro?.fotoPersonagens[3] || 'Nome personagem'}
+                            alt="Carolina Maria de Jesus"
+                            style={{ width: '13rem' }}
                             />
 
                             <div className={styles.divNomeDesc}>
