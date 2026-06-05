@@ -70,7 +70,7 @@ export default function Inicio() {
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[0] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px' }}
                         />
                         <div className={styles.divNomeDesc}>
                             <h1 className="title-main" style={{marginBottom: '20px'}}>
@@ -96,7 +96,7 @@ export default function Inicio() {
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[1] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px'  }}
                         />
 
                         <div className={styles.divNomeDesc}>
@@ -118,7 +118,7 @@ export default function Inicio() {
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[2] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px'  }}
                         />
 
                         <div className={styles.divNomeDesc}>
@@ -140,7 +140,7 @@ export default function Inicio() {
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[3] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px'  }}
                             />
 
                        <div className={styles.divNomeDesc}>
@@ -162,7 +162,7 @@ export default function Inicio() {
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[4] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px'  }}
                         />
 
                         <div className={styles.divNomeDesc}>
@@ -189,7 +189,7 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[5] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px'  }}
                         />
 
                         <div className={styles.divNomeDesc}>
@@ -210,7 +210,7 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[6] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px'  }}
                         />
 
                         <div className={styles.divNomeDesc}>
@@ -231,7 +231,7 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[7] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px'  }}
                         />
 
                         <div className={styles.divNomeDesc}>
@@ -252,7 +252,7 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[8] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px'  }}
                         />
 
                         <div className={styles.divNomeDesc}>
@@ -273,7 +273,7 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[9] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px' }}
                         />
 
                         <div className={styles.divNomeDesc}>
@@ -294,7 +294,7 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[10] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px'  }}
                         />
 
                         <div className={styles.divNomeDesc}>
@@ -315,7 +315,7 @@ Alguns vizinhos ajudam Carolina; outros a criticam por escrever e por se conside
                                 ? 'Carregando personagem...'
                                 : livro?.fotoPersonagens[11] || 'Nome personagem'}
                             alt="Carolina Maria de Jesus"
-                            style={{ width: '13rem' }}
+                            style={{ width: '13rem', borderRadius: '15px'  }}
                         />
 
                         <div className={styles.divNomeDesc}>
