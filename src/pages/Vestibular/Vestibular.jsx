@@ -94,8 +94,8 @@ export default function ObraVestibular() {
                         </h2>
                         <p className={styles.cardTopText}>
                             {language === 'en'
-                                ? dados[0]?.interpretacoesEn
-                                : dados[0]?.interpretacoesPt}
+                                ? dados[1]?.interpretacoesEn
+                                : dados[1]?.interpretacoesPt}
                         </p>
                     </div>
 
