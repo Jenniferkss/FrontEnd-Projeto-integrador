@@ -247,8 +247,8 @@ function Simulados({ idiomaDoSite = 'PT' }) {
                                     onClick={() => selecionarAlternativa(alt.id)}
                                     style={{
                                         cursor: 'pointer',
-                                        border: selecionada ? '2px solid #4CAF50' : '2px solid transparent',
-                                        backgroundColor: selecionada ? '#e8f5e9' : '',
+                                        border: selecionada ? '2px solid #000000' : '2px solid transparent',
+                                        backgroundColor: selecionada ? '#cacaca' : '',
                                         borderRadius: '6px',
                                         transition: 'all 0.2s ease',
                                         color: selecionada ? '#000' : '#000',
