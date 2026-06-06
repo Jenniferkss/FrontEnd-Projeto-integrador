@@ -1,37 +1,70 @@
-setEquipe.pageContainer {
+/* CONTAINER PAI: Controla a página de ponta a ponta sem margens */
+.pageContainer {
     background-color: #fdf0f2;
     min-height: 100vh;
-    width: 100%;
+    width: 100vw;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; 
 }
 
-.boxedLayout {
-    width: 90%;
+.banner {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 1rem 0.5rem;
+   }
+
+.kicker {
+    margin: 0 0 0.6rem; 
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18rem; 
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #7d0f0f;
+}
+
+.titulo {
+    margin: 0; 
+    font-family: 'Playfair Display', serif; 
+    font-size: 3.5rem; 
+    line-height: 1.05;
+    color: #000000;
+    font-weight: 700;
+}
+
+.subtitulo {
+    margin: 0.8rem auto 0; 
+    max-width: 45rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    color: #5d4540;
+}
+
+/* CONTEÚDO CENTRAL (HERO): Centraliza os integrantes com segurança */
+.hero {
+    flex: 1; 
+    width: 100%;
     max-width: 1200px;
-    min-height: 100vh;
-    background-color: #fdf0f2;
+    margin: 0 auto; 
+    /* Mudamos de 3rem para 3rem no topo, 20px nas laterais e 6rem na base */
+    padding: 3rem 20px 3rem 20px; 
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 40px;
+    box-sizing: border-box;
 }
 
-.hero {
+/* TÍTULO EQUIPE */
+.tituloDiv {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    padding: 2rem 0;
-    gap: 30px;
-}
-
-.tituloDiv {
-    width: 76rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
 }
 
 .title {
@@ -39,10 +72,60 @@ setEquipe.pageContainer {
     font-size: 3rem;
     color: #1a1a1a;
     font-weight: bold;
+    margin: 0;
 }
 
+/* ÁREA DOS CARDS */
+.divGrandeIntegrantes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px; 
+}
+
+/* FILEIRAS */
+.linhaIntegrantes {
+    width: 100%;
+    display: flex;
+    gap: 20px; 
+    justify-content: center; 
+    align-items: flex-start; 
+    flex-wrap: wrap;
+}
+
+/* CARD INDIVIDUAL */
+.integrante {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    width: 135px; 
+    text-align: center;
+}
+
+.integrante h4 {
+    margin: 6px 0 2px 0;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.integranteCurso {
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    color: #555;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.2;
+}
+
+/* --- Elementos de formulários/questões mantidos caso use em outra rota --- */
+
 .falaJesus {
-    font-family: 'Montserrat', sans-serif;;
+    font-family: 'Montserrat', sans-serif;
     width: 80%;
     max-width: 1100px;
     border-radius: 15px;
@@ -71,13 +154,10 @@ setEquipe.pageContainer {
     display: flex;
     align-items: center;
     gap: 15px;
-
     color: #2d2c2c;
     min-height: 70px;
-
     border-radius: 12px;
     background-color: #D9D9D9;
-
     padding: 18px 20px;
     text-align: left;
 }
@@ -113,7 +193,6 @@ setEquipe.pageContainer {
 .btnGroup {
     width: 80%;
     max-width: 1100px;
-
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
@@ -141,7 +220,6 @@ setEquipe.pageContainer {
     transition: all ease 0.5s;
 }
 
-
 .btn {
     font-family: 'Montserrat', sans-serif;
     background-color: #7d0f0f;
@@ -156,46 +234,4 @@ setEquipe.pageContainer {
 
 .btn:hover {
     opacity: 0.9;
-}
-
-.footer {
-    width: 100%;
-    background-color: #efe5dd;
-    color: #1a1a1a;
-    text-align: center;
-    padding: 1.5rem 0;
-    margin-top: auto;
-}
-
-.divGrandeIntegrantes {
-    width: 80%;
-    height: 40rem;
-}
-
-.linhaIntegrantes {
-    width: 100%;
-    height: 10rem;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    margin-left: 8.5rem;
-    margin-top: 5rem;
-    flex-wrap: wrap;
-
-}
-
-.integrante {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 10.6rem;
-    height: 10rem;
-}
-
-.integranteCurso {
-    width: 100%;
-    text-align: center;
-    font-size: 14px;
 }

@@ -33,7 +33,9 @@ export default function ObraVestibular() {
 
                 const data = await response.json();
                 console.log('Dados recebidos com sucesso:', JSON.stringify(data, null, 2));
-                setDados(data);
+                
+                // Garante que dados seja tratado como Array
+                setDados(Array.isArray(data) ? data : [data]);
             } catch (error) {
                 console.error('Erro ao conectar com o back-end:', error);
             } finally {
@@ -52,7 +54,7 @@ export default function ObraVestibular() {
         );
     }
 
-    if (!dados) {
+    if (!dados || dados.length === 0) {
         return (
             <div style={{ textAlign: 'center', padding: '50px', fontSize: '18px' }}>
                 {language === 'en'
@@ -61,6 +63,20 @@ export default function ObraVestibular() {
             </div>
         );
     }
+
+    // Pega o primeiro registro do banco
+    const livro = dados[0];
+
+    // Lógica para garantir que Interpretações tenha conteúdo caso a coluna mude de nome ou venha vazia
+    // Lógica para garantir que Interpretações tenha conteúdo caso a coluna mude de nome ou venha vazia
+const obterInterpretacao = () => {
+    if (language === 'en') {
+        // Removido o "|| livro?.conteudoEn"
+        return livro?.interpretacoesEn || livro?.interpretacaoEn || 'No analysis available.';
+    }
+    // Removido o "|| livro?.conteudoPt"
+    return livro?.interpretacoesPt || livro?.interpretacaoPt || 'Nenhuma análise disponível.';
+};
 
     return (
         <div className={styles.pageContainer}>
@@ -82,10 +98,8 @@ export default function ObraVestibular() {
                             {language === 'en' ? 'Critical Analysis' : 'Análise crítica'}
                         </h2>
                         <p className={styles.cardTopText}>
-                        {language === 'en'
-                        ? dados[0]?.conteudoEn
-                        : dados[0]?.conteudoPt}
-</p>
+                            {language === 'en' ? livro?.conteudoEn : livro?.conteudoPt}
+                        </p>
                     </div>
 
                     <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
@@ -93,9 +107,7 @@ export default function ObraVestibular() {
                             {language === 'en' ? 'Interpretations' : 'Interpretações e análises'}
                         </h2>
                         <p className={styles.cardTopText}>
-                            {language === 'en'
-                                ? dados[1]?.interpretacoesEn
-                                : dados[1]?.interpretacoesPt}
+                            {obterInterpretacao()}
                         </p>
                     </div>
 
@@ -103,17 +115,15 @@ export default function ObraVestibular() {
                         <h2 className={styles.cardTopTitle}>
                             {language === 'en' ? 'Essay Topics' : 'Possíveis temas para redação'}
                         </h2>
-
                         <ul className={styles.cardTopList}>
-                            {Array.isArray(dados.temasRedacao) ? (
-                                dados.temasRedacao.map((tema, index) => <li key={index}>{tema}</li>)
+                            {Array.isArray(livro?.temasRedacao) ? (
+                                livro.temasRedacao.map((tema, index) => <li key={index}>{tema}</li>)
+                            ) : livro?.temasRedacao ? (
+                                livro.temasRedacao.split('\n').map((tema, index) => <li key={index}>{tema}</li>)
                             ) : (
                                 <>
                                     <li>A invisibilidade social de populações marginalizadas.</li>
-                                    <li>
-                                        Os obstáculos para a garantia dos direitos humanos no
-                                        Brasil.
-                                    </li>
+                                    <li>Os obstáculos para a garantia dos direitos humanos no Brasil.</li>
                                     <li>A exclusão social nas periferias urbanas.</li>
                                 </>
                             )}
@@ -124,58 +134,60 @@ export default function ObraVestibular() {
                 {/* PARTE INFERIOR */}
                 <div className={styles.mainLayout}>
                     <main className={styles.contentBox}>
+                        
+                        {/* Título e Texto Principal */}
                         <h2 className={styles.contentTitle}>
-                            {dados.tituloPrincipal || 'A Dupla Perspectiva: Carolina vs. o Leitor'}
+                            {livro?.tituloPrincipal || (language === 'en' ? 'The Double Perspective' : 'A Dupla Perspectiva: Carolina vs. o Leitor')}
                         </h2>
-
                         <p className={styles.contentText}>
-                            {dados.textoPrincipal || dados.resumo || 'Conteúdo indisponível.'}
+                            {livro?.textoPrincipal || livro?.conteudoPt}
                         </p>
 
-                        {dados.citacao && (
+                        {/* Bloco de Citação Puro vindo do Banco */}
+                        {livro?.citacao && (
                             <blockquote className={styles.quoteBlock}>
                                 <div className={styles.quoteLine}></div>
-                                <p className={styles.quoteText}>“{dados.citacao}”</p>
+                                <p className={styles.quoteText}>“{livro.citacao}”</p>
                             </blockquote>
                         )}
 
+                        {/* Vetores Analíticos Chave */}
                         <h3 className={styles.vectorsTitle}>
-                            {language === 'en'
-                                ? 'Key Analytical Vectors'
-                                : 'Vetores Analíticos Chave'}
+                            {language === 'en' ? 'Key Analytical Vectors' : 'Vetores Analíticos Chave'}
                         </h3>
 
                         <div className={styles.vectorListContainer}>
-                            {dados.contextoHist ? (
-                                <p className={styles.contentText}>{dados.contextoHist}</p>
+                            {livro?.vetoresAnaliticos || livro?.contextoHist ? (
+                                (livro.vetoresAnaliticos || livro.contextoHist).split('\n').map((linha, index) => {
+                                    if (linha.includes(':')) {
+                                        const [titulo, ...resto] = linha.split(':');
+                                        return (
+                                            <p key={index} className={styles.contentText}>
+                                                <strong>{titulo.trim()}:</strong>{resto.join(':')}
+                                            </p>
+                                        );
+                                    }
+                                    return (
+                                        <p key={index} className={styles.contentText}>
+                                            {linha}
+                                        </p>
+                                    );
+                                })
                             ) : (
+                                // Fallback Completo
                                 <div className={styles.vectorListFallback}>
                                     <p>
-                                        <strong>A Retórica da Sobrevivência:</strong> linguagem
-                                        direta e crua sobre a fome e luta diária.
+                                        <strong>A Retórica da Sobrevivência:</strong> Note como Carolina usa a linguagem crua e direta para descrever sua fome, trabalho e luta diária, validando a urgência de sua experiência.
                                     </p>
                                     <p>
-                                        <strong>Olhar Atento:</strong> percepção da desigualdade nas
-                                        pequenas coisas do cotidiano.
+                                        <strong>Olhar Atento:</strong> A famosa atenção aos detalhes da favela – desde os vizinhos até o lixo nas ruas – funciona como símbolo da percepção aguda de Carolina sobre a desigualdade e a injustiça social.
                                     </p>
                                     <p>
-                                        <strong>Rigidez Social:</strong> impacto do preconceito e
-                                        estrutura social nas oportunidades.
+                                        <strong>Rigidez Social:</strong> A influência do preconceito racial e da estrutura social brasileira em moldar as oportunidades e a visão de mundo de Carolina, evidenciando as barreiras que cercam sua existência e a da comunidade ao seu redor.
                                     </p>
                                 </div>
                             )}
                         </div>
-
-                        {dados.personagens && (
-                            <div>
-                                <h3 className={styles.vectorsTitle}>
-                                    {language === 'en'
-                                        ? 'Main Characters'
-                                        : 'Personagens Principais'}
-                                </h3>
-                                <p className={styles.contentText}>{dados.personagens}</p>
-                            </div>
-                        )}
                     </main>
 
                     {/* SIDEBAR */}
@@ -184,40 +196,30 @@ export default function ObraVestibular() {
                             <Link to="/VideoAulas">
                                 <button className={styles.videoBtn}>
                                     <FaPlayCircle />
-                                    {language === 'en'
-                                        ? 'Watch video-classes'
-                                        : 'Veja as vídeo-aulas'}
+                                    {language === 'en' ? 'Watch video-classes' : 'Veja as vídeo-aulas'}
                                 </button>
                             </Link>
                         </div>
 
                         <div className={styles.statsCard}>
                             <h3 className={styles.statsTitle}>
-                                {language === 'en'
-                                    ? 'Exam Frequency'
-                                    : 'Frequência nos vestibulares'}
+                                {language === 'en' ? 'Exam Frequency' : 'Frequência nos vestibulares'}
                             </h3>
-
                             <div className={styles.progressGroup}>
-                                {(
-                                    dados.estatisticas || [
-                                        { nome: 'Fuvest', porcentagem: 30 },
-                                        { nome: 'Unicamp', porcentagem: 72 },
-                                        { nome: 'ENEM', porcentagem: 42 },
-                                    ]
-                                ).map((est, index) => (
+                                {(livro?.estatisticas || [
+                                    { nome: 'Fuvest', porcentagem: 30 },
+                                    { nome: 'Unicamp', porcentagem: 72 },
+                                    { nome: 'ENEM', porcentagem: 42 },
+                                ]).map((est, index) => (
                                     <div key={index} className={styles.statsItem}>
                                         <div className={styles.progressLabels}>
                                             <p>{est.nome}</p>
                                             <p>{est.porcentagem}%</p>
                                         </div>
-
                                         <div className={styles.progressBg}>
                                             <div
                                                 className={styles.progressBar}
-                                                style={{
-                                                    width: `${est.porcentagem}%`,
-                                                }}
+                                                style={{ width: `${est.porcentagem}%` }}
                                             />
                                         </div>
                                     </div>
