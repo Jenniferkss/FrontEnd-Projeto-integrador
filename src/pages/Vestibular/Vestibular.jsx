@@ -7,7 +7,7 @@ import { useLanguage } from '../../context/LanguageContext.jsx';
 import fieldsMap from '../../mapeamento/mapeamento';
 
 export default function ObraVestibular() {
-    const [dados, setDados] = useState(null);
+    const [dados, setDados] = useState([]);
     const [carregando, setCarregando] = useState(true);
     const {  t, mapFields, selectField } = useLanguage();
     const localized = dados ? mapFields(dados, fieldsMap.vestibular) : {};

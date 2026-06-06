@@ -2,67 +2,58 @@
     width: 100%;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     background: linear-gradient(180deg, #fff8f8, #fdf0f2);
     box-sizing: border-box;
 }
 
-/* Embrulho centralizado do conteúdo principal */
 .contentWrapper {
-    width: 92%;
+    width: 92%; 
     max-width: 1700px;
-    margin: 0 auto;
+    margin: 0 auto; 
     padding: 40px 24px;
     box-sizing: border-box;
-    display: flex;
+    display: flex; 
     flex-direction: column;
     gap: 32px;
 }
 
-.lead {
-    max-width: 100%;
-    white-space: normal;
-    margin: 1rem 0 0;
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(1rem, 1.4vw, 1.15rem);
-    line-height: 1.8;
-    color: #4d403c;
+.banner {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 1rem 0.5rem;
 }
 
 .kicker {
-    margin: 0 0 0.8rem;
+    margin: 0 0 0.6rem; 
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 0.72rem;
-    font-weight: 800;
+    letter-spacing: 0.18rem; 
+    font-size: 0.78rem;
+    font-weight: 700;
     color: #7d0f0f;
 }
 
-/* Cabeçalho */
-.mainHeader {
-    width: 100%;
-    text-align: left;
+.titulo {
+    margin: 0; 
+    font-family: 'Playfair Display', serif; 
+    font-size: 3.5rem; 
+    line-height: 1.05;
+    color: #000000;
+    font-weight: 700;
 }
 
-.headerTitle {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    font-weight: bold;
-    color: #000;
-    line-height: 1.1;
-    margin: 0;
-    letter-spacing: -1px;
+.subtitulo {
+    margin: 0.8rem auto 0; 
+    max-width: 45rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    color: #5d4540;
 }
 
-.headerSubtitle {
-    font-style: italic;
-    font-weight: bold;
-}
-
-/* Cards superiores */
 .topCardsGrid {
-    display: grid;
+    display: grid; 
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     width: 100%;
@@ -77,7 +68,7 @@
     flex-direction: column;
     min-height: 220px;
     box-shadow: 0 4px 20px rgba(125, 15, 15, 0.08);
-    transition: all 0.3s ease;
+    transition: all 0.3 ease;
 }
 
 .cardTop:hover {
@@ -86,11 +77,11 @@
 }
 
 .cardRedBorder {
-    border: 1px solid rgba(125, 15, 15, 0.25);
+    border: 1px solid rgba(125, 15, 15, 0.15);
 }
 
 .cardTopTitle {
-    font-family: 'Georgia', serif;
+    font-family: 'Montserrat', sans-serif;
     color: #7d0f0f;
     font-size: 1.3rem;
     font-weight: bold;
@@ -100,9 +91,9 @@
     line-height: 1.2;
 }
 
-.cardTopText,
+.cardTopText, 
 .cardTopList {
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: #333;
     font-size: 0.95rem;
     line-height: 1.7;
@@ -110,26 +101,24 @@
 }
 
 .cardTopList {
-    padding-left: 20px;
+    padding-left: 1.25rem; 
 }
 
-/* Layout principal */
 .mainLayout {
-    display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(320px, 1fr);
-    gap: 32px;
+    display: grid; 
+    grid-template-columns: minmax(0, 3fr) minmax(20rem, 1fr);
+    gap: 2rem; 
     width: 100%;
     align-items: start;
 }
 
-/* Conteúdo principal */
 .contentBox {
     font-family: 'Montserrat', sans-serif;
     width: 100%;
     background-color: #fffdfb;
     border: 1px solid rgba(125, 15, 15, 0.2);
-    border-radius: 16px;
-    padding: 36px;
+    border-radius: 1rem;
+    padding: 2.25rem; 
     box-sizing: border-box;
     box-shadow: 0 8px 25px rgba(125, 15, 15, 0.08);
 }
@@ -140,7 +129,7 @@
     font-size: 1.6rem;
     font-weight: bold;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .contentText {
@@ -148,15 +137,14 @@
     color: #333;
     font-size: 1rem;
     line-height: 1.8;
-    margin-bottom: 20px;
+    margin: 2.25rem;
 }
 
-/* Citação */
 .quoteBlock {
     display: flex;
-    gap: 16px;
+    gap: 1rem; 
     align-items: stretch;
-    margin: 32px 0;
+    margin: 2rem 0; 
 }
 
 .quoteLine {
@@ -166,23 +154,21 @@
 }
 
 .quoteText {
-    font-family: 'Georgia', serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 1.15rem;
     color: #7d0f0f;
+    font-size: 1.15rem;
     line-height: 1.6;
     margin: 0;
 }
 
-/* Sidebar */
 .sidebar {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
-/* Botão de vídeo */
 .videoBtnWrapper a {
     text-decoration: none;
     display: block;
@@ -192,23 +178,20 @@
 .videoBtn {
     width: 100%;
     background: linear-gradient(135deg, #7d0f0f, #a61a1a);
-    color: white;
-
-    font-family: system-ui, -apple-system, sans-serif;
-    font-weight: 700;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
     font-size: 1rem;
-
+    font-weight: 700;
     border: none;
+    text-align: center;
+    justify-content: center;
+    padding: 1rem;
     border-radius: 12px;
-    padding: 16px;
-
-    cursor: pointer;
     transition: all 0.3s ease;
-
+    cursor: pointer; 
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    gap: 0.5rem;
 }
 
 .videoBtn svg {
@@ -221,11 +204,10 @@
     box-shadow: 0 10px 20px rgba(125, 15, 15, 0.25);
 }
 
-/* Card de estatísticas */
 .statsCard {
     font-family: 'Montserrat', sans-serif;
     background: linear-gradient(180deg, #7d0f0f, #5f0909);
-    color: white;
+    color: #fff;
     border-radius: 16px;
     padding: 24px;
     box-sizing: border-box;
@@ -233,7 +215,7 @@
 }
 
 .statsTitle {
-    font-family: 'Georgia', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.3rem;
     font-weight: bold;
     text-align: center;
@@ -244,13 +226,13 @@
 .progressGroup {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .statsItem {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.4rem;
 }
 
 .progressLabels {
@@ -271,6 +253,7 @@
     background: linear-gradient(90deg, #fff5eb, #ffffff);
     height: 100%;
     border-radius: 20px;
+    transition: width 0.5s ease;
 }
 
 /* Responsividade */
@@ -280,29 +263,35 @@
     }
 }
 
+
 @media (max-width: 900px) {
     .topCardsGrid {
         grid-template-columns: 1fr;
     }
+
 
     .mainLayout {
         grid-template-columns: 1fr;
     }
 }
 
+
 @media (max-width: 600px) {
     .contentWrapper {
         padding: 24px 16px;
     }
 
+
     .headerTitle {
         font-size: 2.3rem;
     }
+
 
     .contentBox {
         padding: 24px;
     }
 }
+
 
 @media (min-width: 1600px) {
     .contentWrapper {
@@ -310,11 +299,16 @@
         max-width: 1900px;
     }
 
+
     .cardTop {
         min-height: 260px;
     }
+
 
     .contentBox {
         padding: 42px;
     }
 }
+
+
+
