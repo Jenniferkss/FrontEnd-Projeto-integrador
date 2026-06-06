@@ -55,13 +55,27 @@ export default function ObraVestibular() {
         );
     }
 
-    if (!dados) {
+    if (!dados || dados.length === 0) {
         return (
             <div style={{ textAlign: 'center', padding: '50px', fontSize: '18px' }}>
                 {t('no_records')}
             </div>
         );
     }
+
+    // Pega o primeiro registro do banco
+    const livro = dados[0];
+
+    // Lógica para garantir que Interpretações tenha conteúdo caso a coluna mude de nome ou venha vazia
+    // Lógica para garantir que Interpretações tenha conteúdo caso a coluna mude de nome ou venha vazia
+const obterInterpretacao = () => {
+    if (language === 'en') {
+        // Removido o "|| livro?.conteudoEn"
+        return livro?.interpretacoesEn || livro?.interpretacaoEn || 'No analysis available.';
+    }
+    // Removido o "|| livro?.conteudoPt"
+    return livro?.interpretacoesPt || livro?.interpretacaoPt || 'Nenhuma análise disponível.';
+};
 
     return (
         <div className={styles.pageContainer}>
@@ -92,7 +106,6 @@ export default function ObraVestibular() {
                         <h2 className={styles.cardTopTitle}>
                             {t('vest_card_essayTopics')}
                         </h2>
-
                         <ul className={styles.cardTopList}>
                             {Array.isArray(localized.temasRedacao) ? (
                                 localized.temasRedacao.map((tema, index) => <li key={index}>{tema}</li>)
@@ -114,10 +127,11 @@ export default function ObraVestibular() {
 
                         <p className={styles.contentText}>{selectField(dados, 'conteudo') || selectField(dados, 'texto') || localized.textoPrincipal || localized.resumo || t('content_unavailable')}</p>
 
-                        {dados.citacao && (
+                        {/* Bloco de Citação Puro vindo do Banco */}
+                        {livro?.citacao && (
                             <blockquote className={styles.quoteBlock}>
                                 <div className={styles.quoteLine}></div>
-                                <p className={styles.quoteText}>“{dados.citacao}”</p>
+                                <p className={styles.quoteText}>“{livro.citacao}”</p>
                             </blockquote>
                         )}
 
@@ -127,6 +141,7 @@ export default function ObraVestibular() {
                             {dados.contextoHist ? (
                                 <p className={styles.contentText}>{localized.contextoHist}</p>
                             ) : (
+                                // Fallback Completo
                                 <div className={styles.vectorListFallback}>
                                     <p>
                                         <strong>{t('vector1_title')}</strong> {t('vector1_text')}
@@ -165,25 +180,20 @@ export default function ObraVestibular() {
                             <h3 className={styles.statsTitle}>{t('exam_frequency')}</h3>
 
                             <div className={styles.progressGroup}>
-                                {(
-                                    dados.estatisticas || [
-                                        { nome: 'Fuvest', porcentagem: 30 },
-                                        { nome: 'Unicamp', porcentagem: 72 },
-                                        { nome: 'ENEM', porcentagem: 42 },
-                                    ]
-                                ).map((est, index) => (
+                                {(livro?.estatisticas || [
+                                    { nome: 'Fuvest', porcentagem: 30 },
+                                    { nome: 'Unicamp', porcentagem: 72 },
+                                    { nome: 'ENEM', porcentagem: 42 },
+                                ]).map((est, index) => (
                                     <div key={index} className={styles.statsItem}>
                                         <div className={styles.progressLabels}>
                                             <p>{est.nome}</p>
                                             <p>{est.porcentagem}%</p>
                                         </div>
-
                                         <div className={styles.progressBg}>
                                             <div
                                                 className={styles.progressBar}
-                                                style={{
-                                                    width: `${est.porcentagem}%`,
-                                                }}
+                                                style={{ width: `${est.porcentagem}%` }}
                                             />
                                         </div>
                                     </div>
