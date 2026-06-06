@@ -185,8 +185,8 @@ export default function ObraVestibular() {
                     {/* SIDEBAR */}
                     <div className={styles.sidebar}>
                         <div className={styles.videoBtnWrapper}>
-                            <Link to="/VideoAulas">
-                                <button className={styles.videoBtn}>
+                            <Link to="/videoAulas">
+                                <button className={styles.videoBtn} > 
                                     <FaPlayCircle />
                                     {language === 'en'
                                         ? 'Watch video-classes'
@@ -194,6 +194,7 @@ export default function ObraVestibular() {
                                 </button>
                             </Link>
                         </div>
+                        
 
                         <div className={styles.statsCard}>
                             <h3 className={styles.statsTitle}>
