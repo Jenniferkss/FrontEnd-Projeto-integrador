@@ -9,11 +9,37 @@ import { request } from '../../services/api.js';
 import carolina from '../../../public/images/carolina.png';
 import livro from '../../../public/images/livro.png';
 
+const frases = [
+    {
+        texto: 'A fome é a dinamite do corpo humano.',
+        data: '15 de maio de 1958',
+    },
+    {
+        texto: 'O Brasil precisa ser dirigido por uma pessoa que já passou fome.',
+        data: '19 de julho de 1955',
+    },
+    {
+        texto: 'Quem inventou a fome são os que comem.',
+        data: '22 de maio de 1958',
+    },
+];
+
 export default function ObraVestibular() {
     const [dados, setDados] = useState(null);
     const [carregando, setCarregando] = useState(true);
 
     const { language } = useLanguage();
+
+    /* Frases */
+    const [index, setIndex] = useState(0);
+
+    const proxima = () => {
+        setIndex((index + 1) % frases.length);
+    };
+
+    const anterior = () => {
+        setIndex((index - 1 + frases.length) % frases.length);
+    };
 
     useEffect(() => {
         const carregarLivros = async () => {
@@ -70,7 +96,7 @@ export default function ObraVestibular() {
                             {language === 'en' ? 'the Dark' : 'Despejo'}
                         </h1>
 
-                        <p className={styles.subtitle}>
+                        <p className={styles.subtitleTrechos}>
                             {language === 'en'
                                 ? ' “Brazil needs to be led by someone who has already experienced hunger.” '
                                 : ' “O Brasil precisa ser dirigido por alguém que já passou fome” '}
@@ -175,6 +201,36 @@ export default function ObraVestibular() {
                 </div>
             </section>
 
+          <section className={`${styles.container} ${styles.textContainerTrechos}`}>
+    <h2 className={styles.titleTrechos}>Trechos marcantes</h2>
+
+    <h3 className={styles.subtitleTrechos}>palavras que ecoam</h3>
+
+    <div className={styles.quoteIconTrechos}>❞</div>
+
+    <p className={styles.fraseTrechos}>“{frases[index].texto}”</p>
+
+    <time className={styles.dataTrechos}>{frases[index].data}</time>
+
+    <div className={styles.controlsTrechos}>
+        <button onClick={anterior} className={styles.btnTrechos}>
+            &lt;
+        </button>
+
+        <div className={styles.dotsTrechos}>
+            {frases.map((_, i) => (
+                <strong
+                    key={i}
+                    className={i === index ? styles.activeDotTrechos : styles.dotTrechos}
+                ></strong>
+            ))}
+        </div>
+
+        <button onClick={proxima} className={styles.btnTrechos}>
+            &gt;
+        </button>
+    </div>
+</section>
             <Footer />
         </div>
     );

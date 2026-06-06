@@ -7,7 +7,7 @@ import Footer from '../../components/Footer/Footer.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 
 export default function ObraVestibular() {
-    const [dados, setDados] = useState(null);
+    const [dados, setDados] = useState([]);
     const [carregando, setCarregando] = useState(true);
     const { language } = useLanguage();
 
@@ -32,8 +32,8 @@ export default function ObraVestibular() {
                 }
 
                 const data = await response.json();
-                console.log('Dados recebidos com sucesso:', data);
-                setDados(Array.isArray(data) ? data[0] : data);
+                console.log('Dados recebidos com sucesso:', JSON.stringify(data, null, 2));
+                setDados(data);
             } catch (error) {
                 console.error('Erro ao conectar com o back-end:', error);
             } finally {
@@ -67,21 +67,13 @@ export default function ObraVestibular() {
             <Header />
 
             <div className={styles.contentWrapper}>
-                <header className={styles.mainHeader}>
-                    <p className={styles.kicker}>
-                        {language === 'en' ? 'Critical analysis' : 'ANÁLISE CRÍTICA'}
+                <section className={styles.banner}>
+                    <p className={styles.kicker}>Análise crítica</p>
+                    <h1 className={styles.titulo}>A obra no vestibular</h1>
+                    <p className={styles.subtitulo}>
+                       Entenda a obra através de interpretações, crítica social e possíveis temas de redação. 
                     </p>
-
-                    <h1 className={styles.headerTitle}>
-                        {language === 'en' ? 'The work in Exam Prep' : 'A obra no vestibular'}
-                    </h1>
-
-                    <p className={styles.lead}>
-                        {language === 'en'
-                            ? 'Understand the literary work through interpretation, social criticism and essay themes.'
-                            : 'Entenda a obra através de interpretações, crítica social e possíveis temas de redação.'}
-                    </p>
-                </header>
+                </section>
 
                 {/* GRID SUPERIOR */}
                 <section className={styles.topCardsGrid}>
@@ -90,8 +82,10 @@ export default function ObraVestibular() {
                             {language === 'en' ? 'Critical Analysis' : 'Análise crítica'}
                         </h2>
                         <p className={styles.cardTopText}>
-                            {dados.analiseCritica || 'Indisponível.'}
-                        </p>
+                        {language === 'en'
+                        ? dados[0]?.conteudoEn
+                        : dados[0]?.conteudoPt}
+</p>
                     </div>
 
                     <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
@@ -99,7 +93,9 @@ export default function ObraVestibular() {
                             {language === 'en' ? 'Interpretations' : 'Interpretações e análises'}
                         </h2>
                         <p className={styles.cardTopText}>
-                            {dados.interpretacoes || 'Indisponível.'}
+                            {language === 'en'
+                                ? dados[0]?.interpretacoesEn
+                                : dados[0]?.interpretacoesPt}
                         </p>
                     </div>
 
