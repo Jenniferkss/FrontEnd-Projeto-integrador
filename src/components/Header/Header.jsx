@@ -11,7 +11,6 @@ const links = [
     { to: '/vestibular', labelPt: 'Vestibular', labelEn: 'Exam Prep' },
     { to: '/curiosidades', labelPt: 'Curiosidades', labelEn: 'Curiosities' },
     { to: '/personagens', labelPt: 'Personagens', labelEn: 'Characters' },
-    { to: '/videoaulas', labelPt: 'Vídeo Aulas', labelEn: 'Video Lessons' }
 ];
 
 const Header = () => {
