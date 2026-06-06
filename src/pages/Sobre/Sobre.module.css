@@ -1,29 +1,23 @@
-/* CONTAINER PAI: Controla a página de ponta a ponta sem margens */
 .pageContainer {
     background-color: #fdf0f2;
     min-height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 0;
     padding: 0;
     overflow-x: hidden; 
 }
 
-.banner {
-    text-align: center;
-    margin-bottom: 1rem;
-    padding: 1rem 0.5rem;
-   }
-
-.kicker {
-    margin: 0 0 0.6rem; 
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.18rem; 
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #7d0f0f;
+.boxedLayout {
+    width: 90%;
+    max-width: 1200px;
+    flex: 1;
+    background-color: #fdf0f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .titulo {
@@ -55,16 +49,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    padding: 2rem 1rem;
+    gap: 30px;
     box-sizing: border-box;
 }
 
 /* TÍTULO EQUIPE */
 .tituloDiv {
     width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 .title {
@@ -132,6 +126,7 @@
     border: 2px solid #1a1a1a;
     padding: 20px;
     background-color: #FFEBEF;
+    box-sizing: border-box;
 }
 
 .divTextoJesus {
@@ -160,6 +155,8 @@
     background-color: #D9D9D9;
     padding: 18px 20px;
     text-align: left;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
 .questoes:hover {
@@ -170,9 +167,9 @@
 
 .enunciado {
     font-family: 'Montserrat', sans-serif;
-    width: 63rem;
-    height: 4rem;
+    width: 100%;
     font-size: 19px;
+    line-height: 1.4;
 }
 
 .letraQuestao {
@@ -184,6 +181,7 @@
     justify-content: center;
     font-weight: bold;
     font-size: 1.2rem;
+    flex-shrink: 0;
 }
 
 .textoQuestao {
@@ -196,14 +194,15 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    box-sizing: border-box;
 }
 
 .divBotao {
-    height: 5rem;
-    width: 63rem;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 0;
 }
 
 .buttonVa {
@@ -212,6 +211,8 @@
     border-radius: 17px;
     background-color: #7d0f0f;
     color: #fdf0f2;
+    border: none;
+    cursor: pointer;
 }
 
 .buttonVa:hover {
@@ -234,4 +235,139 @@
 
 .btn:hover {
     opacity: 0.9;
+}
+
+.footer {
+    width: 100%;
+    background-color: #efe5dd;
+    color: #1a1a1a;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: auto;
+}
+
+/* ── INTEGRANTES ── */
+.divGrandeIntegrantes {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1.5rem;
+    justify-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.integrante {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.integranteImg {
+    width: 120px;
+    height: 155px;
+    border-radius: 15px;
+    border: 2px solid #7d0f0f;
+    object-fit: cover;
+}
+
+.integranteCurso {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.3;
+    text-align: center;
+}
+
+/* ── TABLET (≤ 1024px) ── */
+@media (max-width: 1024px) {
+    .divGrandeIntegrantes {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .falaJesus,
+    .questoes,
+    .btnGroup {
+        width: 90%;
+    }
+}
+
+/* ── MOBILE GRANDE (≤ 768px) ── */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .divGrandeIntegrantes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .integranteImg {
+        width: 100px;
+        height: 130px;
+    }
+}
+
+/* ── MOBILE (≤ 500px) ── */
+@media (max-width: 500px) {
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .tituloDiv {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .falaJesus,
+    .questoes,
+    .btnGroup {
+        width: 95%;
+    }
+
+    .enunciado {
+        font-size: 15px;
+    }
+
+    .letraQuestao {
+        min-width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+
+    .divGrandeIntegrantes {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .integranteImg {
+        width: 90px;
+        height: 115px;
+    }
+
+    .btnGroup {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .btn,
+    .buttonVa {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* ── MOBILE PEQUENO (≤ 380px) ── */
+@media (max-width: 380px) {
+    .divGrandeIntegrantes {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .integranteImg {
+        width: 80px;
+        height: 103px;
+    }
 }

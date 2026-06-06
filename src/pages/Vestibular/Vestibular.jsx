@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Vestibular.module.css';
-import { FaPlayCircle } from 'react-icons/fa';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
+import fieldsMap from '../../mapeamento/mapeamento';
 
 export default function ObraVestibular() {
     const [dados, setDados] = useState([]);
     const [carregando, setCarregando] = useState(true);
-    const { language } = useLanguage();
+    const {  t, mapFields, selectField } = useLanguage();
+    const localized = dados ? mapFields(dados, fieldsMap.vestibular) : {};
 
     useEffect(() => {
         const carregarLivros = async () => {
@@ -32,10 +33,10 @@ export default function ObraVestibular() {
                 }
 
                 const data = await response.json();
-                console.log('Dados recebidos com sucesso:', JSON.stringify(data, null, 2));
-                
-                // Garante que dados seja tratado como Array
-                setDados(Array.isArray(data) ? data : [data]);
+                console.debug('Vestibular - raw data from API:', data);
+                const processed = Array.isArray(data) ? data[0] : data;
+                console.debug('Vestibular - processed dados:', processed);
+                setDados(processed);
             } catch (error) {
                 console.error('Erro ao conectar com o back-end:', error);
             } finally {
@@ -49,7 +50,7 @@ export default function ObraVestibular() {
     if (carregando) {
         return (
             <div style={{ textAlign: 'center', padding: '50px', fontSize: '18px' }}>
-                {language === 'en' ? 'Loading database info...' : 'Carregando dados do banco...'}
+                {t('loading_database')}
             </div>
         );
     }
@@ -57,9 +58,7 @@ export default function ObraVestibular() {
     if (!dados || dados.length === 0) {
         return (
             <div style={{ textAlign: 'center', padding: '50px', fontSize: '18px' }}>
-                {language === 'en'
-                    ? 'No records found.'
-                    : 'Nenhum registro encontrado ou erro na API.'}
+                {t('no_records')}
             </div>
         );
     }
@@ -83,48 +82,38 @@ const obterInterpretacao = () => {
             <Header />
 
             <div className={styles.contentWrapper}>
-                <section className={styles.banner}>
-                    <p className={styles.kicker}>Análise crítica</p>
-                    <h1 className={styles.titulo}>A obra no vestibular</h1>
-                    <p className={styles.subtitulo}>
-                       Entenda a obra através de interpretações, crítica social e possíveis temas de redação. 
-                    </p>
-                </section>
+                <header className={styles.mainHeader}>
+                    <p className={styles.kicker}>{t('vest_kicker')}</p>
+
+                    <h1 className={styles.headerTitle}>{t('vest_headerTitle')}</h1>
+
+                    <p className={styles.lead}>{t('vest_lead')}</p>
+                </header>
 
                 {/* GRID SUPERIOR */}
                 <section className={styles.topCardsGrid}>
                     <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
-                        <h2 className={styles.cardTopTitle}>
-                            {language === 'en' ? 'Critical Analysis' : 'Análise crítica'}
-                        </h2>
-                        <p className={styles.cardTopText}>
-                            {language === 'en' ? livro?.conteudoEn : livro?.conteudoPt}
-                        </p>
+                        <h2 className={styles.cardTopTitle}>{t('vest_card_critical')}</h2>
+                        <p className={styles.cardTopText}>{localized.analiseCritica || t('unavailable')}</p>
+                    </div>
+
+                    <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
+                        <h2 className={styles.cardTopTitle}>{t('vest_card_interpret')}</h2>
+                        <p className={styles.cardTopText}>{localized.interpretacoes || t('unavailable')}</p>
                     </div>
 
                     <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
                         <h2 className={styles.cardTopTitle}>
-                            {language === 'en' ? 'Interpretations' : 'Interpretações e análises'}
-                        </h2>
-                        <p className={styles.cardTopText}>
-                            {obterInterpretacao()}
-                        </p>
-                    </div>
-
-                    <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
-                        <h2 className={styles.cardTopTitle}>
-                            {language === 'en' ? 'Essay Topics' : 'Possíveis temas para redação'}
+                            {t('vest_card_essayTopics')}
                         </h2>
                         <ul className={styles.cardTopList}>
-                            {Array.isArray(livro?.temasRedacao) ? (
-                                livro.temasRedacao.map((tema, index) => <li key={index}>{tema}</li>)
-                            ) : livro?.temasRedacao ? (
-                                livro.temasRedacao.split('\n').map((tema, index) => <li key={index}>{tema}</li>)
+                            {Array.isArray(localized.temasRedacao) ? (
+                                localized.temasRedacao.map((tema, index) => <li key={index}>{tema}</li>)
                             ) : (
                                 <>
-                                    <li>A invisibilidade social de populações marginalizadas.</li>
-                                    <li>Os obstáculos para a garantia dos direitos humanos no Brasil.</li>
-                                    <li>A exclusão social nas periferias urbanas.</li>
+                                    <li>{t('essay_topic1')}</li>
+                                    <li>{t('essay_topic2')}</li>
+                                    <li>{t('essay_topic3')}</li>
                                 </>
                             )}
                         </ul>
@@ -134,14 +123,9 @@ const obterInterpretacao = () => {
                 {/* PARTE INFERIOR */}
                 <div className={styles.mainLayout}>
                     <main className={styles.contentBox}>
-                        
-                        {/* Título e Texto Principal */}
-                        <h2 className={styles.contentTitle}>
-                            {livro?.tituloPrincipal || (language === 'en' ? 'The Double Perspective' : 'A Dupla Perspectiva: Carolina vs. o Leitor')}
-                        </h2>
-                        <p className={styles.contentText}>
-                            {livro?.textoPrincipal || livro?.conteudoPt}
-                        </p>
+                        <h2 className={styles.contentTitle}>{selectField(dados, 'titulo') || localized.tituloPrincipal || t('vest_default_title')}</h2>
+
+                        <p className={styles.contentText}>{selectField(dados, 'conteudo') || selectField(dados, 'texto') || localized.textoPrincipal || localized.resumo || t('content_unavailable')}</p>
 
                         {/* Bloco de Citação Puro vindo do Banco */}
                         {livro?.citacao && (
@@ -151,60 +135,50 @@ const obterInterpretacao = () => {
                             </blockquote>
                         )}
 
-                        {/* Vetores Analíticos Chave */}
-                        <h3 className={styles.vectorsTitle}>
-                            {language === 'en' ? 'Key Analytical Vectors' : 'Vetores Analíticos Chave'}
-                        </h3>
+                        <h3 className={styles.vectorsTitle}>{t('key_vectors')}</h3>
 
                         <div className={styles.vectorListContainer}>
-                            {livro?.vetoresAnaliticos || livro?.contextoHist ? (
-                                (livro.vetoresAnaliticos || livro.contextoHist).split('\n').map((linha, index) => {
-                                    if (linha.includes(':')) {
-                                        const [titulo, ...resto] = linha.split(':');
-                                        return (
-                                            <p key={index} className={styles.contentText}>
-                                                <strong>{titulo.trim()}:</strong>{resto.join(':')}
-                                            </p>
-                                        );
-                                    }
-                                    return (
-                                        <p key={index} className={styles.contentText}>
-                                            {linha}
-                                        </p>
-                                    );
-                                })
+                            {dados.contextoHist ? (
+                                <p className={styles.contentText}>{localized.contextoHist}</p>
                             ) : (
                                 // Fallback Completo
                                 <div className={styles.vectorListFallback}>
                                     <p>
-                                        <strong>A Retórica da Sobrevivência:</strong> Note como Carolina usa a linguagem crua e direta para descrever sua fome, trabalho e luta diária, validando a urgência de sua experiência.
+                                        <strong>{t('vector1_title')}</strong> {t('vector1_text')}
                                     </p>
                                     <p>
-                                        <strong>Olhar Atento:</strong> A famosa atenção aos detalhes da favela – desde os vizinhos até o lixo nas ruas – funciona como símbolo da percepção aguda de Carolina sobre a desigualdade e a injustiça social.
+                                        <strong>{t('vector2_title')}</strong> {t('vector2_text')}
                                     </p>
                                     <p>
-                                        <strong>Rigidez Social:</strong> A influência do preconceito racial e da estrutura social brasileira em moldar as oportunidades e a visão de mundo de Carolina, evidenciando as barreiras que cercam sua existência e a da comunidade ao seu redor.
+                                        <strong>{t('vector3_title')}</strong> {t('vector3_text')}
                                     </p>
                                 </div>
                             )}
                         </div>
+
+                        {dados.personagens && (
+                            <div>
+                                <h3 className={styles.vectorsTitle}>{t('main_characters')}</h3>
+                                <p className={styles.contentText}>{localized.personagens}</p>
+                            </div>
+                        )}
                     </main>
 
                     {/* SIDEBAR */}
                     <div className={styles.sidebar}>
                         <div className={styles.videoBtnWrapper}>
-                            <Link to="/VideoAulas">
-                                <button className={styles.videoBtn}>
+                            <Link to="/videoAulas">
+                                <button className={styles.videoBtn} > 
                                     <FaPlayCircle />
-                                    {language === 'en' ? 'Watch video-classes' : 'Veja as vídeo-aulas'}
+                                    {t('watch_video_classes')}
                                 </button>
                             </Link>
                         </div>
+                        
 
                         <div className={styles.statsCard}>
-                            <h3 className={styles.statsTitle}>
-                                {language === 'en' ? 'Exam Frequency' : 'Frequência nos vestibulares'}
-                            </h3>
+                            <h3 className={styles.statsTitle}>{t('exam_frequency')}</h3>
+
                             <div className={styles.progressGroup}>
                                 {(livro?.estatisticas || [
                                     { nome: 'Fuvest', porcentagem: 30 },

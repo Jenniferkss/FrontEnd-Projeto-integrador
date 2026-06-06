@@ -4,6 +4,7 @@ import styles from '../Obra/AObra.module.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
+import fieldsMap from '../../mapeamento/mapeamento';
 import { request } from '../../services/api.js';
 
 import carolina from '../../../public/images/carolina.png';
@@ -28,7 +29,7 @@ export default function ObraVestibular() {
     const [dados, setDados] = useState(null);
     const [carregando, setCarregando] = useState(true);
 
-    const { language } = useLanguage();
+    const { language, t,  mapFields } = useLanguage();
 
     /* Frases */
     const [index, setIndex] = useState(0);
@@ -51,7 +52,10 @@ export default function ObraVestibular() {
                     },
                 });
 
-                setDados(Array.isArray(data) ? data[0] : data);
+                    console.debug('AObra - raw data from API:', data);
+                    const processed = Array.isArray(data) ? data[0] : data;
+                    console.debug('AObra - processed dados:', processed);
+                        setDados(processed);
             } catch (error) {
                 console.error('Erro ao conectar com o back-end:', error);
             } finally {
@@ -66,9 +70,7 @@ export default function ObraVestibular() {
         return (
             <div className={styles.loading}>
                 <p>
-                    {language === 'en'
-                        ? 'Loading database info...'
-                        : 'Carregando dados do banco...'}
+                    {t('loading_database')}
                 </p>
             </div>
         );
@@ -77,10 +79,12 @@ export default function ObraVestibular() {
     if (!dados) {
         return (
             <div className={styles.loading}>
-                <p>{language === 'en' ? 'No records found.' : 'Nenhum registro encontrado.'}</p>
+                <p>{t('no_records')}</p>
             </div>
         );
     }
+
+    const localized = dados ? mapFields(dados, fieldsMap.obra) : {};
 
     return (
         <div className={styles.page}>
@@ -89,24 +93,12 @@ export default function ObraVestibular() {
             <section className={styles.hero}>
                 <div className={styles.leftHero}>
                     <div className={styles.quoteBox}>
-                        <h1 className={styles.titleMain}>
-                            {language === 'en' ? 'Child of ' : 'Quarto de'}
-                        </h1>
-                        <h1 className={styles.redTitleMain}>
-                            {language === 'en' ? 'the Dark' : 'Despejo'}
-                        </h1>
+                        <h1 className={styles.titleMain}>{t('title_part1')}</h1>
+                        <h1 className={styles.redTitleMain}>{t('title_part2')}</h1>
 
-                        <p className={styles.subtitleTrechos}>
-                            {language === 'en'
-                                ? ' “Brazil needs to be led by someone who has already experienced hunger.” '
-                                : ' “O Brasil precisa ser dirigido por alguém que já passou fome” '}
-                        </p>
+                        <p className={styles.subtitle}>&nbsp;“{t('quote_brazil_needs')}”</p>
 
-                        <p className={styles.subtitleAuthor}>
-                            {language === 'en'
-                                ? ' - Carolina Maria de Jesus '
-                                : ' - Carolina Maria de Jesus '}
-                        </p>
+                        <p className={styles.subtitleAuthor}>{t('quote_author')}</p>
                     </div>
                 </div>
 
@@ -129,58 +121,44 @@ export default function ObraVestibular() {
                 </div>
 
                 <div className={styles.bookInfo}>
-                    <p className={styles.sectionName}>{dados.nomeSecao || 'A OBRA'}</p>
+                    <p className={styles.sectionName}>{localized.sectionName || t('the_work')}</p>
 
                     <div className={styles.bookTitle}>
-                        <h2>{dados.subtitulo1 || 'Um relato que'}</h2>
+                        <h2>{localized.subtitle1 || t('a_story_that')}</h2>
 
-                        <h2 className={styles.redTitle}>{dados.subtitulo2 || 'mudou o Brasil'}</h2>
+                        <h2 className={styles.redTitle}>{localized.subtitle2 || t('changed_brazil')}</h2>
                     </div>
 
                     <div className={styles.cards}>
                         <div className={styles.card}>
-                            <p>Publicação</p>
-                            <h3>{dados.publicacao || '1960'}</h3>
+                            <p>{t('publication')}</p>
+                            <h3>{localized.publication || '1960'}</h3>
                         </div>
 
                         <div className={styles.card}>
-                            <p>Idiomas</p>
-                            <h3>{dados.idiomas || '13 traduções'}</h3>
+                            <p>{t('languages')}</p>
+                            <h3>{localized.languages || (language === 'en' ? '13 translations' : '13 traduções')}</h3>
                         </div>
 
                         <div className={styles.card}>
-                            <p>Vendas</p>
-                            <h3>{dados.vendas || '1 milhão +'}</h3>
+                            <p>{t('sales')}</p>
+                            <h3>{localized.sales || (language === 'en' ? '1 million +' : '1 milhão +')}</h3>
                         </div>
 
                         <div className={styles.card}>
-                            <p>Gênero</p>
-                            <h3>{dados.genero || 'Diário / Autobiografia'}</h3>
+                            <p>{t('genre')}</p>
+                            <h3>{localized.genre || (language === 'en' ? 'Diary / Autobiography' : 'Diário / Autobiografia')}</h3>
                         </div>
                     </div>
 
                     <div className={styles.textBox}>
-                        {Array.isArray(dados.descricao) ? (
-                            dados.descricao.map((texto, index) => <p key={index}>{texto}</p>)
+                        {Array.isArray(localized.description) ? (
+                            localized.description.map((texto, index) => <p key={index}>{texto}</p>)
                         ) : (
                             <>
-                                <p>
-                                    "Quarto de Despejo: Diário de uma Favelada" é o relato visceral
-                                    e poético de Carolina Maria de Jesus sobre a sua vida na favela
-                                    do Canindé, em São Paulo.
-                                </p>
-
-                                <p>
-                                    Escrito entre 1955 e 1960, o diário documenta com uma
-                                    honestidade brutal a fome, a miséria e a luta diária pela
-                                    sobrevivência.
-                                </p>
-
-                                <p>
-                                    A obra se tornou um fenômeno editorial, traduzida para mais de
-                                    13 idiomas e reconhecida como um dos mais importantes
-                                    testemunhos da literatura brasileira.
-                                </p>
+                                <p>{localized.description || t('desc_p1')}</p>
+                                <p>{t('desc_p2')}</p>
+                                <p>{t('desc_p3')}</p>
                             </>
                         )}
                     </div>
@@ -190,14 +168,9 @@ export default function ObraVestibular() {
             {/* ANÁLISE */}
             <section className={styles.container}>
                 <div className={styles.textContainer}>
-                    <h2 className={styles.titleContainer}>
-                        {dados.tituloAnalise || 'Análise da obra'}
-                    </h2>
+                    <h2 className={styles.titleContainer}>{localized.titleAnalysis || t('analysis_of_work')}</h2>
 
-                    <p>
-                        {dados.analise ||
-                            `A obra Quarto de Despejo, de Carolina Maria de Jesus, é um relato autobiográfico em forma de diário que oferece uma visão direta e impactante da vida na favela do Canindé, em São Paulo, na década de 1950.`}
-                    </p>
+                    <p>{localized.analysis || t('analysis_p1')}</p>
                 </div>
             </section>
 
