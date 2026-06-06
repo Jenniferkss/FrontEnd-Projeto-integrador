@@ -251,6 +251,7 @@ function Simulados({ idiomaDoSite = 'PT' }) {
                                         backgroundColor: selecionada ? '#e8f5e9' : '',
                                         borderRadius: '6px',
                                         transition: 'all 0.2s ease',
+                                        color: selecionada ? '#000' : '#000',
                                     }}>
                                     <p>
                                         <strong>({alt.id})</strong> {textoAlt(alt)}
