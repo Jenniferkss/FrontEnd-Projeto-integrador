@@ -80,7 +80,7 @@ export default function Personagens() {
                             <img
                                 src={loading ? '' : photos[i] || ''}
                                 alt={loading ? 'Carregando...' : characters[i] || 'Personagem'}
-                                style={{ width: '13rem', borderRadius: '15px' }}
+                                style={{ width: '13rem', borderRadius: '15px', height: '13rem', minWidth: '13rem', objectFit: 'cover' }}
                             />
                             <div className={styles.divNomeDesc}>
                                 <h1 className="title-main" style={{ marginBottom: '20px' }}>
