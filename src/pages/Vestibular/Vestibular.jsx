@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Vestibular.module.css';
+import { FaPlayCircle } from 'react-icons/fa';
 import Header from '../../components/Header/Header';
 import { FaPlayCircle } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer.jsx';
@@ -153,13 +154,14 @@ export default function ObraVestibular() {
                     {/* SIDEBAR */}
                     <div className={styles.sidebar}>
                         <div className={styles.videoBtnWrapper}>
-                            <Link to="/VideoAulas">
-                                <button className={styles.videoBtn}>
+                            <Link to="/videoAulas">
+                                <button className={styles.videoBtn} > 
                                     <FaPlayCircle />
                                     {t('watch_video_classes')}
                                 </button>
                             </Link>
                         </div>
+                        
 
                         <div className={styles.statsCard}>
                             <h3 className={styles.statsTitle}>{t('exam_frequency')}</h3>
