@@ -46,7 +46,7 @@ function Footer() {
             </div>
 
             <div className={styles.contact}>
-                <h3>Contato</h3>
+                <h3>Contato:</h3>
 
                 <p>E-mail</p>
                 <a href="mailto:intertexto@gmail.com" className={styles.contactLink}>
