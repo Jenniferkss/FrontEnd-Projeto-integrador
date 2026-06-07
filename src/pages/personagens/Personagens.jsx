@@ -20,6 +20,7 @@ const DESCRIPTIONS = [
     'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
 ];
 
+
 export default function Personagens() {
     const [livro, setLivro] = useState(null);
     const [loading, setLoading] = useState(true);
