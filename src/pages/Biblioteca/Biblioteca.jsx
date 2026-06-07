@@ -15,7 +15,6 @@ const CAPAS_FALLBACK = {
     'capitães da areia': '/images/CapitaesDaAreia.webp',
 };
 
-// Normaliza texto (remove acentos) para comparar títulos
 function normalizar(texto) {
     return String(texto || '')
         .toLowerCase()

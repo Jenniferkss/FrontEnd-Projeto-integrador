@@ -80,7 +80,7 @@ const Inicio = () => {
                         <img src={PaginaLivro} alt="Página do livro" className={styles.pageImg} />
                     </div>
 
-                    <div className={styles.themeBox}>
+              <div className={styles.themeBox}>
                         <h3 className={styles.themeTitle}>{t('theme_title')}</h3>
                         <ul className={styles.themeList}>
                             <li>{t('theme_item1')}</li>
