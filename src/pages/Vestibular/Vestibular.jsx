@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import styles from './Vestibular.module.css'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer.jsx'
+import { FaPlayCircle } from 'react-icons/fa';
 
 export default function Vestibular() {
   const [conteudo, setConteudo] = useState(null)
@@ -43,7 +44,7 @@ export default function Vestibular() {
           : jsonDicas.data || []
 
         setConteudo(dadosConteudo)
-        setDicas(listaDicas.slice(0, 8))
+        setDicas(listaDicas.slice(0, 4))
       } catch (err) {
         console.error('Erro ao carregar dados:', err)
         setError('Não foi possível carregar os dados do vestibular.')
@@ -84,14 +85,13 @@ export default function Vestibular() {
       <Header />
 
       <div className={styles.contentWrapper}>
-        <header className={styles.mainHeader}>
-          <p className={styles.kicker}>VESTIBULAR</p>
-          <h1 className={styles.headerTitle}>A obra no vestibular</h1>
-          <p className={styles.lead}>
-            Entenda a obra através de interpretações, crítica social e possíveis
-            temas de redação.
-          </p>
-        </header>
+             <section className={styles.banner}>
+                            <p className={styles.kicker}>Análise crítica</p>
+                            <h1 className={styles.titulo}>A obra no vestibular</h1>
+                            <p className={styles.subtitulo}>
+                            Prepare-se para o vestibular de forma prática e eficiente.
+                            </p>
+              </section>
 
         <section className={styles.topCardsGrid}>
           <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
@@ -159,7 +159,7 @@ export default function Vestibular() {
 
           <div className={styles.sidebar}>
             <Link to='/videoAulas' className={styles.videoBtn}>
-              Ver as vídeo-aulas
+              < FaPlayCircle /> Ver as vídeo-aulas
             </Link>
 
             <div className={styles.statsCard}>

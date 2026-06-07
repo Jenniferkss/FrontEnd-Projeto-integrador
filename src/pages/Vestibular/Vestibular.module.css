@@ -2,131 +2,153 @@
     width: 100%;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     background: linear-gradient(180deg, #fff8f8, #fdf0f2);
+    box-sizing: border-box;
 }
 
 .contentWrapper {
-    width: 92%;
+    width: 92%; 
     max-width: 1700px;
-    margin: 0 auto;
+    margin: 0 auto; 
     padding: 40px 24px;
-    display: flex;
+    box-sizing: border-box;
+    display: flex; 
     flex-direction: column;
-    gap: 48px;
+    gap: 32px;
 }
 
-.mainHeader {
+.banner {
     text-align: center;
+    margin-bottom: 1rem;
+    padding: 1rem 0.5rem;
 }
 
 .kicker {
+    margin: 0 0 0.6rem; 
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    font-size: 0.85rem;
+    letter-spacing: 0.04rem; 
+    font-size: 0.78rem;
     font-weight: 700;
     color: #7d0f0f;
-    margin-bottom: 8px;
 }
 
-.headerTitle {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.1rem;
+.titulo {
+    margin: 0; 
+    font-family: 'Playfair Display', serif; 
+    font-size: 3.5rem; 
+    line-height: 1.05;
+    color: #000000;
     font-weight: 700;
-    color: #000;
-    margin: 0 0 12px;
 }
 
-.lead {
+.subtitulo {
+    margin: 0.8rem auto 0; 
+    max-width: 45rem;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.05rem;
+    font-size: 1rem;
+    line-height: 1.6rem;
     color: #5d4540;
-    max-width: 620px;
-    margin: 0 auto;
-    line-height: 1.7;
 }
 
 .topCardsGrid {
-    display: grid;
+    display: grid; 
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+    width: 100%;
 }
 
 .cardTop {
     background-color: #fffdfb;
     border-radius: 16px;
-    padding: 28px 24px;
-    border: 1px solid rgba(125, 15, 15, 0.12);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
     box-shadow: 0 4px 20px rgba(125, 15, 15, 0.08);
-    transition: all 0.3s ease;
-    min-height: 230px;
+    transition: all 0.3 ease;
 }
 
 .cardTop:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 30px rgba(125, 15, 15, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(125, 15, 15, 0.15);
 }
 
 .cardRedBorder {
-    border-left: 4px solid #ffffff;
+    border: 1px solid rgba(125, 15, 15, 0.15);
 }
 
 .cardTopTitle {
     font-family: 'Montserrat', sans-serif;
     color: #7d0f0f;
     font-size: 1.3rem;
-    font-weight: 700;
+    font-weight: bold;
     text-align: center;
-    margin-bottom: 18px;
+    margin-top: 0;
+    margin-bottom: 16px;
+    line-height: 1.2;
 }
 
-.cardTopText,
+.cardTopText, 
 .cardTopList {
     font-family: 'Montserrat', sans-serif;
     color: #333;
-    font-size: 1rem;
-    line-height: 1.75;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.cardTopList {
+    padding-left: 1.25rem; 
 }
 
 .mainLayout {
-    display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(22rem, 1fr);
-    gap: 2rem;
+    display: grid; 
+    grid-template-columns: minmax(0, 3fr) minmax(20rem, 1fr);
+    gap: 2rem; 
+    width: 100%;
     align-items: start;
 }
 
 .contentBox {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
     background-color: #fffdfb;
-    border: 1px solid rgba(125, 15, 15, 0.18);
-    border-radius: 16px;
-    padding: 36px 32px;
-    box-shadow: 0 8px 28px rgba(125, 15, 15, 0.08);
+    border: 1px solid rgba(125, 15, 15, 0.2);
+    border-radius: 1rem;
+    padding: 2.25rem; 
+    box-sizing: border-box;
+    box-shadow: 0 8px 25px rgba(125, 15, 15, 0.08);
 }
 
 .contentTitle {
     font-family: 'Playfair Display', serif;
     color: #7d0f0f;
-    font-size: 1.7rem;
-    font-weight: 700;
-    margin-bottom: 20px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
 }
 
 .contentText {
     font-family: 'Montserrat', sans-serif;
     color: #333;
-    font-size: 1.05rem;
-    line-height: 1.85;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin: 0;
 }
 
 .quoteBlock {
     display: flex;
-    gap: 14px;
-    margin: 32px 0;
+    gap: 1rem; 
+    align-items: stretch;
+    margin: 2rem 0; 
 }
 
 .quoteLine {
-    width: 5px;
+    width: 4px;
     background-color: #7d0f0f;
     border-radius: 10px;
 }
@@ -134,10 +156,109 @@
 .quoteText {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    color: #7d0f0f;
-    font-size: 1.2rem;
-    line-height: 1.7;
+    color: #000000;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin: 0;
 }
+
+.sidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.videoBtnWrapper a {
+    display: block;
+    width: 100%;
+}
+
+.videoBtn {
+    text-decoration: none;
+    width: 100%;
+    background: linear-gradient(135deg, #7d0f0f, #a61a1a);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    text-align: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer; 
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.videoBtn svg {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.videoBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(125, 15, 15, 0.25);
+}
+
+.statsCard {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(180deg, #7d0f0f, #5f0909);
+    color: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(125, 15, 15, 0.2);
+}
+
+.statsTitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.progressGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.statsItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.progressLabels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.progressBg {
+    background: rgba(255, 255, 255, 0.2);
+    height: 12px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progressBar {
+    background: linear-gradient(90deg, #fff5eb, #ffffff);
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.5s ease;
+}
+
+/* ==========================================================================
+   ELEMENTOS QUE ESTAVAM FALTANDO NO SEGUNDO CÓDIGO (DICAS E VETORES)
+   ========================================================================== */
 
 .vectorsTitle {
     font-family: 'Montserrat', sans-serif;
@@ -151,81 +272,6 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
-}
-
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.videoBtn {
-    width: 100%;
-    background: linear-gradient(135deg, #7d0f0f, #a61a1a);
-    color: #fff;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    padding: 16px;
-    border-radius: 12px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: block;
-}
-
-.videoBtn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 22px rgba(125, 15, 15, 0.3);
-}
-
-.statsCard {
-    background: linear-gradient(180deg, #7d0f0f, #5f0909);
-    color: #fff;
-    border-radius: 16px;
-    padding: 28px 24px;
-    box-shadow: 0 10px 30px rgba(125, 15, 15, 0.25);
-}
-
-.statsTitle {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.progressGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-.statsItem {
-    display: flex;
-    flex-direction: column;
-}
-
-.progressLabels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.95rem;
-    font-weight: 500;
-    margin-bottom: 6px;
-}
-
-.progressBg {
-    background: rgba(255, 255, 255, 0.2);
-    height: 11px;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.progressBar {
-    background: linear-gradient(90deg, #fff5eb, #ffffff);
-    height: 100%;
-    border-radius: 20px;
-    transition: width 0.5s ease;
 }
 
 .dicasSection {
@@ -253,7 +299,8 @@
     border-radius: 14px;
     padding: 24px;
     box-shadow: 0 4px 18px rgba(125, 15, 15, 0.07);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* Corrigido o 's' que faltava no segundo código */
+    margin-bottom: 1.5rem;
 }
 
 .dicaCard:hover {
@@ -276,6 +323,18 @@
     line-height: 1.7;
     margin: 0;
 }
+
+/* ==========================================================================
+   ESTILOS EXCLUSIVOS DO PRIMEIRO CÓDIGO (OPCIONAL/MELHORIAS)
+   ========================================================================== */
+
+/* Se quiser manter o efeito de borda apenas na ESPERDA dos cards do topo, 
+   como estava no primeiro código, use esta classe: */
+.cardRedBorderLeftOnly {
+    border-left: 4px solid #ffffff;
+}
+
+
 
 @media (max-width: 1400px) {
     .contentWrapper { gap: 44px; }
