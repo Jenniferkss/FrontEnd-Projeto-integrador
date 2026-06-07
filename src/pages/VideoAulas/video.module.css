@@ -1,292 +1,292 @@
 .page {
-    min-height: 100vh;
-    background-color: #fdf0f2;
-    display: flex;
-    flex-direction: column;
-    color: #271817;
+  min-height: 100vh;
+  background-color: #fdf0f2;
+  display: flex;
+  flex-direction: column;
+  color: #271817;
 }
 
 .main {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2.5rem 2rem 4rem;
-    flex: 1;
-    box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+  flex: 1;
+  box-sizing: border-box;
 }
 
-/* ===== BANNER ===== */
 .banner {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding: 1rem 0.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1rem 0.5rem;
 }
 
 .kicker {
-    margin: 0 0 0.6rem;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #7d0f0f;
+  margin: 0 0 0.6rem;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #7d0f0f;
 }
 
 .titulo {
-    margin: 0;
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    line-height: 1.05;
-    color: #5c1212;
-    font-weight: 700;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+  color: #5c1212;
+  font-weight: 700;
 }
 
 .subtitulo {
-    margin: 0.8rem auto 0;
-    max-width: 36rem;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #5d4540;
+  margin: 0.8rem auto 0;
+  max-width: 36rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #5d4540;
 }
 
-/* ===== LAYOUT (player + playlist) ===== */
 .layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 320px;
-    gap: 1.75rem;
-    align-items: start;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 1.75rem;
+  align-items: start;
 }
 
-/* ===== PLAYER ===== */
 .player {
-    background: linear-gradient(180deg, #fffcf8, #fff5f1);
-    border: 1px solid rgba(125, 15, 15, 0.12);
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 6px 18px rgba(68, 19, 19, 0.06);
-    min-width: 0;
+  background: linear-gradient(180deg, #fffcf8, #fff5f1);
+  border: 1px solid rgba(125, 15, 15, 0.12);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(68, 19, 19, 0.06);
+  min-width: 0;
 }
 
 .videoWrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #000;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
 }
 
 .videoWrap iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 .playerInfo {
-    padding: 1.4rem 1.6rem 1.6rem;
+  padding: 1.4rem 1.6rem 1.6rem;
 }
 
 .videoTitulo {
-    margin: 0 0 0.6rem;
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    line-height: 1.25;
-    color: #5a1111;
-    font-weight: 700;
+  margin: 0 0 0.6rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  line-height: 1.25;
+  color: #5a1111;
+  font-weight: 700;
 }
 
 .videoDesc {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: #5d4540;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #5d4540;
 }
 
-/* ===== PLAYLIST ===== */
 .playlist {
-    background: linear-gradient(180deg, #fffcf8, #fff5f1);
-    border: 1px solid rgba(125, 15, 15, 0.12);
-    border-radius: 18px;
-    box-shadow: 0 6px 18px rgba(68, 19, 19, 0.06);
-    padding: 1.25rem;
-    max-height: 620px;
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 1.5rem;
+  background: linear-gradient(180deg, #fffcf8, #fff5f1);
+  border: 1px solid rgba(125, 15, 15, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(68, 19, 19, 0.06);
+  padding: 1.25rem;
+  max-height: 620px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 1.5rem;
 }
 
 .playlistTitulo {
-    margin: 0 0 1rem;
-    padding: 0 0.25rem;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #5a1111;
+  margin: 0 0 1rem;
+  padding: 0 0.25rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #5a1111;
 }
 
 .playlistScroll {
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding-right: 0.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: 0.25rem;
 }
 
 .playlistScroll::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 .playlistScroll::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 .playlistScroll::-webkit-scrollbar-thumb {
-    background: rgba(125, 15, 15, 0.18);
-    border-radius: 3px;
+  background: rgba(125, 15, 15, 0.18);
+  border-radius: 3px;
 }
 
 .item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    width: 100%;
-    padding: 0.6rem;
-    border: 1px solid transparent;
-    border-radius: 12px;
-    background: transparent;
-    text-align: left;
-    cursor: pointer;
-    font-family: inherit;
-    color: inherit;
-    transition: background 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .item:hover {
-    background: rgba(125, 15, 15, 0.06);
-    border-color: rgba(125, 15, 15, 0.12);
+  background: rgba(125, 15, 15, 0.06);
+  border-color: rgba(125, 15, 15, 0.12);
 }
 
 .itemAtivo {
-    background: linear-gradient(135deg, rgba(125, 15, 15, 0.1), rgba(174, 75, 55, 0.05));
-    border-color: rgba(125, 15, 15, 0.28);
+  background: linear-gradient(
+    135deg,
+    rgba(125, 15, 15, 0.1),
+    rgba(174, 75, 55, 0.05)
+  );
+  border-color: rgba(125, 15, 15, 0.28);
 }
 
 .itemThumb {
-    width: 96px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    overflow: hidden;
-    background: rgba(125, 15, 15, 0.1);
-    aspect-ratio: 16 / 9;
+  width: 96px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(125, 15, 15, 0.1);
+  aspect-ratio: 16 / 9;
 }
 
 .itemThumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .itemTitulo {
-    flex: 1;
-    min-width: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #5a1111;
-    line-height: 1.35;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  flex: 1;
+  min-width: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #5a1111;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .itemAtivo .itemTitulo {
-    color: #7d0f0f;
-    font-weight: 700;
+  color: #7d0f0f;
+  font-weight: 700;
 }
 
-/* ===== LOADING / ERRO ===== */
 .loading {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 50vh;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.05rem;
-    color: #7a5a55;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  color: #7a5a55;
 }
 
-/* ===== RESPONSIVO ===== */
 @media (max-width: 900px) {
-    .main {
-        padding: 2rem 1.5rem 3rem;
-    }
-    .layout {
-        grid-template-columns: minmax(0, 1fr) 260px;
-        gap: 1.25rem;
-    }
-    .itemThumb {
-        width: 80px;
-    }
+  .main {
+    padding: 2rem 1.5rem 3rem;
+  }
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 1.25rem;
+  }
+  .itemThumb {
+    width: 80px;
+  }
 }
 
 @media (max-width: 700px) {
-    .main {
-        padding: 1.5rem 1rem 2.5rem;
-    }
-    .layout {
-        grid-template-columns: 1fr;
-    }
-    .playlist {
-        position: static;
-        max-height: none;
-    }
-    .playlistScroll {
-        max-height: 360px;
-    }
-    .playerInfo {
-        padding: 1.1rem 1.2rem 1.3rem;
-    }
-    .itemThumb {
-        width: 90px;
-    }
+  .main {
+    padding: 1.5rem 1rem 2.5rem;
+  }
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .playlist {
+    position: static;
+    max-height: none;
+  }
+  .playlistScroll {
+    max-height: 360px;
+  }
+  .playerInfo {
+    padding: 1.1rem 1.2rem 1.3rem;
+  }
+  .itemThumb {
+    width: 90px;
+  }
 }
 
 @media (max-width: 480px) {
-    .main {
-        padding: 1.2rem 0.75rem 2rem;
-    }
-    .banner {
-        margin-bottom: 1.5rem;
-    }
-    .player,
-    .playlist {
-        border-radius: 14px;
-    }
-    .playerInfo {
-        padding: 0.9rem 1rem 1.1rem;
-    }
-    .videoTitulo {
-        font-size: 1.1rem;
-    }
-    .videoDesc {
-        font-size: 0.88rem;
-    }
-    .playlist {
-        padding: 1rem;
-    }
-    .item {
-        padding: 0.5rem;
-        gap: 0.6rem;
-    }
-    .itemThumb {
-        width: 72px;
-    }
-    .itemTitulo {
-        font-size: 0.8rem;
-    }
+  .main {
+    padding: 1.2rem 0.75rem 2rem;
+  }
+  .banner {
+    margin-bottom: 1.5rem;
+  }
+  .player,
+  .playlist {
+    border-radius: 14px;
+  }
+  .playerInfo {
+    padding: 0.9rem 1rem 1.1rem;
+  }
+  .videoTitulo {
+    font-size: 1.1rem;
+  }
+  .videoDesc {
+    font-size: 0.88rem;
+  }
+  .playlist {
+    padding: 1rem;
+  }
+  .item {
+    padding: 0.5rem;
+    gap: 0.6rem;
+  }
+  .itemThumb {
+    width: 72px;
+  }
+  .itemTitulo {
+    font-size: 0.8rem;
+  }
 }
