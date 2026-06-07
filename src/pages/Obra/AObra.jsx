@@ -13,9 +13,6 @@ export default function ObraVestibular() {
     const [dados, setDados] = useState(null);
     const [carregando, setCarregando] = useState(true);
     const { language, t, mapFields } = useLanguage();
-
-
-    /* Frases */
     const [index, setIndex] = useState(0);
     const frases = t('frases') || [];
 
