@@ -5,6 +5,7 @@ import AuthorImg from '/images/foto-carolina.png';
 import PaginaLivro from '/images/pagina-livro.png';
 import Footer from '../../components/Footer/Footer.jsx';
 import { Link } from 'react-router-dom';
+
 const Inicio = () => {
     const { language, t } = useLanguage();
 
@@ -15,8 +16,11 @@ const Inicio = () => {
 
                 <main className={styles.hero}>
                     <h1 className={styles.title}>
-                        {t('welcome_to')} <br />
-                        <span className={styles.italicTitle}>Intertexto!</span>
+                        {t('welcome_to')}
+                    </h1>
+
+                    <h1 className={styles.italicTitle}>
+                        Intertexto!
                     </h1>
 
                     <p className={styles.description}>
@@ -28,7 +32,7 @@ const Inicio = () => {
                     <div className={styles.btnGroup}>
 
                         <Link to="/Obra" className={styles.logoGroup}>
-                        <button className={styles.btn}>{language === 'en' ? 'Discover Child of the Dark' : 'Conheça Quarto de Despejo'}</button>
+                            <button className={styles.btn}>{language === 'en' ? 'Discover Child of the Dark' : 'Conheça Quarto de Despejo'}</button>
                         </Link>
 
                         <Link to="/Biblioteca" className={styles.logoGroup}>
@@ -36,7 +40,7 @@ const Inicio = () => {
                         </Link>
 
                         <Link to="/Sobre" className={styles.logoGroup}>
-                        <button className={styles.btn}>{language === 'en' ? 'Meet our team' : 'Conheça nossa equipe'}</button>
+                            <button className={styles.btn}>{language === 'en' ? 'Meet our team' : 'Conheça nossa equipe'}</button>
                         </Link>
                     </div>
                 </main>
