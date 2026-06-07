@@ -13,6 +13,17 @@ export default function ObraVestibular() {
 
     const { language, t,  mapFields } = useLanguage();
 
+    /* Frases */
+    const [index, setIndex] = useState(0);
+
+    const proxima = () => {
+        setIndex((index + 1) % frases.length);
+    };
+
+    const anterior = () => {
+        setIndex((index - 1 + frases.length) % frases.length);
+    };
+
     useEffect(() => {
         const carregarLivros = async () => {
             try {
@@ -153,6 +164,36 @@ export default function ObraVestibular() {
                 </div>
             </section>
 
+          <section className={`${styles.container} ${styles.textContainerTrechos}`}>
+    <h2 className={styles.titleTrechos}>Trechos marcantes</h2>
+
+    <h3 className={styles.subtitleTrechos}>palavras que ecoam</h3>
+
+    <div className={styles.quoteIconTrechos}>❞</div>
+
+    <p className={styles.fraseTrechos}>“{frases[index].texto}”</p>
+
+    <time className={styles.dataTrechos}>{frases[index].data}</time>
+
+    <div className={styles.controlsTrechos}>
+        <button onClick={anterior} className={styles.btnTrechos}>
+            &lt;
+        </button>
+
+        <div className={styles.dotsTrechos}>
+            {frases.map((_, i) => (
+                <strong
+                    key={i}
+                    className={i === index ? styles.activeDotTrechos : styles.dotTrechos}
+                ></strong>
+            ))}
+        </div>
+
+        <button onClick={proxima} className={styles.btnTrechos}>
+            &gt;
+        </button>
+    </div>
+</section>
             <Footer />
         </div>
     );

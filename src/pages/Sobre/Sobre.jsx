@@ -27,7 +27,6 @@ export default function Inicio() {
                 setError('Não foi possível carregar os dados da equipe.');
             }
         };
-
         carregarEquipe();
     }, []);
 

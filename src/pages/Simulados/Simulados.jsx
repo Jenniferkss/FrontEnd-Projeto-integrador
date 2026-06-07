@@ -215,9 +215,13 @@ function Simulados({ idiomaDoSite = 'PT' }) {
         <div className={styles.page}>
             <Header />
             <main className={styles.hero}>
-                <div className={styles.tituloDiv}>
-                    <h1 className={styles.title}>Simulado</h1>
-                </div>
+                <section className={styles.banner}>
+                    <p className={styles.kicker}>Teste seu conhecimento</p>
+                    <h1 className={styles.titulo}>Simulado</h1>
+                    <p className={styles.subtitulo}>
+                    Prepare-se para o vestibular de forma prática e eficiente.
+                    </p>
+                </section>
 
                 <div className={styles.falaJesus}>
                     <div className={styles.divTextoJesus}>

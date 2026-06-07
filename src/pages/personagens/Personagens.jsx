@@ -20,6 +20,7 @@ const DESCRIPTIONS = [
     'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
 ];
 
+
 export default function Personagens() {
     const [livro, setLivro] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -80,7 +81,7 @@ export default function Personagens() {
                             <img
                                 src={loading ? '' : photos[i] || ''}
                                 alt={loading ? 'Carregando...' : characters[i] || 'Personagem'}
-                                style={{ width: '13rem', borderRadius: '15px', height: '13rem', minWidth: '13rem', objectFit: 'cover' }}
+                                className={styles.personagemFoto}
                             />
                             <div className={styles.divNomeDesc}>
                                 <h1 className="title-main" style={{ marginBottom: '20px' }}>

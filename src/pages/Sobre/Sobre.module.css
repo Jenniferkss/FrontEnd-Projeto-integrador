@@ -1,12 +1,13 @@
 .pageContainer {
     background-color: #fdf0f2;
     min-height: 100vh;
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; 
 }
 
 .boxedLayout {
@@ -19,8 +20,32 @@
     align-items: center;
 }
 
+.titulo {
+    margin: 0; 
+    font-family: 'Playfair Display', serif; 
+    font-size: 3.5rem; 
+    line-height: 1.05;
+    color: #000000;
+    font-weight: 700;
+}
+
+.subtitulo {
+    margin: 0.8rem auto 0; 
+    max-width: 45rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    color: #5d4540;
+}
+
+/* CONTEÚDO CENTRAL (HERO): Centraliza os integrantes com segurança */
 .hero {
+    flex: 1; 
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; 
+    /* Mudamos de 3rem para 3rem no topo, 20px nas laterais e 6rem na base */
+    padding: 3rem 20px 3rem 20px; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,6 +54,7 @@
     box-sizing: border-box;
 }
 
+/* TÍTULO EQUIPE */
 .tituloDiv {
     width: 100%;
     padding: 0 1rem;
@@ -40,7 +66,57 @@
     font-size: 3rem;
     color: #1a1a1a;
     font-weight: bold;
+    margin: 0;
 }
+
+/* ÁREA DOS CARDS */
+.divGrandeIntegrantes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px; 
+}
+
+/* FILEIRAS */
+.linhaIntegrantes {
+    width: 100%;
+    display: flex;
+    gap: 20px; 
+    justify-content: center; 
+    align-items: flex-start; 
+    flex-wrap: wrap;
+}
+
+/* CARD INDIVIDUAL */
+.integrante {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    width: 135px; 
+    text-align: center;
+}
+
+.integrante h4 {
+    margin: 6px 0 2px 0;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.integranteCurso {
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    color: #555;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.2;
+}
+
+/* --- Elementos de formulários/questões mantidos caso use em outra rota --- */
 
 .falaJesus {
     font-family: 'Montserrat', sans-serif;

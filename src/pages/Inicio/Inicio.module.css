@@ -86,16 +86,17 @@
 
 .title {
     font-family: 'Playfair Display', serif;
-    font-size: 4.5rem;
+    font-size: 5.5rem;
     line-height: 1.05;
     color: #1a1a1a;
-    margin-bottom: 2.5rem;
+    
     font-weight: bolder;
 }
 
 .italicTitle {
     color:  #7d0f0f;
     font-style: italic;
+    font-size: 6.5rem;
     font-weight: 550;
 }
 
@@ -266,4 +267,51 @@
 .themeList li {
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
+}
+
+
+/* NOTEBOOKS */
+@media (min-width: 1366px) and (max-width: 1599px) {
+    .hero {
+        padding-top: 7rem;
+    }
+
+    .title {
+        font-size: 5.5rem;
+    }
+
+    .description {
+        max-width: 55rem;
+        font-size: 1.15rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 0.7rem 1.5rem;
+    }
+}
+
+/* DESKTOPS GRANDES */
+@media (min-width: 1600px) {
+    .hero {
+        padding-top: 9rem;
+    }
+
+    .title {
+        font-size: 6.5rem;
+    }
+
+    .description {
+        max-width: 65rem;
+        font-size: 1.35rem;
+    }
+
+    .btn {
+        font-size: 1.15rem;
+        padding: 0.85rem 2rem;
+    }
+
+    .btnGroup {
+        gap: 1.8rem;
+    }
 }
