@@ -1,210 +1,209 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './Vestibular.module.css';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer.jsx';
-import { useLanguage } from '../../context/LanguageContext.jsx';
-import fieldsMap from '../../mapeamento/mapeamento';
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import styles from './Vestibular.module.css'
+import Header from '../../components/Header/Header'
+import Footer from '../../components/Footer/Footer.jsx'
 
-export default function ObraVestibular() {
-    const [dados, setDados] = useState([]);
-    const [carregando, setCarregando] = useState(true);
-    const {  t, mapFields, selectField } = useLanguage();
-    const localized = dados ? mapFields(dados, fieldsMap.vestibular) : {};
+export default function Vestibular() {
+  const [conteudo, setConteudo] = useState(null)
+  const [dicas, setDicas] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-    useEffect(() => {
-        const carregarLivros = async () => {
-            try {
-                const response = await fetch(
-                    'https://backend-projeto-integrador-rana.onrender.com/api/dicaVestibular',
-                    {
-                        method: 'GET',
-                        headers: {
-                            'x-api-key': 'amods',
-                            'Content-Type': 'application/json',
-                        },
-                    },
-                );
+  useEffect(() => {
+    const carregarDados = async () => {
+      try {
+        setLoading(true)
+        setError(null)
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('Erro retornado pelo servidor:', errorText);
-                    throw new Error(`Erro ${response.status} ao buscar dados.`);
-                }
+        const resConteudo = await fetch(
+          'https://backend-projeto-integrador-rana.onrender.com/api/conteudoVestibular?livroId=6',
+          { headers: { 'x-api-key': 'amods' } }
+        )
 
-                const data = await response.json();
-                console.debug('Vestibular - raw data from API:', data);
-                const processed = Array.isArray(data) ? data[0] : data;
-                console.debug('Vestibular - processed dados:', processed);
-                setDados(processed);
-            } catch (error) {
-                console.error('Erro ao conectar com o back-end:', error);
-            } finally {
-                setCarregando(false);
-            }
-        };
+        if (!resConteudo.ok) {
+          throw new Error('Erro ao buscar conteúdo do vestibular')
+        }
 
-        carregarLivros();
-    }, []);
+        const jsonConteudo = await resConteudo.json()
+        const dadosConteudo = jsonConteudo.data || jsonConteudo
 
-    if (carregando) {
-        return (
-            <div style={{ textAlign: 'center', padding: '50px', fontSize: '18px' }}>
-                {t('loading_database')}
-            </div>
-        );
+        const resDicas = await fetch(
+          'https://backend-projeto-integrador-rana.onrender.com/api/dicaVestibular?livroId=6',
+          { headers: { 'x-api-key': 'amods' } }
+        )
+
+        if (!resDicas.ok) {
+          throw new Error('Erro ao buscar dicas')
+        }
+
+        const jsonDicas = await resDicas.json()
+        const listaDicas = Array.isArray(jsonDicas)
+          ? jsonDicas
+          : jsonDicas.data || []
+
+        setConteudo(dadosConteudo)
+        setDicas(listaDicas.slice(0, 8))
+      } catch (err) {
+        console.error('Erro ao carregar dados:', err)
+        setError('Não foi possível carregar os dados do vestibular.')
+      } finally {
+        setLoading(false)
+      }
     }
 
-    if (!dados || dados.length === 0) {
-        return (
-            <div style={{ textAlign: 'center', padding: '50px', fontSize: '18px' }}>
-                {t('no_records')}
-            </div>
-        );
-    }
+    carregarDados()
+  }, [])
 
-    // Pega o primeiro registro do banco
-    const livro = dados[0];
-
-    // Lógica para garantir que Interpretações tenha conteúdo caso a coluna mude de nome ou venha vazia
-    // Lógica para garantir que Interpretações tenha conteúdo caso a coluna mude de nome ou venha vazia
-const obterInterpretacao = () => {
-    if (language === 'en') {
-        // Removido o "|| livro?.conteudoEn"
-        return livro?.interpretacoesEn || livro?.interpretacaoEn || 'No analysis available.';
-    }
-    // Removido o "|| livro?.conteudoPt"
-    return livro?.interpretacoesPt || livro?.interpretacaoPt || 'Nenhuma análise disponível.';
-};
-
+  if (loading) {
     return (
-        <div className={styles.pageContainer}>
-            <Header />
+      <div style={{ textAlign: 'center', padding: '80px' }}>
+        Carregando conteúdo do vestibular...
+      </div>
+    )
+  }
 
-            <div className={styles.contentWrapper}>
-                <header className={styles.mainHeader}>
-                    <p className={styles.kicker}>{t('vest_kicker')}</p>
+  if (error) {
+    return (
+      <div style={{ textAlign: 'center', padding: '80px', color: '#c0392b' }}>
+        {error}
+      </div>
+    )
+  }
 
-                    <h1 className={styles.headerTitle}>{t('vest_headerTitle')}</h1>
+  if (!conteudo) {
+    return (
+      <div style={{ textAlign: 'center', padding: '80px' }}>
+        Nenhum conteúdo encontrado.
+      </div>
+    )
+  }
 
-                    <p className={styles.lead}>{t('vest_lead')}</p>
-                </header>
+  return (
+    <div className={styles.pageContainer}>
+      <Header />
 
-                {/* GRID SUPERIOR */}
-                <section className={styles.topCardsGrid}>
-                    <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
-                        <h2 className={styles.cardTopTitle}>{t('vest_card_critical')}</h2>
-                        <p className={styles.cardTopText}>{localized.analiseCritica || t('unavailable')}</p>
-                    </div>
+      <div className={styles.contentWrapper}>
+        <header className={styles.mainHeader}>
+          <p className={styles.kicker}>VESTIBULAR</p>
+          <h1 className={styles.headerTitle}>A obra no vestibular</h1>
+          <p className={styles.lead}>
+            Entenda a obra através de interpretações, crítica social e possíveis
+            temas de redação.
+          </p>
+        </header>
 
-                    <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
-                        <h2 className={styles.cardTopTitle}>{t('vest_card_interpret')}</h2>
-                        <p className={styles.cardTopText}>{localized.interpretacoes || t('unavailable')}</p>
-                    </div>
+        <section className={styles.topCardsGrid}>
+          <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
+            <h2 className={styles.cardTopTitle}>Análise crítica</h2>
+            <p className={styles.cardTopText}>
+              {conteudo.analiseCriticaPt || 'Análise crítica não disponível.'}
+            </p>
+          </div>
 
-                    <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
-                        <h2 className={styles.cardTopTitle}>
-                            {t('vest_card_essayTopics')}
-                        </h2>
-                        <ul className={styles.cardTopList}>
-                            {Array.isArray(localized.temasRedacao) ? (
-                                localized.temasRedacao.map((tema, index) => <li key={index}>{tema}</li>)
-                            ) : (
-                                <>
-                                    <li>{t('essay_topic1')}</li>
-                                    <li>{t('essay_topic2')}</li>
-                                    <li>{t('essay_topic3')}</li>
-                                </>
-                            )}
-                        </ul>
-                    </div>
-                </section>
+          <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
+            <h2 className={styles.cardTopTitle}>Interpretações e análises</h2>
+            <p className={styles.cardTopText}>
+              {conteudo.interpretacoesPt || 'Interpretações não disponíveis.'}
+            </p>
+          </div>
 
-                {/* PARTE INFERIOR */}
-                <div className={styles.mainLayout}>
-                    <main className={styles.contentBox}>
-                        <h2 className={styles.contentTitle}>{selectField(dados, 'titulo') || localized.tituloPrincipal || t('vest_default_title')}</h2>
+          <div className={`${styles.cardTop} ${styles.cardRedBorder}`}>
+            <h2 className={styles.cardTopTitle}>
+              Possíveis temas para redação
+            </h2>
+            <ul className={styles.cardTopList}>
+              {conteudo.temasRedacaoPt?.length > 0 ? (
+                conteudo.temasRedacaoPt.map((tema, index) => (
+                  <li key={index}>{tema}</li>
+                ))
+              ) : (
+                <li>Nenhum tema cadastrado ainda.</li>
+              )}
+            </ul>
+          </div>
+        </section>
 
-                        <p className={styles.contentText}>{selectField(dados, 'conteudo') || selectField(dados, 'texto') || localized.textoPrincipal || localized.resumo || t('content_unavailable')}</p>
+        <div className={styles.mainLayout}>
+          <main className={styles.contentBox}>
+            <h2 className={styles.contentTitle}>
+              {conteudo.tituloPrincipalPt ||
+                'A Dupla Perspectiva: Carolina vs. o Leitor'}
+            </h2>
 
-                        {/* Bloco de Citação Puro vindo do Banco */}
-                        {livro?.citacao && (
-                            <blockquote className={styles.quoteBlock}>
-                                <div className={styles.quoteLine}></div>
-                                <p className={styles.quoteText}>“{livro.citacao}”</p>
-                            </blockquote>
-                        )}
+            <p className={styles.contentText}>
+              {conteudo.textoPrincipalPt ||
+                'Conteúdo principal não disponível.'}
+            </p>
 
-                        <h3 className={styles.vectorsTitle}>{t('key_vectors')}</h3>
+            {conteudo.citacao && (
+              <blockquote className={styles.quoteBlock}>
+                <div className={styles.quoteLine}></div>
+                <p className={styles.quoteText}>“{conteudo.citacao}”</p>
+              </blockquote>
+            )}
 
-                        <div className={styles.vectorListContainer}>
-                            {dados.contextoHist ? (
-                                <p className={styles.contentText}>{localized.contextoHist}</p>
-                            ) : (
-                                // Fallback Completo
-                                <div className={styles.vectorListFallback}>
-                                    <p>
-                                        <strong>{t('vector1_title')}</strong> {t('vector1_text')}
-                                    </p>
-                                    <p>
-                                        <strong>{t('vector2_title')}</strong> {t('vector2_text')}
-                                    </p>
-                                    <p>
-                                        <strong>{t('vector3_title')}</strong> {t('vector3_text')}
-                                    </p>
-                                </div>
-                            )}
-                        </div>
-
-                        {dados.personagens && (
-                            <div>
-                                <h3 className={styles.vectorsTitle}>{t('main_characters')}</h3>
-                                <p className={styles.contentText}>{localized.personagens}</p>
-                            </div>
-                        )}
-                    </main>
-
-                    {/* SIDEBAR */}
-                    <div className={styles.sidebar}>
-                        <div className={styles.videoBtnWrapper}>
-                            <Link to="/videoAulas">
-                                <button className={styles.videoBtn} > 
-                                    <FaPlayCircle />
-                                    {t('watch_video_classes')}
-                                </button>
-                            </Link>
-                        </div>
-                        
-
-                        <div className={styles.statsCard}>
-                            <h3 className={styles.statsTitle}>{t('exam_frequency')}</h3>
-
-                            <div className={styles.progressGroup}>
-                                {(livro?.estatisticas || [
-                                    { nome: 'Fuvest', porcentagem: 30 },
-                                    { nome: 'Unicamp', porcentagem: 72 },
-                                    { nome: 'ENEM', porcentagem: 42 },
-                                ]).map((est, index) => (
-                                    <div key={index} className={styles.statsItem}>
-                                        <div className={styles.progressLabels}>
-                                            <p>{est.nome}</p>
-                                            <p>{est.porcentagem}%</p>
-                                        </div>
-                                        <div className={styles.progressBg}>
-                                            <div
-                                                className={styles.progressBar}
-                                                style={{ width: `${est.porcentagem}%` }}
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h3 className={styles.vectorsTitle}>Vetores Analíticos Chave</h3>
+            <div className={styles.vectorListContainer}>
+              {[1, 2, 3].map(num => {
+                const titulo = conteudo[`vetor${num}TituloPt`]
+                const texto = conteudo[`vetor${num}TextoPt`]
+                return titulo ? (
+                  <p key={num} className={styles.contentText}>
+                    <strong>{titulo}</strong> {texto}
+                  </p>
+                ) : null
+              })}
             </div>
+          </main>
 
-            <Footer />
+          <div className={styles.sidebar}>
+            <Link to='/videoAulas' className={styles.videoBtn}>
+              Ver as vídeo-aulas
+            </Link>
+
+            <div className={styles.statsCard}>
+              <h3 className={styles.statsTitle}>Frequência nos vestibulares</h3>
+              <div className={styles.progressGroup}>
+                {[
+                  { nome: 'Fuvest', value: conteudo.frequenciaFuvest ?? 30 },
+                  { nome: 'Unicamp', value: conteudo.frequenciaUnicamp ?? 72 },
+                  { nome: 'ENEM', value: conteudo.frequenciaEnem ?? 42 },
+                ].map((item, index) => (
+                  <div key={index} className={styles.statsItem}>
+                    <div className={styles.progressLabels}>
+                      <span>{item.nome}</span>
+                      <span>{item.value}%</span>
+                    </div>
+                    <div className={styles.progressBg}>
+                      <div
+                        className={styles.progressBar}
+                        style={{ width: `${item.value}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-    );
+
+        {dicas.length > 0 && (
+          <section className={styles.dicasSection}>
+            <h2 className={styles.dicasTitle}>Dicas para o Vestibular</h2>
+            <div className={styles.dicasGrid}>
+              {dicas.map((dica, index) => (
+                <div key={index} className={styles.dicaCard}>
+                  <h4>{dica.tituloPt}</h4>
+                  <p>{dica.conteudoPt}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+
+      <Footer />
+    </div>
+  )
 }
