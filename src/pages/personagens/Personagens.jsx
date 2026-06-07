@@ -5,31 +5,11 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 
-const Descricoes = [
-  'Narradora e protagonista da obra. Mulher negra, catadora de papel e mãe solteira que vive na favela do Canindé, em São Paulo. Carolina é observadora, crítica e extremamente consciente da desigualdade social ao seu redor. A escrita funciona como forma de resistência e denúncia.',
-
-  'Filha caçula de Carolina. Representa inocência e esperança dentro do livro. Carolina frequentemente expressa o desejo de oferecer uma vida melhor para ela.',
-
-  'Filho de Carolina. Geralmente descrito como mais sensível e obediente. A autora demonstra forte preocupação com sua alimentação, educação e futuro.',
-
-  'Filho de Carolina. É apresentado como uma criança mais rebelde e difícil de controlar. Muitas vezes aparece em conflitos comuns da vida na favela, mostrando as dificuldades da maternidade em situação de pobreza extrema.',
-
-  'Morador da favela citado por Carolina. Representa os trabalhadores pobres que enfrentam diariamente a luta pela sobrevivência em meio à miséria e à exclusão social.',
-
-  'Peixeiro mencionado na obra. Surge em relatos do cotidiano da comunidade e ajuda a retratar as relações econômicas e sociais existentes entre os moradores da favela.',
-
-  'Eletricista citado por Carolina. Faz parte do conjunto de personagens secundários que ilustram a realidade dos trabalhadores e as dificuldades enfrentadas pelos habitantes do Canindé.',
-
-  'Morador da favela mencionado nos relatos de Carolina. Sua presença contribui para retratar os desafios, conflitos e formas de solidariedade existentes na comunidade.',
-
-  'Personagem citado no cotidiano da favela. Representa as relações sociais construídas entre os moradores e as dificuldades impostas pela pobreza.',
-
-  'Figura conhecida entre os habitantes do Canindé. Aparece como parte da rede de convivência da comunidade, evidenciando as diferentes estratégias de sobrevivência dos moradores.',
-
-  'Morador mencionado por Carolina em diversos momentos. Sua participação ajuda a demonstrar os impactos da desigualdade social e das condições precárias de vida na favela.',
-
-  'Personagem secundário que contribui para a construção do retrato social apresentado pela autora, evidenciando a realidade dos trabalhadores pobres e marginalizados.'
-];
+function toList(value) {
+    if (Array.isArray(value)) return value;
+    if (typeof value === 'string' && value.trim()) return [value.trim()];
+    return [];
+}
 
 
 export default function Personagens() {
@@ -69,6 +49,17 @@ export default function Personagens() {
 
     const characters = selectField(livro, 'personagens') || livro?.personagens || [];
     const photos = selectField(livro, 'fotoPersonagens') || livro?.fotoPersonagens || [];
+    const descriptions =
+        toList(
+            selectField(livro, 'descricaoPersonagens') ||
+            livro?.descricaoPersonagens ||
+            selectField(livro, 'descricoesPersonagens') ||
+            livro?.descricoesPersonagens ||
+            selectField(livro, 'descricaoPersonagensPT') ||
+            livro?.descricaoPersonagensPT ||
+            selectField(livro, 'descricoesPersonagensPT') ||
+            livro?.descricoesPersonagensPT
+        );
     const count = Math.max(characters.length || 0, 12);
 
     return (
@@ -98,7 +89,7 @@ export default function Personagens() {
                                 <h1 className="title-main" style={{ marginBottom: '20px' }}>
                                     {loading ? 'Carregando personagem...' : characters[i] || 'Nome personagem'}
                                 </h1>
-                                <p>{Descricoes[i] || 'Descrição do personagem'}</p>
+                                <p>{descriptions[i] || 'Descrição indisponível'}</p>
                             </div>
                         </div>
                     ))}
