@@ -8,6 +8,40 @@
     padding: 0;
 }
 
+.banner {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 1rem 0.5rem;
+}
+
+.kicker {
+    margin: 0 0 0.6rem; 
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18rem; 
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #7d0f0f;
+}
+
+.titulo {
+    margin: 0; 
+    font-family: 'Playfair Display', serif; 
+    font-size: 3.5rem; 
+    line-height: 1.05;
+    color: #000000;
+    font-weight: 700;
+}
+
+.subtitulo {
+    margin: 0.8rem auto 0; 
+    max-width: 45rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    color: #5d4540;
+}
+
 .boxedLayout {
     width: 90%;
     max-width: 1200px;
