@@ -98,6 +98,7 @@
     font-style: italic;
     font-size: 6.5rem;
     font-weight: 550;
+    margin-bottom: 1rem;
 }
 
 .description {
@@ -197,15 +198,35 @@
     margin-bottom: 4rem;
 }
 
+.text {
+    font-family:'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: #1a1a1a;
+    margin-top: 4rem;
+}
+
 .quote {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     color: #1a1a1a;
     margin: 0;
 }
 
+.quoteLine {
+    width: 4px;
+    height: 5rem; 
+    background-color: #7d0f0f;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
 .quoteAuthor {
-    font-family:'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     margin-top: 1rem;
     color: #333;

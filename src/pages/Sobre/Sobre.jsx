@@ -39,9 +39,13 @@ export default function Inicio() {
             <Header />
             <div className={styles.boxedLayout}>
                 <main className={styles.hero}>
-                    <div className={styles.tituloDiv}>
-                        <h1 className={styles.title}>Equipe</h1>
-                    </div>
+                    <section className={styles.banner}>
+                        <p className={styles.kicker}>Conheça nossa</p>
+                        <h1 className={styles.titulo}>Equipe</h1>
+                        <p className={styles.subtitulo}>
+                            Conheça os estudantes por trás do Intertexto, que uniram suas habilidades para criar uma experiência literária única e acessível a todos.
+                        </p>
+                    </section>
                     <div className={styles.divGrandeIntegrantes}>
                         {ids.map((id) => (
                             <div key={id} className={styles.integrante}>

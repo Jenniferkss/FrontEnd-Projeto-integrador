@@ -279,8 +279,11 @@
 }
 
 .dicasTitle {
+    background-color: #5f0909;
+    padding: 1rem 2rem 1rem 2rem;
+    border-radius: 12px;
     font-family: 'Playfair Display', serif;
-    color: #7d0f0f;
+    color: #fff1f1;
     font-size: 1.7rem;
     font-weight: 700;
     text-align: center;
@@ -314,9 +317,11 @@
     font-size: 1.15rem;
     font-weight: 700;
     margin: 0 0 12px;
+    text-align: center;
 }
 
 .dicaCard p {
+    text-align: center;
     font-family: 'Montserrat', sans-serif;
     color: #444;
     font-size: 1rem;
