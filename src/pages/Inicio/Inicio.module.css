@@ -169,7 +169,7 @@
 .badgeGroup {
     display: flex;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .badge {
@@ -177,10 +177,9 @@
     padding: 0.3rem 1rem;
     border-radius: 20px;
     font-family: 'Playfair Display', serif;
-    color: #fdf0f2;
+    color: #ffffff;
     font-weight: bold;
     font-size: 0.7rem;
-    margin-bottom: 0.1rem;
 }
 
 .bookTitle {

@@ -78,5 +78,47 @@
   "meet_our_team": "Meet our team",
   "team": "Team",
   "member_name": "Member name",
-  "member_course": "Member course"
+  "member_course": "Member course",
+  "frases": [
+  {
+    "texto": "Hunger is the dynamite of the human body.",
+    "data": "May 15, 1958"
+  },
+  {
+    "texto": "Brazil needs to be led by someone who has already experienced hunger.",
+    "data": "July 19, 1955"
+  },
+  {
+    "texto": "Those who eat invented hunger.",
+    "data": "May 22, 1958"
+  },
+  {
+    "texto": "The dizziness caused by hunger is worse than that caused by alcohol. Alcohol makes us want to sing, but hunger makes us tremble.",
+    "data": "May 13, 1958"
+  },
+  {
+    "texto": "Life is like a book. Only after it has been read do we know what it contains.",
+    "data": "June 3, 1958"
+  },
+  {
+    "texto": "I came to the conclusion that those who do not need to go to heaven do not need to look up.",
+    "data": "May 20, 1958"
+  },
+  {
+    "texto": "When I arrive in the city, I feel as though I am in paradise. Everything seems wonderful. But when I return to the favela, I feel like a discarded object.",
+    "data": "May 16, 1958"
+  },
+  {
+    "texto": "There are days when I suffer so much that it seems I am the root of all the suffering in the world.",
+    "data": "May 13, 1958"
+  },
+  {
+    "texto": "The cost of living is what revolts us. The cost of living is what turns us into victims.",
+    "data": "May 11, 1958"
+  },
+  {
+    "texto": "I write reality.",
+    "data": "June 16, 1958"
+  }
+]
 }

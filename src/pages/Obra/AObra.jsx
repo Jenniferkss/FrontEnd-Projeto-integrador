@@ -6,33 +6,18 @@ import Footer from '../../components/Footer/Footer.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import fieldsMap from '../../mapeamento/mapeamento';
 import { request } from '../../services/api.js';
-
 import carolina from '../../../public/images/carolina.png';
 import livro from '../../../public/images/livro.png';
-
-const frases = [
-    {
-        texto: 'A fome é a dinamite do corpo humano.',
-        data: '15 de maio de 1958',
-    },
-    {
-        texto: 'O Brasil precisa ser dirigido por uma pessoa que já passou fome.',
-        data: '19 de julho de 1955',
-    },
-    {
-        texto: 'Quem inventou a fome são os que comem.',
-        data: '22 de maio de 1958',
-    },
-];
 
 export default function ObraVestibular() {
     const [dados, setDados] = useState(null);
     const [carregando, setCarregando] = useState(true);
+    const { language, t, mapFields } = useLanguage();
 
-    const { language, t,  mapFields } = useLanguage();
 
     /* Frases */
     const [index, setIndex] = useState(0);
+    const frases = t('frases') || [];
 
     const proxima = () => {
         setIndex((index + 1) % frases.length);
@@ -52,10 +37,10 @@ export default function ObraVestibular() {
                     },
                 });
 
-                    console.debug('AObra - raw data from API:', data);
-                    const processed = Array.isArray(data) ? data[0] : data;
-                    console.debug('AObra - processed dados:', processed);
-                        setDados(processed);
+                console.debug('AObra - raw data from API:', data);
+                const processed = Array.isArray(data) ? data[0] : data;
+                console.debug('AObra - processed dados:', processed);
+                setDados(processed);
             } catch (error) {
                 console.error('Erro ao conectar com o back-end:', error);
             } finally {
@@ -174,36 +159,44 @@ export default function ObraVestibular() {
                 </div>
             </section>
 
-          <section className={`${styles.container} ${styles.textContainerTrechos}`}>
-    <h2 className={styles.titleTrechos}>Trechos marcantes</h2>
+            <section className={`${styles.container} ${styles.textContainerTrechos}`}>
+                <h2 className={styles.titleTrechos}>Trechos marcantes</h2>
 
-    <h3 className={styles.subtitleTrechos}>palavras que ecoam</h3>
+                <h3 className={styles.subtitleTrechos}>palavras que ecoam</h3>
 
-    <div className={styles.quoteIconTrechos}>❞</div>
+                <div className={styles.quoteIconTrechos}>❞</div>
 
-    <p className={styles.fraseTrechos}>“{frases[index].texto}”</p>
+                <p className={styles.fraseTrechos}>
+                    “{frases[index]?.texto}”
+                </p>
 
-    <time className={styles.dataTrechos}>{frases[index].data}</time>
+                <time className={styles.dataTrechos}>
+                    {frases[index]?.data}
+                </time>
 
-    <div className={styles.controlsTrechos}>
-        <button onClick={anterior} className={styles.btnTrechos}>
-            &lt;
-        </button>
+                <div className={styles.controlsTrechos}>
+                    <button onClick={anterior} className={styles.btnTrechos}>
+                        &lt;
+                    </button>
 
-        <div className={styles.dotsTrechos}>
-            {frases.map((_, i) => (
-                <strong
-                    key={i}
-                    className={i === index ? styles.activeDotTrechos : styles.dotTrechos}
-                ></strong>
-            ))}
-        </div>
+                    <div className={styles.dotsTrechos}>
+                        {frases.map((_, i) => (
+                            <strong
+                                key={i}
+                                className={
+                                    i === index
+                                        ? styles.activeDotTrechos
+                                        : styles.dotTrechos
+                                }
+                            />
+                        ))}
+                    </div>
 
-        <button onClick={proxima} className={styles.btnTrechos}>
-            &gt;
-        </button>
-    </div>
-</section>
+                    <button onClick={proxima} className={styles.btnTrechos}>
+                        &gt;
+                    </button>
+                </div>
+            </section>
             <Footer />
         </div>
     );
