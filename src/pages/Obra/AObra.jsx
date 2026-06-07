@@ -1,28 +1,39 @@
-import { useState, useEffect } from 'react';
-
-import styles from '../Obra/AObra.module.css';
+import {useState, useEffect} from 'react';
+import styles from './Obra/AObra.module.css';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer.jsx';
-import { useLanguage } from '../../context/LanguageContext.jsx';
+import Footer from '../../components/Footer/Footer';
+import { useLanguage } from '../../context/LanguageContext';
 import fieldsMap from '../../mapeamento/mapeamento';
-import { request } from '../../services/api.js';
-
+import {request} from '../../services/api.js';
 
 export default function ObraVestibular() {
+    const frases =[
+        {
+            texto: 'A fome é a dinamite do corpo humano',
+            data: 'Página 45'
+        },
+        {
+            texto: 'Outra frase marcante',
+            data: 'Página 82'
+        },
+        {
+            texto: 'Mais uma frase',
+            data: 'Página 120'
+        },
+    ];
     const [dados, setDados] = useState(null);
     const [carregando, setCarregando] = useState(true);
 
-    const { language, t,  mapFields } = useLanguage();
+    const {language, t, mapFields} = useLanguage();
 
-    /* Frases */
     const [index, setIndex] = useState(0);
 
     const proxima = () => {
-        setIndex((index + 1) % frases.length);
+        setIndex ((index + 1) % frases.length);
     };
 
     const anterior = () => {
-        setIndex((index - 1 + frases.length) % frases.length);
+        setIndex((index -1 + frases.length) % frases.length);
     };
 
     useEffect(() => {
@@ -34,13 +45,13 @@ export default function ObraVestibular() {
                         'x-api-key': 'amods',
                     },
                 });
-                    console.debug('AObra - raw data from API:', data);
+    console.debug('AObra - raw data from API:', data);
 
-                    const processed = Array.isArray(data) ? data[0] : data;
+    const processed = Array.isArray(data) ? data[0] : data;
 
-                    console.debug('AObra - processed dados:', processed);
+    console.debug('AObra - processed dados:', processed);
 
-            setDados(processed);
+    setDados(processed);
             } catch (error) {
                 console.error('Erro ao conectar com o back-end:', error);
             } finally {
@@ -50,14 +61,11 @@ export default function ObraVestibular() {
 
         carregarLivros();
     }, []);
-    
 
-    if (carregando) {
-        return (
+   if (carregando) {
+    return (
             <div className={styles.loading}>
-                <p>
-                    {t('loading_database')}
-                </p>
+           <p>{t('loading_database')}</p>
             </div>
         );
     }
@@ -70,34 +78,34 @@ export default function ObraVestibular() {
         );
     }
 
-    const localized = dados ? mapFields(dados, fieldsMap.obra) : {};
+const localized = dados ? mapFields(dados, fieldsMap.obra) : {};
 
-    return (
-        <div className={styles.page}>
-            <Header />
+return (
+    <div className={styles.page}>
+        < Header />
 
-            <section className={styles.hero}>
-                <div className={styles.leftHero}>
-                    <div className={styles.quoteBox}>
-                        <h1 className={styles.titleMain}>{t('title_part1')}</h1>
-                        <h1 className={styles.redTitleMain}>{t('title_part2')}</h1>
+        <section className={styles.hero}>
+            <div className={styles.leftHero}>
+                <div className={styles.quoteBox}>
+                    <h1 className={styles.titleMain}>{t('title_part1')}</h1>
+                    <h1 className={styles.redtitleMain}>{t('title_part2')}</h1>
 
-                        <p className={styles.subtitle}>&nbsp;“{t('quote_brazil_needs')}”</p>
+                <p className={styles.subtitle}>&nbsp;"{t('quote_brazil_needs')}"</p>
 
-                        <p className={styles.subtitleAuthor}>{t('quote_author')}</p>
-                    </div>
+            <p className={styles.subtitleAuthor}>{t('quote_author')} </p>
                 </div>
+            </div>
 
-                <div className={styles.rightHero}>
-                    <img
-                        src={dados?.fotoAutor}
-                        alt={dados?.autor}
-                        className={styles.authorImage}
-                    />
-                </div>
-            </section>
+        <div className={styles.rightHero}>
+            <img 
+            src={dados?.fotoAutor}
+            alt={dados?.autor}
+            className={styles.authorImage}
+            />
+        </div>
+        </section>
 
-            <section className={styles.aboutBook}>
+         <section className={styles.aboutBook}>
                 <div className={styles.bookImage}>
                     <img
                         src={dados?.capaURL}
@@ -166,7 +174,71 @@ export default function ObraVestibular() {
                 </div>
             </section>
 
-          <section className={`${styles.container} ${styles.textContainerTrechos}`}>
+        <section className={styles.aboutBook}>
+            <div className={styles.bookImage}>
+                <img 
+                src={dados?.capaURL}
+                alt={language ==' en' ? dados?.tituloEN : dados?.tituloPT}
+                className={styles.bookCover}
+                />
+            </div>
+
+            <div className={styles.bookTitle}>
+                <h2>
+                    {language === 'en'
+                    ? dados?.tituloEN
+                    : dados?.tituloPT
+                    }
+                </h2>
+            </div>
+
+        <div className={styles.cards}>
+            <div className={styles.cards}>
+                <p>{t('publication')}</p>
+                <h3>{dados?.anoPublicacao}</h3>
+            </div>
+     <div className={styles.card}>
+            <p>{t('languages')}</p>
+                <h3>{localized.languages || (language === 'en' ? '13 translations' : '13 traduções')}</h3>
+    </div>
+
+<div className={styles.card}>
+    <p>{t('sales')}</p>
+        <h3>{localized.sales || (language === 'en' ? '1 million +' : '1 milhão +')}</h3>
+</div>
+
+    <div className={styles.card}>
+        <p>{t('genre')}</p>
+            <p>
+    {language === 'en'
+    ? dados?.generoEN
+    : dados?.generoPT}
+            </p>
+    </div>
+        </div>
+
+<div className={styles.textBox}>
+    <p> {language === 'en' 
+    ?dados?.descricaoEN
+    :dados?.descricaoPT}
+    </p>
+</div>
+        </section>
+
+    <section className={styles.container}>
+        <div className={styles.textContainer}>
+             <h2 className={styles.titleContainer}>{localized.titleAnalysis || t('analysis_of_work')}</h2>
+        
+    <p>
+        {language === 'en'
+        ? dados?.analiseEN
+        : dados?.analisePT
+        }
+    </p>
+        </div>
+    </section>
+
+      <section className={`${styles.container} ${styles.textContainerTrechos}`}>
     <h2 className={styles.titleTrechos}>Trechos marcantes</h2>
 
     <h3 className={styles.subtitleTrechos}>palavras que ecoam</h3>
@@ -196,7 +268,7 @@ export default function ObraVestibular() {
         </button>
     </div>
 </section>
-            <Footer />
-        </div>
-    );
+        <Footer/>
+    </div>
+);
 }
