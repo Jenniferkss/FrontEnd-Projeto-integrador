@@ -5,20 +5,12 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 
-const DESCRIPTIONS = [
-    'Descrição do personagem',
-    'Filho de Carolina. É apresentado como uma criança mais rebelde e difícil de controlar. Muitas vezes aparece em conflitos comuns da vida na favela, mostrando as dificuldades da maternidade em situação de pobreza extrema.',
-    'Outro filho de Carolina. Geralmente descrito como mais sensível e obediente. A autora demonstra forte preocupação com sua alimentação, educação e futuro.',
-    'Filha caçula de Carolina. Representa inocência e esperança dentro do livro. Carolina frequentemente expressa o desejo de oferecer uma vida melhor para ela.',
-    'Embora muitos apareçam apenas por nomes ou episódios rápidos, eles formam um "personagem coletivo". Representam a solidariedade entre os pobres, os conflitos causados pela miséria, violência, alcoolismo e disputas, e a luta diária pela sobrevivência.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-];
+function toList(value) {
+    if (Array.isArray(value)) return value;
+    if (typeof value === 'string' && value.trim()) return [value.trim()];
+    return [];
+}
+
 
 export default function Personagens() {
     const [livro, setLivro] = useState(null);
@@ -57,6 +49,17 @@ export default function Personagens() {
 
     const characters = selectField(livro, 'personagens') || livro?.personagens || [];
     const photos = selectField(livro, 'fotoPersonagens') || livro?.fotoPersonagens || [];
+    const descriptions =
+        toList(
+            selectField(livro, 'descricaoPersonagens') ||
+            livro?.descricaoPersonagens ||
+            selectField(livro, 'descricoesPersonagens') ||
+            livro?.descricoesPersonagens ||
+            selectField(livro, 'descricaoPersonagensPT') ||
+            livro?.descricaoPersonagensPT ||
+            selectField(livro, 'descricoesPersonagensPT') ||
+            livro?.descricoesPersonagensPT
+        );
     const count = Math.max(characters.length || 0, 12);
 
     return (
@@ -80,13 +83,13 @@ export default function Personagens() {
                             <img
                                 src={loading ? '' : photos[i] || ''}
                                 alt={loading ? 'Carregando...' : characters[i] || 'Personagem'}
-                                style={{ width: '13rem', borderRadius: '15px', height: '13rem', minWidth: '13rem', objectFit: 'cover' }}
+                                className={styles.personagemFoto}
                             />
                             <div className={styles.divNomeDesc}>
                                 <h1 className="title-main" style={{ marginBottom: '20px' }}>
                                     {loading ? 'Carregando personagem...' : characters[i] || 'Nome personagem'}
                                 </h1>
-                                <p>{DESCRIPTIONS[i] || 'Descrição do personagem'}</p>
+                                <p>{descriptions[i] || 'Descrição indisponível'}</p>
                             </div>
                         </div>
                     ))}
