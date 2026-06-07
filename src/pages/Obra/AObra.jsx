@@ -7,6 +7,7 @@ import { useLanguage } from '../../context/LanguageContext.jsx';
 import fieldsMap from '../../mapeamento/mapeamento';
 import { request } from '../../services/api.js';
 
+
 export default function ObraVestibular() {
     const [dados, setDados] = useState(null);
     const [carregando, setCarregando] = useState(true);
@@ -38,6 +39,7 @@ export default function ObraVestibular() {
 
         carregarLivros();
     }, []);
+    
 
     if (carregando) {
         return (
