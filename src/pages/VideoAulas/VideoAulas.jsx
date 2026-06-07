@@ -1,141 +1,155 @@
-import { useEffect, useState } from 'react';
-import Header from '../../components/Header/Header.jsx';
-import Footer from '../../components/Footer/Footer.jsx';
-import { request } from '../../services/api.js';
-import styles from './video.module.css';
+import { useEffect, useState } from 'react'
+import Header from '../../components/Header/Header.jsx'
+import Footer from '../../components/Footer/Footer.jsx'
+import { request } from '../../services/api.js'
+import styles from './video.module.css'
 
-const API_KEY = import.meta.env.VITE_API_KEY ?? 'amods';
+const API_KEY = import.meta.env.VITE_API_KEY ?? 'amods'
 
-// Extrai o ID de qualquer URL do YouTube (watch, shorts, youtu.be, embed)
-function extrairId(url) {
-    if (!url) return '';
-    if (url.includes('embed/')) return url.split('embed/')[1].split('?')[0];
-    if (url.includes('watch?v=')) return url.split('watch?v=')[1].split('&')[0];
-    if (url.includes('shorts/')) return url.split('shorts/')[1].split('?')[0];
-    if (url.includes('youtu.be/')) return url.split('youtu.be/')[1].split('?')[0];
-    return '';
+function getYoutubeEmbedUrl(url) {
+  if (!url) return ''
+
+  let videoId = ''
+
+  if (url.includes('youtube.com/watch?v=')) {
+    videoId = url.split('v=')[1].split('&')[0]
+  } else if (url.includes('youtu.be/')) {
+    videoId = url.split('youtu.be/')[1].split('?')[0]
+  } else if (url.includes('youtube.com/shorts/')) {
+    videoId = url.split('shorts/')[1].split('?')[0]
+  } else if (url.includes('youtube.com/embed/')) {
+    videoId = url.split('embed/')[1].split('?')[0]
+  }
+
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : url
 }
 
-// Converte URL do YouTube em URL de embed
-function youtubeEmbed(url) {
-    const id = extrairId(url);
-    return id ? `https://www.youtube.com/embed/${id}` : url;
-}
+function getYoutubeThumbnail(url) {
+  if (!url) return ''
 
-// Gera URL da thumbnail do YouTube
-function youtubeThumb(url) {
-    const id = extrairId(url);
-    return id ? `https://img.youtube.com/vi/${id}/mqdefault.jpg` : '';
+  let videoId = ''
+
+  if (url.includes('youtube.com/watch?v=')) {
+    videoId = url.split('v=')[1].split('&')[0]
+  } else if (url.includes('youtu.be/')) {
+    videoId = url.split('youtu.be/')[1].split('?')[0]
+  } else if (url.includes('youtube.com/shorts/')) {
+    videoId = url.split('shorts/')[1].split('?')[0]
+  } else if (url.includes('youtube.com/embed/')) {
+    videoId = url.split('embed/')[1].split('?')[0]
+  }
+
+  return videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : ''
 }
 
 export default function VideoAulas() {
-    const [videos, setVideos] = useState([]);
-    const [videoAtivo, setVideoAtivo] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [erro, setErro] = useState('');
+  const [videos, setVideos] = useState([])
+  const [videoAtivo, setVideoAtivo] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [erro, setErro] = useState('')
 
-    useEffect(() => {
-        async function carregar() {
-            try {
-                const data = await request('/api/videoaula', {
-                    headers: { 'x-api-key': API_KEY },
-                });
-                if (Array.isArray(data) && data.length > 0) {
-                    setVideos(data);
-                    setVideoAtivo(data[0]);
-                }
-            } catch (e) {
-                console.error('Erro ao carregar vídeos:', e);
-                setErro('Não foi possível carregar as videoaulas.');
-            } finally {
-                setLoading(false);
-            }
+  useEffect(() => {
+    async function carregarVideos() {
+      try {
+        const data = await request('/api/videoaula', {
+          headers: { 'x-api-key': API_KEY },
+        })
+
+        if (Array.isArray(data) && data.length > 0) {
+          setVideos(data)
+          setVideoAtivo(data[0])
         }
-        carregar();
-    }, []);
-
-    if (loading) {
-        return (
-            <div className={styles.page}>
-                <Header />
-                <div className={styles.loading}>Carregando videoaulas...</div>
-                <Footer />
-            </div>
-        );
+      } catch (error) {
+        console.error('Erro ao carregar videoaulas:', error)
+        setErro('Não foi possível carregar as videoaulas.')
+      } finally {
+        setLoading(false)
+      }
     }
 
-    if (erro) {
-        return (
-            <div className={styles.page}>
-                <Header />
-                <div className={styles.loading}>{erro}</div>
-                <Footer />
-            </div>
-        );
-    }
+    carregarVideos()
+  }, [])
 
+  if (loading) {
     return (
-        <div className={styles.page}>
-            <Header />
+      <div className={styles.page}>
+        <Header />
+        <div className={styles.loading}>Carregando videoaulas...</div>
+        <Footer />
+      </div>
+    )
+  }
 
-            <main className={styles.main}>
-                <section className={styles.banner}>
-                    <p className={styles.kicker}>Vídeo Aulas</p>
-                    <h1 className={styles.titulo}>Aprenda assistindo</h1>
-                    <p className={styles.subtitulo}>
-                        Análises e conteúdos em vídeo.
-                    </p>
-                </section>
+  if (erro) {
+    return (
+      <div className={styles.page}>
+        <Header />
+        <div className={styles.loading}>{erro}</div>
+        <Footer />
+      </div>
+    )
+  }
 
-                <div className={styles.layout}>
-                    {/* Player principal */}
-                    <section className={styles.player}>
-                        {videoAtivo && (
-                            <>
-                                <div className={styles.videoWrap}>
-                                    <iframe
-                                        src={youtubeEmbed(videoAtivo.urlMidia)}
-                                        title={videoAtivo.tituloPt}
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                    />
-                                </div>
-                                <div className={styles.playerInfo}>
-                                    <h2 className={styles.videoTitulo}>{videoAtivo.tituloPt}</h2>
-                                    {videoAtivo.descricaoPt && (
-                                        <p className={styles.videoDesc}>{videoAtivo.descricaoPt}</p>
-                                    )}
-                                </div>
-                            </>
-                        )}
-                    </section>
+  return (
+    <div className={styles.page}>
+      <Header />
 
-                    {/* Playlist lateral */}
-                    <aside className={styles.playlist}>
-                        <h3 className={styles.playlistTitulo}>Aulas ({videos.length})</h3>
-                        <div className={styles.playlistScroll}>
-                            {videos.map((video) => (
-                                <button
-                                    key={video.id}
-                                    className={`${styles.item} ${video.id === videoAtivo?.id ? styles.itemAtivo : ''}`}
-                                    onClick={() => setVideoAtivo(video)}
-                                >
-                                    <div className={styles.itemThumb}>
-                                        <img
-                                            src={youtubeThumb(video.urlMidia)}
-                                            alt={video.tituloPt}
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <span className={styles.itemTitulo}>{video.tituloPt}</span>
-                                </button>
-                            ))}
-                        </div>
-                    </aside>
+      <main className={styles.main}>
+        <section className={styles.banner}>
+          <p className={styles.kicker}>Vídeo Aulas</p>
+          <h1 className={styles.titulo}>Aprenda assistindo</h1>
+          <p className={styles.subtitulo}>Análises e conteúdos em vídeo.</p>
+        </section>
+
+        <div className={styles.layout}>
+          <section className={styles.player}>
+            {videoAtivo && (
+              <>
+                <div className={styles.videoWrap}>
+                  <iframe
+                    src={getYoutubeEmbedUrl(videoAtivo.urlMidia)}
+                    title={videoAtivo.tituloPt}
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                    allowFullScreen
+                  />
                 </div>
-            </main>
 
-            <Footer />
+                <div className={styles.playerInfo}>
+                  <h2 className={styles.videoTitulo}>{videoAtivo.tituloPt}</h2>
+                  {videoAtivo.descricaoPt && (
+                    <p className={styles.videoDesc}>{videoAtivo.descricaoPt}</p>
+                  )}
+                </div>
+              </>
+            )}
+          </section>
+
+          <aside className={styles.playlist}>
+            <h3 className={styles.playlistTitulo}>Aulas ({videos.length})</h3>
+
+            <div className={styles.playlistScroll}>
+              {videos.map(video => (
+                <button
+                  key={video.id}
+                  className={`${styles.item} ${video.id === videoAtivo?.id ? styles.itemAtivo : ''}`}
+                  onClick={() => setVideoAtivo(video)}
+                >
+                  <div className={styles.itemThumb}>
+                    <img
+                      src={getYoutubeThumbnail(video.urlMidia)}
+                      alt={video.tituloPt}
+                      loading='lazy'
+                    />
+                  </div>
+                  <span className={styles.itemTitulo}>{video.tituloPt}</span>
+                </button>
+              ))}
+            </div>
+          </aside>
         </div>
-    );
+      </main>
+
+      <Footer />
+    </div>
+  )
 }
