@@ -5,19 +5,30 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 
-const DESCRIPTIONS = [
-    'Descrição do personagem',
-    'Filho de Carolina. É apresentado como uma criança mais rebelde e difícil de controlar. Muitas vezes aparece em conflitos comuns da vida na favela, mostrando as dificuldades da maternidade em situação de pobreza extrema.',
-    'Outro filho de Carolina. Geralmente descrito como mais sensível e obediente. A autora demonstra forte preocupação com sua alimentação, educação e futuro.',
-    'Filha caçula de Carolina. Representa inocência e esperança dentro do livro. Carolina frequentemente expressa o desejo de oferecer uma vida melhor para ela.',
-    'Embora muitos apareçam apenas por nomes ou episódios rápidos, eles formam um "personagem coletivo". Representam a solidariedade entre os pobres, os conflitos causados pela miséria, violência, alcoolismo e disputas, e a luta diária pela sobrevivência.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
-    'Aparecem de forma indireta e crítica. Carolina frequentemente denuncia promessas vazias, abandono social e corrupção. Eles simbolizam o descaso do poder público com a população pobre.',
+const Descricoes = [
+  'Narradora e protagonista da obra. Mulher negra, catadora de papel e mãe solteira que vive na favela do Canindé, em São Paulo. Carolina é observadora, crítica e extremamente consciente da desigualdade social ao seu redor. A escrita funciona como forma de resistência e denúncia.',
+
+  'Filha caçula de Carolina. Representa inocência e esperança dentro do livro. Carolina frequentemente expressa o desejo de oferecer uma vida melhor para ela.',
+
+  'Filho de Carolina. Geralmente descrito como mais sensível e obediente. A autora demonstra forte preocupação com sua alimentação, educação e futuro.',
+
+  'Filho de Carolina. É apresentado como uma criança mais rebelde e difícil de controlar. Muitas vezes aparece em conflitos comuns da vida na favela, mostrando as dificuldades da maternidade em situação de pobreza extrema.',
+
+  'Morador da favela citado por Carolina. Representa os trabalhadores pobres que enfrentam diariamente a luta pela sobrevivência em meio à miséria e à exclusão social.',
+
+  'Peixeiro mencionado na obra. Surge em relatos do cotidiano da comunidade e ajuda a retratar as relações econômicas e sociais existentes entre os moradores da favela.',
+
+  'Eletricista citado por Carolina. Faz parte do conjunto de personagens secundários que ilustram a realidade dos trabalhadores e as dificuldades enfrentadas pelos habitantes do Canindé.',
+
+  'Morador da favela mencionado nos relatos de Carolina. Sua presença contribui para retratar os desafios, conflitos e formas de solidariedade existentes na comunidade.',
+
+  'Personagem citado no cotidiano da favela. Representa as relações sociais construídas entre os moradores e as dificuldades impostas pela pobreza.',
+
+  'Figura conhecida entre os habitantes do Canindé. Aparece como parte da rede de convivência da comunidade, evidenciando as diferentes estratégias de sobrevivência dos moradores.',
+
+  'Morador mencionado por Carolina em diversos momentos. Sua participação ajuda a demonstrar os impactos da desigualdade social e das condições precárias de vida na favela.',
+
+  'Personagem secundário que contribui para a construção do retrato social apresentado pela autora, evidenciando a realidade dos trabalhadores pobres e marginalizados.'
 ];
 
 
@@ -87,7 +98,7 @@ export default function Personagens() {
                                 <h1 className="title-main" style={{ marginBottom: '20px' }}>
                                     {loading ? 'Carregando personagem...' : characters[i] || 'Nome personagem'}
                                 </h1>
-                                <p>{DESCRIPTIONS[i] || 'Descrição do personagem'}</p>
+                                <p>{Descricoes[i] || 'Descrição do personagem'}</p>
                             </div>
                         </div>
                     ))}
