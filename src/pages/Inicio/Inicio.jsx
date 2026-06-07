@@ -140,6 +140,10 @@ const Inicio = () => {
 
             <section className={styles.contentSection}>
                 <div className={styles.leftColumn}>
+                    <div className={styles.badgeGroup}>
+                        <div className={styles.badge}>{t('badge_social')}</div>
+                        <div className={styles.badge}>{t('badge_resilience')}</div>
+                    </div>
                     <h2 className={styles.bookTitle}> Livro: {dados.tituloPT}
                     </h2>
 

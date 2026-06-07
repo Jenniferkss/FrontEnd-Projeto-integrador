@@ -78,5 +78,47 @@
   "meet_our_team": "Conheça nossa equipe",
   "team": "Equipe",
   "member_name": "Nome integrante",
-  "member_course": "Curso integrante"
+  "member_course": "Curso integrante",
+  "frases": [
+  {
+    "texto": "A fome é a dinamite do corpo humano.",
+    "data": "15 de maio de 1958"
+  },
+  {
+    "texto": "O Brasil precisa ser dirigido por uma pessoa que já passou fome.",
+    "data": "19 de julho de 1955"
+  },
+  {
+    "texto": "Quem inventou a fome são os que comem.",
+    "data": "22 de maio de 1958"
+  },
+  {
+    "texto": "A tontura da fome é pior do que a do álcool. A tontura do álcool nos impele a cantar. Mas a da fome nos faz tremer.",
+    "data": "13 de maio de 1958"
+  },
+  {
+    "texto": "A vida é igual um livro. Só depois de lido é que sabemos o que encerra.",
+    "data": "3 de junho de 1958"
+  },
+  {
+    "texto": "Eu cheguei a conclusão que quem não tem de ir pro ceu, não precisa olhar pra cima.",
+    "data": "20 de maio de 1958"
+  },
+  {
+    "texto": "Quando eu chego na cidade tenho a impressão que estou no paraíso. Acho tudo maravilhoso. E quando retorno a favela tenho a impressão que sou um objeto fora de uso.",
+    "data": "16 de maio de 1958"
+  },
+  {
+    "texto": "Tem dias que eu sofro tanto que parece que eu sou a raiz de todo o sofrimento do mundo.",
+    "data": "13 de maio de 1958"
+  },
+  {
+    "texto": "O custo de vida é que nos revolta. O custo de vida é que nos faz de vítima.",
+    "data": "11 de maio de 1958"
+  },
+  {
+    "texto": "Eu escrevo a realidade.",
+    "data": "16 de junho de 1958"
+  }
+]
 }

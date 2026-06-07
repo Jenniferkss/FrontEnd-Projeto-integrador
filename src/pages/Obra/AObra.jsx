@@ -23,10 +23,12 @@ export default function ObraVestibular() {
     ];
     const [dados, setDados] = useState(null);
     const [carregando, setCarregando] = useState(true);
+    const { language, t, mapFields } = useLanguage();
 
     const {language, t, mapFields} = useLanguage();
 
     const [index, setIndex] = useState(0);
+    const frases = t('frases') || [];
 
     const proxima = () => {
         setIndex ((index + 1) % frases.length);
@@ -243,25 +245,35 @@ return (
 
     <h3 className={styles.subtitleTrechos}>palavras que ecoam</h3>
 
-    <div className={styles.quoteIconTrechos}>❞</div>
+                <h3 className={styles.subtitleTrechos}>palavras que ecoam</h3>
 
-    <p className={styles.fraseTrechos}>“{frases[index].texto}”</p>
+                <div className={styles.quoteIconTrechos}>❞</div>
 
-    <time className={styles.dataTrechos}>{frases[index].data}</time>
+                <p className={styles.fraseTrechos}>
+                    “{frases[index]?.texto}”
+                </p>
 
-    <div className={styles.controlsTrechos}>
-        <button onClick={anterior} className={styles.btnTrechos}>
-            &lt;
-        </button>
+                <time className={styles.dataTrechos}>
+                    {frases[index]?.data}
+                </time>
 
-        <div className={styles.dotsTrechos}>
-            {frases.map((_, i) => (
-                <strong
-                    key={i}
-                    className={i === index ? styles.activeDotTrechos : styles.dotTrechos}
-                ></strong>
-            ))}
-        </div>
+                <div className={styles.controlsTrechos}>
+                    <button onClick={anterior} className={styles.btnTrechos}>
+                        &lt;
+                    </button>
+
+                    <div className={styles.dotsTrechos}>
+                        {frases.map((_, i) => (
+                            <strong
+                                key={i}
+                                className={
+                                    i === index
+                                        ? styles.activeDotTrechos
+                                        : styles.dotTrechos
+                                }
+                            />
+                        ))}
+                    </div>
 
         <button onClick={proxima} className={styles.btnTrechos}>
             &gt;
