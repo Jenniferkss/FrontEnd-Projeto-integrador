@@ -6,6 +6,8 @@
 }
 
 
+
+
 .hero {
     width: 100%;
     max-width: 68rem;
@@ -18,11 +20,13 @@
     margin-left: 2.95rem;
 }
 
+
 .rightHero {
     display: flex;
     justify-content: center;
     margin-left: 4rem;
 }
+
 
 .leftHero {
     display: flex;
@@ -32,12 +36,14 @@
     margin-right: 4rem;
 }
 
+
 .titleMain {
-      font-size: 4rem;
-      font-family: 'Playfair Display', serif;
-      line-height: 0.6;
-      margin-top: 3rem;
+    font-size: 4rem;
+    font-family: 'Playfair Display', serif;
+    line-height: 0.6;
+    margin-top: 3rem;
 }
+
 
 .titleItalic {
     font-size: 4rem;
@@ -50,6 +56,7 @@
     margin-left: 6.6rem;
 }
 
+
 .leftHero {
     display: flex;
     flex-direction: column;
@@ -57,10 +64,12 @@
     margin-top: -2rem;
 }
 
+
 .titleBox {
     max-width: 32rem;
     margin-top: 2.5rem;
 }
+
 
 .titleMain {
     font-family: 'Playfair Display', serif;
@@ -71,6 +80,7 @@
     letter-spacing: -0.15rem;
 }
 
+
 .redTitleMain {
     color: #8d1f1f;
     font-size: 5.5rem;
@@ -79,6 +89,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 5rem;
 }
+
 
 .subtitle {
     margin-top: 3rem;
@@ -90,14 +101,17 @@
     font-style: bolder;
 }
 
+
 .subtitleAuthor {
-    margin-top:2.5rem;
+    margin-top: 2.5rem;
     font-size: 1rem;
     color: #111;
     font-family: 'Playfair Display', serif;
     font-style: bolder;
 
+
 }
+
 
 .quoteBox {
     margin-top: 3rem;
@@ -106,6 +120,7 @@
     margin-left: 0;
 }
 
+
 .quote {
     font-size: 2rem;
     line-height: 1.4;
@@ -113,10 +128,13 @@
     font-family: 'Playfair Display', serif;
 }
 
+
 .author {
     margin-top: 1rem;
     font-size: 1rem;
 }
+
+
 
 
 .authorImage {
@@ -130,12 +148,14 @@
     margin-left: 2rem;
 }
 
+
 .rightHero {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 0rem;
 }
+
 
 .authorImage {
     width: 100%;
@@ -146,6 +166,7 @@
     display: block;
 }
 
+
 .sectionName {
     color: #8d1f1f;
     font-weight: 600;
@@ -154,6 +175,7 @@
     margin-top: 1rem;
     font-size: 0.75rem;
 }
+
 
 .aboutBook {
     width: 100%;
@@ -168,12 +190,15 @@
     margin-top: 5.1rem;
 }
 
+
 .bookImage {
     display: flex;
     justify-content: center;
     align-items: flex-start;
 
+
 }
+
 
 .bookCover {
     width: 100%;
@@ -183,6 +208,7 @@
     margin-right: 2rem;
 }
 
+
 .bookInfo {
     display: flex;
     flex-direction: column;
@@ -191,6 +217,7 @@
     margin-right: 2.2rem;
 }
 
+
 .bookTitle h2 {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
@@ -198,16 +225,19 @@
     margin: 0;
 }
 
+
 .redTitle {
     color: #8d1f1f;
     font-style: italic;
 }
+
 
 .cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.8rem;
 }
+
 
 .card {
     border: 1px solid #8d1f1f;
@@ -218,10 +248,12 @@
     background-color: #fff8f0;
 }
 
+
 .card p {
     margin: 0;
     font-size: 0.85rem;
 }
+
 
 .card h3 {
     margin-top: 0.5rem;
@@ -229,12 +261,14 @@
     word-break: break-word;
 }
 
+
 .textBox {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-top: 0.3rem;
 }
+
 
 .textBox p {
     font-family: 'Montserrat', sans-serif;
@@ -247,6 +281,8 @@
 }
 
 
+
+
 .container {
     width: 100%;
     max-width: 75rem;
@@ -254,6 +290,7 @@
     padding: 0 2rem;
     box-sizing: content-box;
 }
+
 
 .textContainer {
     background-color: #f8eeee;
@@ -263,6 +300,7 @@
     overflow: hidden;
 }
 
+
 .titleContainer {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
@@ -270,6 +308,7 @@
     color: #111;
     margin: 0 0 1.5rem 0;
 }
+
 
 .analysisText,
 .textContainer p {
@@ -281,11 +320,13 @@
     word-break: break-word;
 }
 
+
 .redacaoList {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+
 
 .redacaoItem {
     background: #fff7f7;
@@ -294,9 +335,11 @@
     padding: 1rem 1.2rem;
 }
 
+
 .redacaoItem p {
     margin: 0;
 }
+
 
 .videoSection {
     display: flex;
@@ -304,6 +347,7 @@
     margin: 4rem 0;
     padding: 0 1rem;
 }
+
 
 .videoBtn {
     padding: 1rem 2rem;
@@ -316,9 +360,11 @@
     transition: 0.3s;
 }
 
+
 .videoBtn:hover {
     opacity: 0.9;
 }
+
 
 .loading {
     min-height: 100vh;
@@ -326,6 +372,9 @@
     justify-content: center;
     align-items: center;
 }
+
+
+
 
 
 
@@ -340,6 +389,7 @@
         margin: 0 auto;
     }
 
+
     .leftHero,
     .rightHero {
         margin: 0;
@@ -347,25 +397,30 @@
         text-align: center;
     }
 
+
     .titleItalic,
     .redTitleMain {
         margin-left: 0;
     }
+
 
     .aboutBook {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
 
+
     .bookInfo {
         margin-right: 0;
     }
+
 
     .bookCover {
         max-width: 22rem;
         margin: 0 auto;
     }
 }
+
 
 /* ========================= */
 /* CELULAR */
@@ -375,6 +430,7 @@
         padding: 2rem 1rem;
     }
 
+
     .titleMain,
     .titleItalic,
     .redTitleMain {
@@ -383,6 +439,7 @@
         margin-left: 0;
     }
 
+
     .subtitle,
     .subtitleAuthor,
     .quote,
@@ -390,98 +447,122 @@
         text-align: center;
     }
 
+
     .authorImage {
         max-width: 15rem;
         margin: 0 auto;
     }
 
+
     .aboutBook {
         padding: 0 1rem 3rem;
     }
+
 
     .bookTitle h2 {
         font-size: 2rem;
         text-align: center;
     }
 
+
     .bookInfo {
         text-align: center;
     }
+
 
     .bookCover {
         max-width: 18rem;
         margin: 0 auto;
     }
 
+
     .cards {
         grid-template-columns: 1fr;
     }
+
 
     .container {
         padding: 0 1rem;
         box-sizing: border-box;
     }
 
+
     .titleContainer {
         font-size: 2rem;
         text-align: center;
     }
+
 
     .textContainer {
         padding: 1.5rem;
     }
 }
 
+
 /* ========================= */
 /* CELULARES PEQUENOS */
 /* ========================= */
 @media (max-width: 480px) {
+
     .titleMain,
     .titleItalic,
     .redTitleMain {
         font-size: 2.3rem;
     }
 
+
     .quote {
         font-size: 1.3rem;
     }
+
 
     .subtitle {
         font-size: 1rem;
     }
 
+
     .bookTitle h2 {
         font-size: 1.7rem;
     }
+
 
     .authorImage {
         max-width: 13rem;
     }
 
+
     .bookCover {
         max-width: 15rem;
     }
+
 
     .titleContainer {
         font-size: 1.7rem;
     }
 }
 
+
 /* ========================================== */
 /* SEÇÃO DE TRECHOS MARCANTES (CARROSSEL)      */
 /* ========================================== */
 
+
 /* Copia a estrutura exata do seu .textContainer, mudando apenas o fundo */
 .textContainerTrechos {
-    background-color: #f8eeee; /* Cor de fundo do card de trechos */
-    border: 1px solid #b35a5a; /* Mesma borda da análise da obra */
-    border-radius: 0.8rem;     /* Mesmo arredondamento */
+    background-color: #f8eeee;
+    /* Cor de fundo do card de trechos */
+    border: 1px solid #b35a5a;
+    /* Mesma borda da análise da obra */
+    border-radius: 0.8rem;
+    /* Mesmo arredondamento */
     padding: 2.5rem 2rem;
     overflow: hidden;
-    text-align: center;        /* Garante que o conteúdo fique centralizado por dentro */
+    text-align: center;
+    /* Garante que o conteúdo fique centralizado por dentro */
     box-sizing: border-box;
     margin-bottom: 4rem;
 }
+
 
 .titleTrechos {
     font-family: 'Playfair Display', serif;
@@ -491,6 +572,7 @@
     margin: 0 0 0.2rem 0;
 }
 
+
 .subtitleTrechos {
     font-family: 'Playfair Display', serif;
     font-style: italic;
@@ -499,14 +581,16 @@
     margin: 0 0 1rem 0;
 }
 
+
 .quoteIconTrechos {
     font-size: 8rem;
     line-height: 1;
     color: rgba(141, 31, 31, 0.12);
     /* Changed the 3rd value (bottom margin) to a negative value */
-    margin: 0 0 -2rem 0; 
+    margin: 0 0 -2rem 0;
     font-family: 'Playfair Display', serif;
 }
+
 
 .fraseTrechos {
     font-family: 'Playfair Display', serif;
@@ -514,9 +598,11 @@
     font-weight: 500;
     color: #000000;
     line-height: 1.4;
-    max-width: 60rem; /* Aumentado ligeiramente para acompanhar a caixa maior */
+    max-width: 60rem;
+    /* Aumentado ligeiramente para acompanhar a caixa maior */
     margin: 0 auto 1.2rem auto;
 }
+
 
 .dataTrechos {
     display: block;
@@ -527,12 +613,14 @@
     margin-bottom: 2rem;
 }
 
+
 .controlsTrechos {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 12px;
 }
+
 
 .btnTrechos {
     width: 30px;
@@ -550,16 +638,19 @@
     transition: transform 0.2s, opacity 0.2s;
 }
 
+
 .btnTrechos:hover {
     opacity: 0.9;
     transform: scale(1.05);
 }
+
 
 .dotsTrechos {
     display: flex;
     align-items: center;
     gap: 6px;
 }
+
 
 .dotTrechos,
 .activeDotTrechos {
@@ -571,19 +662,23 @@
     transition: all 0.3s ease;
 }
 
+
 .activeDotTrechos {
     width: 22px;
     border-radius: 999px;
     background: #8d1f1f;
 }
 
+
 @media (max-width: 480px) {
     .titleTrechos {
         font-size: 1.8rem;
     }
+
     .subtitleTrechos {
         font-size: 1.3rem;
     }
+
     .fraseTrechos {
         font-size: 1.3rem;
     }
