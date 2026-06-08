@@ -19,14 +19,12 @@ function Simulados({ idiomaDoSite = 'PT' }) {
     const { t, selectField } = useLanguage();
     const questaoAtual = questoesFiltradas[indiceAtual] || null;
 
-    // ─── Carrega e cruza os dados das 3 rotas ───────────────────────────────────
     useEffect(() => {
         const carregarDados = async () => {
             try {
                 setCarregando(true);
                 setErro(null);
 
-                // Busca questões e alternativas em paralelo
                 const [resQuestoes, resAlternativas] = await Promise.all([
                     fetch(`${BASE_URL}/questao`, { headers }),
                     fetch(`${BASE_URL}/alternativa`, { headers }),
@@ -40,23 +38,31 @@ function Simulados({ idiomaDoSite = 'PT' }) {
 
                 if (!questoesRaw.length) throw new Error('Nenhuma questão disponível.');
 
-                // Cruza questões com suas alternativas
                 const questoesFormatadas = questoesRaw.map((q) => {
                     const altsDestaQuestao = alternativasRaw
-                        .filter((alt) => alt.questaoId === q.id)
+                        .filter((alt) => String(alt.questaoId) === String(q.id))
                         .map((alt, idx) => ({
-                            id: String.fromCharCode(65 + idx), // A, B, C, D…
+                            id: String.fromCharCode(65 + idx),
                             textoPt: alt.textoPt ?? '',
                             textoEn: alt.textoEn ?? '',
                         }));
 
-                    // Descobre qual letra é a correta comparando o texto
+                    let gabaritoPt = (q.resposta_correta_pt ?? q.respostaCorretaPt ?? '').trim().toLowerCase();
+                    let gabaritoEn = (q.resposta_correta_en ?? q.respostaCorretaEn ?? '').trim().toLowerCase();
+
+                    if (gabaritoPt.match(/^[a-e]\)\s*/)) {
+                        gabaritoPt = gabaritoPt.replace(/^[a-e]\)\s*/, '');
+                    }
+                    if (gabaritoEn.match(/^[a-e]\)\s*/)) {
+                        gabaritoEn = gabaritoEn.replace(/^[a-e]\)\s*/, '');
+                    }
+
                     const letraCorretaPt = altsDestaQuestao.find(
-                        (alt) => alt.textoPt.trim().toLowerCase() === (q.respostaCorretaPt ?? '').trim().toLowerCase()
+                        (alt) => alt.textoPt.trim().toLowerCase() === gabaritoPt
                     )?.id ?? 'A';
 
                     const letraCorretraEn = altsDestaQuestao.find(
-                        (alt) => alt.textoEn.trim().toLowerCase() === (q.respostaCorretaEn ?? '').trim().toLowerCase()
+                        (alt) => alt.textoEn.trim().toLowerCase() === gabaritoEn
                     )?.id ?? 'A';
 
                     return {
@@ -71,7 +77,7 @@ function Simulados({ idiomaDoSite = 'PT' }) {
                     };
                 });
 
-                setQuestoesFiltradas(questoesFormatadas);
+                setQuestoesFiltradas(questoesFormatadas.slice(0, 25));
             } catch (err) {
                 console.error(err);
                 setErro(err.message);
@@ -83,13 +89,11 @@ function Simulados({ idiomaDoSite = 'PT' }) {
         carregarDados();
     }, []);
 
-    // ─── Helpers de idioma ──────────────────────────────────────────────────────
     const textoAlt = (alt) => (abaAtiva === 'EN' ? alt.textoEn : alt.textoPt);
     const enunciado = (q) => (abaAtiva === 'EN' ? q.perguntaEn : q.perguntaPt);
     const explicacao = (q) => (abaAtiva === 'EN' ? q.explicacaoEn : q.explicacaoPt);
     const respostaCorreta = (q) => (abaAtiva === 'EN' ? q.respostaCorretaEn : q.respostaCorretaPt);
 
-    // ─── Interações ─────────────────────────────────────────────────────────────
     const selecionarAlternativa = (alternativaId) => {
         if (!questaoAtual) return;
         setRespostas((prev) => ({ ...prev, [questaoAtual.id]: alternativaId }));
@@ -114,7 +118,6 @@ function Simulados({ idiomaDoSite = 'PT' }) {
         setPontuacao(0);
     };
 
-    // ─── Loading / Erro ─────────────────────────────────────────────────────────
     if (carregando)
         return (
             <div className={styles.page}>
@@ -137,7 +140,6 @@ function Simulados({ idiomaDoSite = 'PT' }) {
             </div>
         );
 
-    // ─── Tela de resultado ───────────────────────────────────────────────────────
     if (simuladoConcluido) {
         const porcentagem =
             questoesFiltradas.length > 0
@@ -210,7 +212,6 @@ function Simulados({ idiomaDoSite = 'PT' }) {
         );
     }
 
-    // ─── Tela principal ──────────────────────────────────────────────────────────
     return (
         <div className={styles.page}>
             <Header />
@@ -219,26 +220,23 @@ function Simulados({ idiomaDoSite = 'PT' }) {
                     <p className={styles.kicker}>{t('test_knowledge')}</p>
                     <h1 className={styles.titulo}>{t('test')}</h1>
                     <p className={styles.subtitulo}>
-                    {t('test_desc')}
+                        {t('test_desc')}
                     </p>
                 </section>
 
                 <div className={styles.falaJesus}>
                     <div className={styles.divTextoJesus}>
                         <div className={styles.enunciado}>
-                    <p>{questaoAtual && enunciado(questaoAtual)}</p>
-                </div>
-                <div style={{ width: '8rem'}}>
-                        <p style={{ marginLeft: 10 }}>
-                            {abaAtiva === 'EN' ? 'Question' : 'Questão'} {indiceAtual + 1}{' '}
-                            {abaAtiva === 'EN' ? '/' : '/'} {questoesFiltradas.length}
-                        </p>
-
-                </div>
+                            <p>{questaoAtual && enunciado(questaoAtual)}</p>
+                        </div>
+                        <div style={{ width: '8rem'}}>
+                            <p style={{ marginLeft: 10 }}>
+                                {abaAtiva === 'EN' ? 'Question' : 'Questão'} {indiceAtual + 1}{' '}
+                                {abaAtiva === 'EN' ? '/' : '/'} {questoesFiltradas.length}
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-                
 
                 <div className={styles.divGrandeQuestoes}>
                     {questaoAtual &&
@@ -255,10 +253,10 @@ function Simulados({ idiomaDoSite = 'PT' }) {
                                         backgroundColor: selecionada ? '#cacaca' : '',
                                         borderRadius: '6px',
                                         transition: 'all 0.2s ease',
-                                        color: selecionada ? '#000' : '#000',
+                                        color: '#000',
                                     }}>
                                     <p>
-                                        <strong>({alt.id})</strong> {textoAlt(alt)}
+                                        <strong>( {alt.id} )</strong> {textoAlt(alt)}
                                     </p>
                                 </div>
                             );

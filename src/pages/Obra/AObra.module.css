@@ -5,9 +5,6 @@
     width: 100%;
 }
 
-
-
-
 .hero {
     width: 100%;
     max-width: 75rem;
@@ -97,7 +94,7 @@
     color: #111;
     font-family: 'Playfair Display', serif;
     font-style: bolder;
-    margin-left: 5rem;
+    margin-left: 4rem;
 }
 
 
@@ -107,7 +104,7 @@
     color: #111;
     font-family: 'Playfair Display', serif;
     font-style: bolder;
-    margin-left: 5rem;
+    margin-left: 4rem;
 
 }
 
@@ -229,6 +226,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.8rem;
+    margin-top: 2rem;
 }
 
 
@@ -369,7 +367,39 @@
 
 
 
+/* ========================= */
+/* NOTEBOOK / DESKTOP MENOR */
+/* ========================= */
+@media (max-width: 1366px) {
+    .hero {
+        padding: 4rem 3rem;
+        gap: 2rem;
+    }
 
+    .titleMain,
+    .titleItalic,
+    .redTitleMain {
+        font-size: 3.8rem;
+    }
+
+    .bookCover {
+        max-width: 20rem;
+    }
+
+    .bookTitle h2 {
+        font-size: 2.3rem;
+    }
+
+    .fraseTrechos {
+        font-size: 1.5rem;
+        max-width: 50rem;
+    }
+
+    .quoteIconTrechos {
+        font-size: 7rem;
+        margin-bottom: -1.5rem;
+    }
+}
 
 /* ========================= */
 /* TABLET */
@@ -382,7 +412,6 @@
         margin: 0 auto;
     }
 
-
     .leftHero,
     .rightHero {
         margin: 0;
@@ -390,30 +419,25 @@
         text-align: center;
     }
 
-
     .titleItalic,
     .redTitleMain {
         margin-left: 0;
     }
-
 
     .aboutBook {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
 
-
     .bookInfo {
         margin-right: 0;
     }
-
 
     .bookCover {
         max-width: 22rem;
         margin: 0 auto;
     }
 }
-
 
 /* ========================= */
 /* CELULAR */
@@ -423,7 +447,6 @@
         padding: 2rem 1rem;
     }
 
-
     .titleMain,
     .titleItalic,
     .redTitleMain {
@@ -432,7 +455,6 @@
         margin-left: 0;
     }
 
-
     .subtitle,
     .subtitleAuthor,
     .quote,
@@ -440,57 +462,47 @@
         text-align: center;
     }
 
-
     .authorImage {
         max-width: 15rem;
         margin: 0 auto;
     }
 
-
     .aboutBook {
         padding: 0 1rem 3rem;
     }
-
 
     .bookTitle h2 {
         font-size: 2rem;
         text-align: center;
     }
 
-
     .bookInfo {
         text-align: center;
     }
-
 
     .bookCover {
         max-width: 18rem;
         margin: 0 auto;
     }
 
-
     .cards {
         grid-template-columns: 1fr;
     }
-
 
     .container {
         padding: 0 1rem;
         box-sizing: border-box;
     }
 
-
     .titleContainer {
         font-size: 2rem;
         text-align: center;
     }
 
-
     .textContainer {
         padding: 1.5rem;
     }
 }
-
 
 /* ========================= */
 /* CELULARES PEQUENOS */
@@ -503,59 +515,57 @@
         font-size: 2.3rem;
     }
 
-
     .quote {
         font-size: 1.3rem;
     }
-
 
     .subtitle {
         font-size: 1rem;
     }
 
-
     .bookTitle h2 {
         font-size: 1.7rem;
     }
-
 
     .authorImage {
         max-width: 13rem;
     }
 
-
     .bookCover {
         max-width: 15rem;
     }
 
-
     .titleContainer {
         font-size: 1.7rem;
     }
+
+    .titleTrechos {
+        font-size: 1.8rem;
+    }
+
+    .subtitleTrechos {
+        font-size: 1.3rem;
+    }
+
+    .fraseTrechos {
+        font-size: 1.3rem;
+    }
 }
 
+/* ========================= */
+/* TRECHOS MARCANTES (BASE) */
+/* ========================= */
 
-/* ========================================== */
-/* SEÇÃO DE TRECHOS MARCANTES (CARROSSEL)      */
-/* ========================================== */
-
-
-/* Copia a estrutura exata do seu .textContainer, mudando apenas o fundo */
 .textContainerTrechos {
     background-color: #f8eeee;
-    /* Cor de fundo do card de trechos */
     border: 1px solid #b35a5a;
-    /* Mesma borda da análise da obra */
     border-radius: 0.8rem;
-    /* Mesmo arredondamento */
     padding: 2.5rem 2rem;
     overflow: hidden;
     text-align: center;
-    /* Garante que o conteúdo fique centralizado por dentro */
     box-sizing: border-box;
     margin-bottom: 4rem;
 }
-
 
 .titleTrechos {
     font-family: 'Playfair Display', serif;
@@ -565,7 +575,6 @@
     margin: 0 0 0.2rem 0;
 }
 
-
 .subtitleTrechos {
     font-family: 'Playfair Display', serif;
     font-style: italic;
@@ -574,16 +583,13 @@
     margin: 0 0 1rem 0;
 }
 
-
 .quoteIconTrechos {
     font-size: 8rem;
     line-height: 1;
     color: rgba(141, 31, 31, 0.12);
-    /* Changed the 3rd value (bottom margin) to a negative value */
     margin: 0 0 -2rem 0;
     font-family: 'Playfair Display', serif;
 }
-
 
 .fraseTrechos {
     font-family: 'Playfair Display', serif;
@@ -592,10 +598,8 @@
     color: #000000;
     line-height: 1.4;
     max-width: 60rem;
-    /* Aumentado ligeiramente para acompanhar a caixa maior */
     margin: 0 auto 1.2rem auto;
 }
-
 
 .dataTrechos {
     display: block;
@@ -606,14 +610,12 @@
     margin-bottom: 2rem;
 }
 
-
 .controlsTrechos {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 12px;
 }
-
 
 .btnTrechos {
     width: 30px;
@@ -631,19 +633,16 @@
     transition: transform 0.2s, opacity 0.2s;
 }
 
-
 .btnTrechos:hover {
     opacity: 0.9;
     transform: scale(1.05);
 }
-
 
 .dotsTrechos {
     display: flex;
     align-items: center;
     gap: 6px;
 }
-
 
 .dotTrechos,
 .activeDotTrechos {
@@ -655,24 +654,8 @@
     transition: all 0.3s ease;
 }
 
-
 .activeDotTrechos {
     width: 22px;
     border-radius: 999px;
     background: #8d1f1f;
-}
-
-
-@media (max-width: 480px) {
-    .titleTrechos {
-        font-size: 1.8rem;
-    }
-
-    .subtitleTrechos {
-        font-size: 1.3rem;
-    }
-
-    .fraseTrechos {
-        font-size: 1.3rem;
-    }
 }

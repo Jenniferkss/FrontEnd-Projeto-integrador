@@ -335,3 +335,280 @@
         gap: 1.8rem;
     }
 }
+
+/* ========================= */
+/* CELULARES PEQUENOS */
+/* ========================= */
+@media (max-width: 480px) {
+
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+    }
+
+    .brand {
+        font-size: 1.4rem;
+    }
+
+    .hero {
+        padding: 3rem 1rem 0;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .italicTitle {
+        font-size: 3rem;
+    }
+
+    .description {
+        font-size: 0.95rem;
+        padding: 0 1rem;
+    }
+
+    .btnGroup {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+    }
+
+    .contentSection {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
+        gap: 2rem;
+    }
+
+    .bookTitle {
+        font-size: 1.8rem;
+    }
+
+    .textBody,
+    .text {
+        font-size: 1rem;
+    }
+
+    .quote {
+        font-size: 1.3rem;
+    }
+
+    .infoBox,
+    .themeBox {
+        padding: 1.2rem;
+    }
+}
+
+/* ========================= */
+/* CELULARES GRANDES */
+/* ========================= */
+@media (min-width: 481px) and (max-width: 767px) {
+
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.2rem;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 4rem 1.5rem 0;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+
+    .italicTitle {
+        font-size: 3.5rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .btnGroup {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contentSection {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1.5rem;
+    }
+
+    .quote {
+        font-size: 1.5rem;
+    }
+}
+
+/* ========================= */
+/* TABLETS */
+/* ========================= */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    .header {
+        padding: 1.5rem 2rem;
+    }
+
+    .menu {
+        gap: 1rem;
+    }
+
+    .hero {
+        padding-top: 5rem;
+    }
+
+    .title {
+        font-size: 4rem;
+    }
+
+    .italicTitle {
+        font-size: 4.5rem;
+    }
+
+    .description {
+        max-width: 90%;
+    }
+
+    .contentSection {
+        grid-template-columns: 1fr;
+        padding: 3rem 2rem;
+    }
+
+    .bookTitle {
+        font-size: 2rem;
+    }
+}
+
+/* ========================= */
+/* NOTEBOOKS PEQUENOS */
+/* ========================= */
+@media (min-width: 1024px) and (max-width: 1365px) {
+
+    .header {
+        padding: 1.5rem 2rem;
+    }
+
+    .contentSection {
+        grid-template-columns: 1fr 1fr;
+        padding: 3rem;
+        gap: 2rem;
+    }
+
+    .contentSection > :first-child {
+        grid-column: span 2;
+    }
+
+    .title {
+        font-size: 4.5rem;
+    }
+
+    .italicTitle {
+        font-size: 5rem;
+    }
+}
+
+/* ========================= */
+/* NOTEBOOKS MÉDIOS */
+/* ========================= */
+@media (min-width: 1366px) and (max-width: 1599px) {
+
+    .hero {
+        padding-top: 7rem;
+    }
+
+    .title {
+        font-size: 5.5rem;
+    }
+
+    .description {
+        max-width: 55rem;
+        font-size: 1.15rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 0.7rem 1.5rem;
+    }
+}
+
+/* ========================= */
+/* DESKTOPS GRANDES */
+/* ========================= */
+@media (min-width: 1600px) {
+
+    .hero {
+        padding-top: 9rem;
+    }
+
+    .title {
+        font-size: 6.5rem;
+    }
+
+    .italicTitle {
+        font-size: 7rem;
+    }
+
+    .description {
+        max-width: 65rem;
+        font-size: 1.35rem;
+    }
+
+    .btn {
+        font-size: 1.15rem;
+        padding: 0.85rem 2rem;
+    }
+
+    .btnGroup {
+        gap: 1.8rem;
+    }
+
+    .contentSection {
+        max-width: 1800px;
+        margin: 0 auto;
+    }
+}
+
+/* ========================= */
+/* ULTRAWIDE */
+/* ========================= */
+@media (min-width: 2200px) {
+
+    .boxedLayout {
+        max-width: 2200px;
+        margin: 0 auto;
+    }
+
+    .title {
+        font-size: 8rem;
+    }
+
+    .italicTitle {
+        font-size: 8.5rem;
+    }
+
+    .description {
+        font-size: 1.5rem;
+    }
+
+    .contentSection {
+        gap: 5rem;
+    }
+}

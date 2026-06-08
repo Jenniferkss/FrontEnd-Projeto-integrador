@@ -1,25 +1,19 @@
 .pageContainer {
-    background: #f6e7ea;
     min-height: 100vh;
+    background-color: #f5e7e9;
+}
+
+.boxedLayout {
+      width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .hero {
-    padding: 40px 30px 80px;
+    padding: 50px;
+    width: 100%;
 }
 
-.hero h1 {
-    font-family: "Playfair Display", serif;
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 60px;
-}
-
-.cardsContainer {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-    align-items: start;
-}
 
 /* BLOCO */
 
@@ -34,10 +28,6 @@
 .cardTitle {
     font-family: "Playfair Display", serif;
     font-style: italic;
-    text-align: center;
-    font-size: 1.6rem;
-    margin-bottom: 18px;
-    min-height: 70px;
 }
 
 /* IMAGEM */
@@ -49,6 +39,8 @@
     background: #f8eef0;
 
     display: flex;
+    flex: 4;
+    gap: 30px;
     justify-content: center;
     align-items: center;
 
