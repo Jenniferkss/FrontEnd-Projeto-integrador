@@ -9,7 +9,7 @@ export default function Contexto() {
   const [fotoLivro, setFotoLivro] = useState([]);
 
   useEffect(() => {
-    const carregarCuriosidades = async () => {
+    const carregarDados = async () => {
       try {
         const response = await fetch(
           "https://backend-projeto-integrador-rana.onrender.com/api/curiosidade",
@@ -17,56 +17,52 @@ export default function Contexto() {
             headers: {
               "x-api-key": "amods",
             },
-          },
+          }
         );
 
         const data = await response.json();
-
-        console.log("RESPOSTA API:", data);
-
         const lista = Array.isArray(data) ? data : data.data;
-
-        console.log("LISTA:", lista);
-
         setCuriosidades(lista || []);
+
+        // CORRIGIDO AQUI: "fotoCuriosidades" mudou para "fotosCuriosidades"
+        const responseFotos = await fetch(
+          "https://backend-projeto-integrador-rana.onrender.com/api/livro/fotosCuriosidades",
+          {
+            headers: {
+              "x-api-key": "amods",
+            },
+          }
+        );
+
+        const fotosData = await responseFotos.json();
+        setFotos(Array.isArray(fotosData) ? fotosData : fotosData.data);
+
+        const responseFotoLivro = await fetch(
+          "https://backend-projeto-integrador-rana.onrender.com/api/livro/fotoLivro",
+          {
+            headers: {
+              "x-api-key": "amods",
+            },
+          }
+        );
+
+        const fotoLivroData = await responseFotoLivro.json();
+        setFotoLivro(
+          Array.isArray(fotoLivroData)
+            ? fotoLivroData
+            : fotoLivroData.data
+        );
+
       } catch (err) {
-        console.error(err);
+        console.error("Erro ao carregar dados:", err);
       }
-      const responseFotos = await fetch(
-  "https://backend-projeto-integrador-rana.onrender.com/api/livro/fotoCuriosidades",
-  {
-    headers: {
-      "x-api-key": "amods",
-    },
-  }
-);
-
-const fotosData = await responseFotos.json();
-const responseFotoLivro = await fetch(
-"https://backend-projeto-integrador-rana.onrender.com/api/livro/fotoLivro",
-{
-headers: {
-  "x-api-key": "amods",
-},
-}
-);
-const fotoLivroData = await responseFotoLivro.json();
-
-
-setFotoLivro(
-Array.isArray(fotoLivroData)
-? fotoLivroData
-: fotoLivroData.data
-);
-
-setFotos(Array.isArray(fotosData) ? fotosData : fotosData.data);
     };
 
-    carregarCuriosidades();
+    carregarDados();
   }, []);
 
   const contextoHistorico = curiosidades.filter(
-    (item) => item.id >= 19 && item.id <= 21,
+    (item) => item.id >= 19 && item.id <= 21
   );
 
   return (
@@ -78,30 +74,32 @@ setFotos(Array.isArray(fotosData) ? fotosData : fotosData.data);
           <h1>Contexto histórico (1955-1960)</h1>
 
           <section className={styles.cardsContainer}>
-           {contextoHistorico.map((item, index) => (
-              <div key={item.id} className={styles.card}>
-                <h3 className={styles.cardTitle}>{item.tituloPt}</h3>
+            {/* ADICIONADO O INDEX AQUI */}
+            {contextoHistorico.map((item, index) => {
+              
+              // CORRIGIDO AQUI: Puxando a imagem pela posição (0, 1, 2) que mapeia as fotos de 1 a 3
+              const imagem =
+                fotoLivro?.[index]?.url ||
+                fotos?.[index]?.url;
 
-                <div className={styles.imageBox}>
-            
-                   <img
-                        src={
-                         index === 2
-                         ? fotoLivro?.[0]?.url: 
-                         fotos[index]?.url
-  }
-  alt={item.tituloPt}
-/>
+              return (
+                <div key={item.id} className={styles.card}>
+                  <h3 className={styles.cardTitle}>{item.tituloPt}</h3>
+
+                  <div className={styles.imageBox}>
+                    <img src={imagem} alt={item.tituloPt} />
+                  </div>
+
+                  <p className={styles.cardText}>{item.conteudoPt}</p>
+
+                  <div className={styles.tag}>Curiosidade histórica</div>
                 </div>
-
-                <p className={styles.cardText}>{item.conteudoPt}</p>
-
-                <div className={styles.tag}>Curiosidade histórica</div>
-              </div>
-            ))}
+              );
+            })}
           </section>
         </main>
       </div>
+
       <Footer />
     </div>
   );
