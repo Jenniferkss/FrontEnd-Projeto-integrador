@@ -172,7 +172,7 @@ const Inicio = () => {
                 <div className={styles.middleColumn}>
                     <div className={styles.imageCard}>
                         <img
-                            src={dados.fotosCuriosidades?.[2]}
+                            src={dados.fotosCuriosidades?.[5]}
                             alt="Carolina Maria de Jesus"
                             className={styles.AuthorImg}
                         />
@@ -186,7 +186,7 @@ const Inicio = () => {
                 <div className={styles.rightColumn}>
                     <div className={styles.bookPageCard}>
                         <img
-                            src={dados.fotosCuriosidades?.[3]}
+                            src={dados.fotosCuriosidades?.[6]}
                             alt="Página do livro"
                             className={styles.pageImg}
                         />
