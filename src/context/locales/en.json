@@ -77,8 +77,14 @@
   "discover_other_works": "Discover other works",
   "meet_our_team": "Meet our team",
   "team": "Team",
+  "team_desc": "Meet the students who developed this project, each with their unique skills and dedication to bringing this work to life.", 
   "member_name": "Member name",
   "member_course": "Member course",
+  "character_desc": "Meet the characters who bring the story to life, each with their own unique traits and a fundamental role in the plot.",
+  "meet": "Meet the",
+  "test_knowledge": "Test your knowledge",
+  "test": "Practice Test",
+  "test_desc": "Prepare for the college entrance exam in a practical and efficient way.",
   "frases": [
   {
     "texto": "Hunger is the dynamite of the human body.",

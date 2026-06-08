@@ -77,8 +77,14 @@
   "discover_other_works": "Conheça outras obras",
   "meet_our_team": "Conheça nossa equipe",
   "team": "Equipe",
+  "team_desc": "Conheça os estudantes por trás do Intertexto, que uniram suas habilidades para criar uma experiência literária única e acessível a todos.", 
   "member_name": "Nome integrante",
   "member_course": "Curso integrante",
+  "character_desc": "Conheça os personagens que dão vida à história, cada um com suas características únicas e papel fundamental na trama.",
+  "meet": "Conheça os",
+  "test_knowledge": "Teste seu conhecimento", 
+  "test": "Simulado",
+  "test_desc": "Prepare-se para o vestibular de forma prática e eficiente.", 
   "frases": [
   {
     "texto": "A fome é a dinamite do corpo humano.",

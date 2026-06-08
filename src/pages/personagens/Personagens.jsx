@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import styles from './Personagens.module.css';
-
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useLanguage } from '../../context/LanguageContext.jsx';
@@ -17,7 +16,7 @@ export default function Personagens() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { t, selectField } = useLanguage();
-
+ 
     useEffect(() => {
         const carregarLivros = async () => {
             try {
@@ -67,15 +66,13 @@ export default function Personagens() {
             <Header />
 
             <main className={styles.hero}>
-                <div className={styles.tituloDiv}>
-                    <h1 className={styles.title}>{t('characters_title')}</h1>
-                    <h1
-                        className={styles.title}
-                        style={{ color: '#6D0000', marginTop: '35px' }}
-                    >
-                        {t('characters_subtitle')}
-                    </h1>
-                </div>
+                <section className={styles.banner}>
+                    <p className={styles.kicker}>{t('meet')}</p>
+                    <h1 className={styles.titulo}>{t('characters_title')}</h1>
+                    <p className={styles.subtitulo}>
+                        {t('character_desc')}
+                    </p>
+                </section>
 
                 <div className={styles.divGrandeQuestoes}>
                     {Array.from({ length: count }, (_, i) => (
