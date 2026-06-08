@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './Simulados.module.css';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 
 const BASE_URL = 'https://backend-projeto-integrador-rana.onrender.com/api';
 const headers = { 'x-api-key': 'amods' };
@@ -9,14 +10,13 @@ const headers = { 'x-api-key': 'amods' };
 function Simulados({ idiomaDoSite = 'PT' }) {
     const [questoesFiltradas, setQuestoesFiltradas] = useState([]);
     const abaAtiva = String(idiomaDoSite).toUpperCase();
-
     const [indiceAtual, setIndiceAtual] = useState(0);
     const [respostas, setRespostas] = useState({});
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState(null);
     const [simuladoConcluido, setSimuladoConcluido] = useState(false);
     const [pontuacao, setPontuacao] = useState(0);
-
+    const { t, selectField } = useLanguage();
     const questaoAtual = questoesFiltradas[indiceAtual] || null;
 
     // ─── Carrega e cruza os dados das 3 rotas ───────────────────────────────────
@@ -216,10 +216,10 @@ function Simulados({ idiomaDoSite = 'PT' }) {
             <Header />
             <main className={styles.hero}>
                 <section className={styles.banner}>
-                    <p className={styles.kicker}>Teste seu conhecimento</p>
-                    <h1 className={styles.titulo}>Simulado</h1>
+                    <p className={styles.kicker}>{t('test_knowledge')}</p>
+                    <h1 className={styles.titulo}>{t('test')}</h1>
                     <p className={styles.subtitulo}>
-                    Prepare-se para o vestibular de forma prática e eficiente.
+                    {t('test_desc')}
                     </p>
                 </section>
 

@@ -2,10 +2,12 @@ import styles from './Sobre.module.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useEffect, useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 
 export default function Inicio() {
     const [equipe, setEquipe] = useState(null);
     const [error, setError] = useState(null);
+    const { t, selectField } = useLanguage();
 
     useEffect(() => {
         const carregarEquipe = async () => {
@@ -40,10 +42,10 @@ export default function Inicio() {
             <div className={styles.boxedLayout}>
                 <main className={styles.hero}>
                     <section className={styles.banner}>
-                        <p className={styles.kicker}>Conheça nossa</p>
-                        <h1 className={styles.titulo}>Equipe</h1>
+                        <p className={styles.kicker}>{t('meet_our_team')}</p>
+                        <h1 className={styles.titulo}>{t('team')}</h1>
                         <p className={styles.subtitulo}>
-                            Conheça os estudantes por trás do Intertexto, que uniram suas habilidades para criar uma experiência literária única e acessível a todos.
+                            {t('team_desc')}
                         </p>
                     </section>
                     <div className={styles.divGrandeIntegrantes}>
