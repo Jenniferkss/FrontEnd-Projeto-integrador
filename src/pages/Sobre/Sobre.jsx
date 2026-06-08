@@ -44,9 +44,7 @@ export default function Inicio() {
                     <section className={styles.banner}>
                         <p className={styles.kicker}>{t('meet_our_team')}</p>
                         <h1 className={styles.titulo}>{t('team')}</h1>
-                        <p className={styles.subtitulo}>
-                            {t('team_desc')}
-                        </p>
+                        <p className={styles.subtitulo}>{t('team_desc')}</p>
                     </section>
                     <div className={styles.divGrandeIntegrantes}>
                         {ids.map((id) => (
