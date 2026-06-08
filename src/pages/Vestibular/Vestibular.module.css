@@ -256,10 +256,6 @@
     transition: width 0.5s ease;
 }
 
-/* ==========================================================================
-   ELEMENTOS QUE ESTAVAM FALTANDO NO SEGUNDO CÓDIGO (DICAS E VETORES)
-   ========================================================================== */
-
 .vectorsTitle {
     font-family: 'Montserrat', sans-serif;
     color: #7d0f0f;
@@ -328,70 +324,246 @@
     line-height: 1.7;
     margin: 0;
 }
-
-/* ==========================================================================
-   ESTILOS EXCLUSIVOS DO PRIMEIRO CÓDIGO (OPCIONAL/MELHORIAS)
-   ========================================================================== */
-
-/* Se quiser manter o efeito de borda apenas na ESPERDA dos cards do topo, 
-   como estava no primeiro código, use esta classe: */
 .cardRedBorderLeftOnly {
     border-left: 4px solid #ffffff;
 }
 
+/* ========================= */
+/* CELULARES MUITO PEQUENOS */
+/* ========================= */
+@media (max-width: 320px) {
 
+    .titulo {
+        font-size: 1.8rem;
+    }
 
-@media (max-width: 1400px) {
-    .contentWrapper { gap: 44px; }
-}
+    .subtitulo {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
 
-@media (max-width: 1200px) {
-    .contentWrapper { width: 95%; padding: 36px 20px; }
-    .topCardsGrid { gap: 20px; }
-    .cardTop { padding: 24px 20px; }
-}
-
-@media (max-width: 1100px) {
-    .mainLayout { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 900px) {
-    .contentWrapper { width: 96%; padding: 32px 16px; gap: 40px; }
-    .headerTitle { font-size: 2.5rem; }
-    .dicasGrid { grid-template-columns: 1fr 1fr; }
-}
-
-@media (max-width: 768px) {
-    .topCardsGrid { grid-template-columns: 1fr; }
-    .dicasGrid { grid-template-columns: 1fr; }
-    .contentBox { padding: 28px 24px; }
-    .statsCard { padding: 24px 20px; }
-    .mainLayout { gap: 1.5rem; }
-}
-
-@media (max-width: 576px) {
-    .contentWrapper { width: 100%; padding: 28px 14px; gap: 36px; }
-    .headerTitle { font-size: 2.1rem; }
-    .lead { font-size: 0.98rem; }
-    .kicker { font-size: 0.78rem; letter-spacing: 0.16rem; }
-    .contentBox { padding: 24px 18px; border-radius: 14px; }
-    .cardTop { padding: 22px 18px; border-radius: 14px; }
-    .dicaCard { padding: 20px 16px; border-radius: 12px; }
-    .statsCard { padding: 22px 18px; border-radius: 14px; }
+    .cardTopTitle,
     .contentTitle,
-    .dicasTitle { font-size: 1.4rem; }
-    .vectorsTitle { font-size: 1.15rem; }
-    .quoteText { font-size: 1.05rem; }
-    .quoteBlock { margin: 24px 0; gap: 10px; }
+    .statsTitle {
+        font-size: 1.1rem;
+    }
+
+    .contentText,
+    .cardTopText,
+    .cardTopList,
+    .dicaCard p {
+        font-size: 0.9rem;
+    }
+
+    .quoteText {
+        font-size: 0.95rem;
+    }
+
+    .dicasGrid {
+        grid-template-columns: 1fr;
+    }
 }
 
-@media (max-width: 380px) {
-    .contentWrapper { padding: 24px 10px; gap: 32px; }
-    .headerTitle { font-size: 1.8rem; }
-    .contentBox { padding: 20px 14px; }
-    .cardTop { padding: 18px 14px; }
-    .dicaCard { padding: 18px 14px; }
-    .statsCard { padding: 18px 14px; }
-    .videoBtn { padding: 14px; font-size: 0.95rem; }
-    .progressLabels { font-size: 0.85rem; }
+/* ========================= */
+/* CELULARES */
+/* ========================= */
+@media (min-width: 321px) and (max-width: 575px) {
+
+    .titulo {
+        font-size: 2.2rem;
+    }
+
+    .subtitulo {
+        max-width: 100%;
+    }
+
+    .quoteText {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========================= */
+/* CELULARES GRANDES */
+/* ========================= */
+@media (min-width: 576px) and (max-width: 767px) {
+
+    .titulo {
+        font-size: 2.7rem;
+    }
+
+    .subtitulo {
+        max-width: 90%;
+    }
+
+    .topCardsGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================= */
+/* TABLETS RETRATO */
+/* ========================= */
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .titulo {
+        font-size: 3rem;
+    }
+
+    .topCardsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .topCardsGrid .cardTop:last-child {
+        grid-column: span 2;
+    }
+}
+
+/* ========================= */
+/* TABLETS HORIZONTAIS */
+/* ========================= */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    .titulo {
+        font-size: 3.2rem;
+    }
+
+    .topCardsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .contentBox {
+        padding: 2rem;
+    }
+}
+
+/* ========================= */
+/* NOTEBOOKS */
+/* ========================= */
+@media (min-width: 1200px) and (max-width: 1599px) {
+
+    .titulo {
+        font-size: 3.8rem;
+    }
+
+    .contentWrapper {
+        width: 92%;
+    }
+
+    .contentBox {
+        padding: 2.5rem;
+    }
+}
+
+/* ========================= */
+/* DESKTOPS GRANDES */
+/* ========================= */
+@media (min-width: 1600px) and (max-width: 2199px) {
+
+    .contentWrapper {
+        max-width: 1800px;
+    }
+
+    .titulo {
+        font-size: 4.5rem;
+    }
+
+    .subtitulo {
+        max-width: 55rem;
+        font-size: 1.15rem;
+    }
+
+    .contentTitle {
+        font-size: 1.9rem;
+    }
+
+    .contentText {
+        font-size: 1.08rem;
+    }
+
+    .cardTop {
+        padding: 30px;
+    }
+
+    .dicaCard {
+        padding: 30px;
+    }
+}
+
+/* ========================= */
+/* ULTRAWIDE */
+/* ========================= */
+@media (min-width: 2200px) {
+
+    .contentWrapper {
+        max-width: 2200px;
+    }
+
+    .titulo {
+        font-size: 5.5rem;
+    }
+
+    .subtitulo {
+        max-width: 70rem;
+        font-size: 1.3rem;
+    }
+
+    .contentTitle {
+        font-size: 2.2rem;
+    }
+
+    .contentText,
+    .cardTopText,
+    .cardTopList,
+    .dicaCard p {
+        font-size: 1.15rem;
+    }
+
+    .quoteText {
+        font-size: 2rem;
+    }
+
+    .contentBox {
+        padding: 3rem;
+    }
+
+    .cardTop {
+        padding: 36px;
+    }
+
+    .statsCard {
+        padding: 36px;
+    }
+
+    .dicaCard {
+        padding: 36px;
+    }
+}
+
+/* ========================= */
+/* TELAS 4K */
+/* ========================= */
+@media (min-width: 3000px) {
+
+    .contentWrapper {
+        max-width: 2800px;
+    }
+
+    .titulo {
+        font-size: 7rem;
+    }
+
+    .subtitulo {
+        font-size: 1.5rem;
+    }
+
+    .contentText,
+    .cardTopText,
+    .cardTopList,
+    .dicaCard p {
+        font-size: 1.3rem;
+    }
+
+    .quoteText {
+        font-size: 2.5rem;
+    }
 }
