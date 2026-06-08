@@ -1,76 +1,108 @@
-import Header from '../../components/Header/Header';
-import styles from './Contexto.module.css';
-import Footer from '../../components/Footer/Footer';
-import { useState, useEffect } from 'react';
+import Header from "../../components/Header/Header";
+import styles from "./Contexto.module.css";
+import Footer from "../../components/Footer/Footer";
+import { useState, useEffect } from "react";
 
 export default function Contexto() {
-    const [curiosidades, setCuriosidades] = useState([]);
+  const [curiosidades, setCuriosidades] = useState([]);
+  const [fotos, setFotos] = useState([]);
+  const [fotoLivro, setFotoLivro] = useState([]);
 
-    useEffect(() => {
-        const carregarCuriosidades = async () => {
-            try {
-                const response = await fetch(
-                    'https://backend-projeto-integrador-rana.onrender.com/api/curiosidades',
-                    {
-                        headers: {
-                            'x-api-key': 'amods',
-                        },
-                    }
-                );
+  useEffect(() => {
+    const carregarCuriosidades = async () => {
+      try {
+        const response = await fetch(
+          "https://backend-projeto-integrador-rana.onrender.com/api/curiosidade",
+          {
+            headers: {
+              "x-api-key": "amods",
+            },
+          },
+        );
 
-                const data = await response.json();
+        const data = await response.json();
 
-                const lista = Array.isArray(data) ? data : data.data;
+        console.log("RESPOSTA API:", data);
 
-                setCuriosidades(lista || []);
-            } catch (err) {
-                console.error(err);
-            }
-        };
+        const lista = Array.isArray(data) ? data : data.data;
 
-        carregarCuriosidades();
-    }, []);
+        console.log("LISTA:", lista);
 
-    return (
-        <div className={styles.pageContainer}>
-            <div className={styles.boxedLayout}>
-                <Header />
+        setCuriosidades(lista || []);
+      } catch (err) {
+        console.error(err);
+      }
+      const responseFotos = await fetch(
+  "https://backend-projeto-integrador-rana.onrender.com/api/livro/fotoCuriosidades",
+  {
+    headers: {
+      "x-api-key": "amods",
+    },
+  }
+);
 
-                <main className={styles.hero}>
-                    <h1>Contexto histórico (1955-1960)</h1>
+const fotosData = await responseFotos.json();
+const responseFotoLivro = await fetch(
+"https://backend-projeto-integrador-rana.onrender.com/api/livro/fotoLivro",
+{
+headers: {
+  "x-api-key": "amods",
+},
+}
+);
+const fotoLivroData = await responseFotoLivro.json();
 
-                    <section className={styles.cardsContainer}>
-                        {curiosidades.map((item) => (
-                            <div key={item.id} className={styles.card}>
-                                
-                                {/* título estilo card */}
-                                <h3 className={styles.cardTitle}>
-                                    {item.tituloPt}
-                                </h3>
 
-                                {/* imagem fake (caso não tenha no banco ainda) */}
-                                <div className={styles.imageBox}>
-                                    <img
-                                        src="https://via.placeholder.com/300x180"
-                                        alt={item.tituloPt}
-                                    />
-                                </div>
+setFotoLivro(
+Array.isArray(fotoLivroData)
+? fotoLivroData
+: fotoLivroData.data
+);
 
-                                {/* conteúdo */}
-                                <p className={styles.cardText}>
-                                    {item.conteudoPt}
-                                </p>
+setFotos(Array.isArray(fotosData) ? fotosData : fotosData.data);
+    };
 
-                                {/* tag estilo da imagem */}
-                                <div className={styles.tag}>
-                                    Curiosidade histórica
-                                </div>
-                            </div>
-                        ))}
-                    </section>
-                </main>
-            </div>
-            <Footer />
-        </div>
-    );
+    carregarCuriosidades();
+  }, []);
+
+  const contextoHistorico = curiosidades.filter(
+    (item) => item.id >= 19 && item.id <= 21,
+  );
+
+  return (
+    <div className={styles.pageContainer}>
+      <div className={styles.boxedLayout}>
+        <Header />
+
+        <main className={styles.hero}>
+          <h1>Contexto histórico (1955-1960)</h1>
+
+          <section className={styles.cardsContainer}>
+           {contextoHistorico.map((item, index) => (
+              <div key={item.id} className={styles.card}>
+                <h3 className={styles.cardTitle}>{item.tituloPt}</h3>
+
+                <div className={styles.imageBox}>
+            
+                   <img
+                        src={
+                         index === 2
+                         ? fotoLivro?.[0]?.url: 
+                         fotos[index]?.url
+  }
+  alt={item.tituloPt}
+/>
+                </div>
+
+                <p className={styles.cardText}>{item.conteudoPt}</p>
+
+                <div className={styles.tag}>Curiosidade histórica</div>
+              </div>
+            ))}
+          </section>
+        </main>
+      </div>
+      <Footer />
+    </div>
+  );
 }
